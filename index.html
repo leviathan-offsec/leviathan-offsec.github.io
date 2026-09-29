@@ -31,7 +31,7 @@
       --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
     /* Custom Sleek Dark Scrollbar */
-    * {
+    *, html, body {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -227,8 +227,17 @@
       align-items: center;
       gap: 0.75rem;
       color: #93c5fd;
+      flex: 1;
+      min-width: 0;
       overflow-x: auto;
       white-space: nowrap;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .pdtm-code::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
     }
     .pdtm-prompt { color: var(--accent); font-weight: 700; user-select: none; }
     .copy-btn {
@@ -438,19 +447,34 @@
       background: #080b11;
       border: 1px solid #161d2b;
       border-radius: 6px;
-      padding: 0.6rem 0.85rem;
+      padding: 0.55rem 0.8rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
       gap: 0.5rem;
       font-family: var(--mono);
       font-size: 0.75rem;
       color: #94a3b8;
       margin-bottom: 1rem;
+      min-width: 0;
+    }
+    .install-prompt {
+      color: var(--accent);
+      font-weight: 700;
+      user-select: none;
+      flex-shrink: 0;
     }
     .tool-install-box code {
+      flex: 1;
+      min-width: 0;
       overflow-x: auto;
       white-space: nowrap;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .tool-install-box code::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
     }
     .tool-footer {
       display: flex;
@@ -490,6 +514,8 @@
       line-height: 1.8;
       overflow-x: auto;
       margin-top: 1.25rem;
+      scrollbar-width: thin;
+      scrollbar-color: #1e293b #07090e;
     }
     .pipeline-code .c-comment { color: #64748b; }
     .pipeline-code .c-cmd { color: var(--accent); }
@@ -688,7 +714,8 @@
           </div>
           <div>
             <div class="tool-install-box">
-              <code id="cmd-hostage">go install -v github.com/leviathan-offsec/HostageLVX@latest</code>
+              <span class="install-prompt">$</span>
+              <code id="cmd-hostage" title="go install -v github.com/leviathan-offsec/HostageLVX@latest">go install -v github.com/leviathan-offsec/HostageLVX@latest</code>
               <button class="copy-btn" onclick="copyCode('cmd-hostage', this)">COPY</button>
             </div>
             <div class="tool-footer">
@@ -711,7 +738,8 @@
           </div>
           <div>
             <div class="tool-install-box">
-              <code id="cmd-surfacediff">pip install git+https://github.com/leviathan-offsec/surfacediff.git</code>
+              <span class="install-prompt">$</span>
+              <code id="cmd-surfacediff" title="pip install git+https://github.com/leviathan-offsec/surfacediff.git">pip install git+https://github.com/leviathan-offsec/surfacediff.git</code>
               <button class="copy-btn" onclick="copyCode('cmd-surfacediff', this)">COPY</button>
             </div>
             <div class="tool-footer">
@@ -734,7 +762,8 @@
           </div>
           <div>
             <div class="tool-install-box">
-              <code id="cmd-fenrir">go install -v github.com/leviathan-offsec/FenrirLVX@latest</code>
+              <span class="install-prompt">$</span>
+              <code id="cmd-fenrir" title="go install -v github.com/leviathan-offsec/FenrirLVX@latest">go install -v github.com/leviathan-offsec/FenrirLVX@latest</code>
               <button class="copy-btn" onclick="copyCode('cmd-fenrir', this)">COPY</button>
             </div>
             <div class="tool-footer">
@@ -757,7 +786,8 @@
           </div>
           <div>
             <div class="tool-install-box">
-              <code id="cmd-core">git clone https://github.com/leviathan-offsec/leviathan-core.git</code>
+              <span class="install-prompt">$</span>
+              <code id="cmd-core" title="git clone https://github.com/leviathan-offsec/leviathan-core.git">git clone https://github.com/leviathan-offsec/leviathan-core.git</code>
               <button class="copy-btn" onclick="copyCode('cmd-core', this)">COPY</button>
             </div>
             <div class="tool-footer">
@@ -780,7 +810,8 @@
           </div>
           <div>
             <div class="tool-install-box">
-              <code id="cmd-agymcp">git clone https://github.com/leviathan-offsec/agy-mcp.git</code>
+              <span class="install-prompt">$</span>
+              <code id="cmd-agymcp" title="git clone https://github.com/leviathan-offsec/agy-mcp.git">git clone https://github.com/leviathan-offsec/agy-mcp.git</code>
               <button class="copy-btn" onclick="copyCode('cmd-agymcp', this)">COPY</button>
             </div>
             <div class="tool-footer">
