@@ -257,18 +257,32 @@
     }
     .t-dot-red { background: #f43f5e; }
     .t-dot-yellow { background: #eab308; }
-    .term-tabs {
+    .t-dot-green { background: #10b981; }
+    .terminal-title {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+    .terminal-subbar {
+      background: #090d16;
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.45rem 0.75rem;
       display: flex;
-      gap: 5px;
+      gap: 6px;
       overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .terminal-subbar::-webkit-scrollbar {
+      display: none;
     }
     .term-tab {
-      background: none;
-      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
       color: var(--text-muted);
       font-family: var(--mono);
       font-size: 0.72rem;
-      padding: 0.2rem 0.55rem;
+      padding: 0.25rem 0.65rem;
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.15s;
@@ -276,22 +290,23 @@
     }
     .term-tab:hover {
       color: #fff;
-      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 255, 204, 0.3);
+      background: rgba(0, 255, 204, 0.06);
     }
     .term-tab.active {
       color: var(--accent);
-      background: rgba(0, 255, 204, 0.1);
-      border-color: rgba(0, 255, 204, 0.3);
+      background: rgba(0, 255, 204, 0.12);
+      border-color: var(--accent);
       font-weight: 700;
     }
     .term-run-btn {
-      background: rgba(0, 255, 204, 0.15);
+      background: rgba(0, 255, 204, 0.12);
       border: 1px solid var(--accent);
       color: var(--accent);
       font-family: var(--mono);
       font-size: 0.68rem;
       font-weight: 700;
-      padding: 0.2rem 0.55rem;
+      padding: 0.25rem 0.6rem;
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.15s;
@@ -924,13 +939,14 @@
             <span class="t-dot t-dot-yellow"></span>
             <span class="t-dot t-dot-green"></span>
           </div>
-          <div class="term-tabs">
-            <button class="term-tab active" id="tab-pipeline" onclick="switchTermTab('pipeline')">⚡ Pipeline</button>
-            <button class="term-tab" id="tab-hostage" onclick="switchTermTab('hostage')">HostageLVX</button>
-            <button class="term-tab" id="tab-surfacediff" onclick="switchTermTab('surfacediff')">surfacediff</button>
-            <button class="term-tab" id="tab-fenrir" onclick="switchTermTab('fenrir')">FenrirLVX</button>
-          </div>
+          <div class="terminal-title">zsh — 84×24</div>
           <button class="term-run-btn" id="termRunBtn" onclick="runCurrentTermTab()" title="Re-run simulation">▶ RUN</button>
+        </div>
+        <div class="terminal-subbar">
+          <button class="term-tab active" id="tab-pipeline" onclick="switchTermTab('pipeline')">⚡ Pipeline</button>
+          <button class="term-tab" id="tab-hostage" onclick="switchTermTab('hostage')">HostageLVX</button>
+          <button class="term-tab" id="tab-surfacediff" onclick="switchTermTab('surfacediff')">surfacediff</button>
+          <button class="term-tab" id="tab-fenrir" onclick="switchTermTab('fenrir')">FenrirLVX</button>
         </div>
         <div class="terminal-screen" id="termScreen">
           <div class="term-line-cmd"><span class="term-prompt">$</span>cat scope.txt | surfacediff --live | HostageLVX -silent</div>
