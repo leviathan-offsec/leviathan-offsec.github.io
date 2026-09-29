@@ -95,9 +95,22 @@
     .nav-links a { color: var(--text-muted); transition: color 0.15s; }
     .nav-links a:hover { color: var(--accent); }
 
-    /* Hero Section */
+    /* Hero Section (Two-Column Grid) */
     .hero {
-      padding: 4.5rem 0 3rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+      padding: 4.5rem 0 3.5rem;
+    }
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 3rem 0 2rem;
+      }
+    }
+    .hero-content {
       text-align: left;
     }
     .hero-badge {
@@ -105,32 +118,73 @@
       align-items: center;
       gap: 0.5rem;
       font-family: var(--mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.3rem 0.8rem;
-      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
       background: rgba(0, 255, 204, 0.08);
-      border: 1px solid rgba(0, 255, 204, 0.25);
+      border: 1px solid rgba(0, 255, 204, 0.3);
       color: var(--accent);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
       font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -1.5px;
+      line-height: 1.15;
+      letter-spacing: -1px;
       margin-bottom: 1.25rem;
-      max-width: 900px;
     }
     .hero h1 span {
       color: var(--accent);
-      text-shadow: 0 0 30px var(--accent-glow);
+      text-shadow: 0 0 25px var(--accent-glow);
     }
     .hero-sub {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       color: var(--text-muted);
-      max-width: 720px;
-      margin-bottom: 2.25rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+    }
+    .btn-action-primary {
+      background: var(--accent);
+      color: #07090e !important;
+      font-weight: 700;
+      padding: 0.65rem 1.25rem;
+      border-radius: 6px;
+      border: 1px solid var(--accent);
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-action-primary:hover {
+      box-shadow: 0 0 15px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+    .btn-action-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text) !important;
+      padding: 0.65rem 1.25rem;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-action-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent) !important;
+      transform: translateY(-1px);
     }
 
     /* PDTM Install Hero Bar */
@@ -143,10 +197,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      max-width: 760px;
       font-family: var(--mono);
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
+      font-size: 0.85rem;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
     .pdtm-code {
@@ -176,21 +228,119 @@
       border-color: var(--accent);
     }
 
-    /* Philosophy Strip */
+    /* Hero Terminal Component */
+    .hero-terminal {
+      background: #080b12;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 255, 204, 0.05);
+      overflow: hidden;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+    }
+    .terminal-bar {
+      background: #0c101b;
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .t-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .t-dot-red { background: #f43f5e; }
+    .t-dot-yellow { background: #eab308; }
+    .t-dot-green { background: #10b981; }
+    .terminal-title {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+    .terminal-badge {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(0, 255, 204, 0.1);
+      border: 1px solid rgba(0, 255, 204, 0.3);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+    .terminal-screen {
+      padding: 1.25rem;
+      line-height: 1.7;
+      color: #94a3b8;
+    }
+    .term-line-cmd {
+      color: #f1f5f9;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+    }
+    .term-prompt {
+      color: var(--accent);
+      font-weight: 700;
+      margin-right: 0.4rem;
+    }
+    .term-info { color: #64748b; font-size: 0.75rem; }
+    .term-asset { color: #38bdf8; }
+    .term-vuln { color: #f43f5e; font-weight: 700; }
+    .term-sub { color: #cbd5e1; padding-left: 1rem; font-size: 0.76rem; }
+    .term-ok { color: #10b981; font-weight: 600; margin-top: 0.4rem; }
+    .cursor-blink {
+      display: inline-block;
+      width: 8px;
+      height: 13px;
+      background: var(--accent);
+      animation: blink 1s step-start infinite;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Architecture Strip */
     .philosophy-strip {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-      padding: 2rem 0;
+      gap: 1.25rem;
+      padding: 2.25rem 0;
       border-top: 1px solid var(--card-border);
       border-bottom: 1px solid var(--card-border);
-      margin-bottom: 3.5rem;
+      margin-bottom: 4rem;
       font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
     }
-    .phil-item { display: flex; align-items: center; gap: 0.6rem; }
-    .phil-check { color: var(--accent); font-weight: 700; }
+    .phil-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .phil-num {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      background: rgba(0, 255, 204, 0.1);
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 255, 204, 0.3);
+      flex-shrink: 0;
+    }
+    .phil-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .phil-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
 
     /* Section Headings */
     .section-title-wrap {
@@ -413,30 +563,85 @@
 
     <!-- Hero -->
     <section class="hero">
-      <div class="hero-badge">
-        <span>⚡ OPEN-SOURCE OFFENSIVE RECON & AUDITING ENGINES</span>
-      </div>
-      <h1>Fast, composable,<br><span>modular offensive tools.</span></h1>
-      <p class="hero-sub">
-        Production-grade utilities designed for high-concurrency attack surface reconnaissance, perimeter differential monitoring, and deterministic risk correlation. Stdlib-first. Zero bloat.
-      </p>
-
-      <!-- PDTM Quick-Install Hero Bar -->
-      <div class="pdtm-hero-bar">
-        <div class="pdtm-code">
-          <span class="pdtm-prompt">$</span>
-          <span id="hero-cmd">go install -v github.com/leviathan-offsec/HostageLVX@latest</span>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>⚡ LEVIATHAN OFFSEC // ARSENAL v1.0</span>
         </div>
-        <button class="copy-btn" onclick="copyCode('hero-cmd', this)">COPY</button>
+        <h1>Offensive Reconnaissance &<br><span>Perimeter Auditing.</span></h1>
+        <p class="hero-sub">
+          High-throughput Go engines and zero-dependency Python utilities built for attack surface mapping, dangling DNS takeover discovery, and deterministic vulnerability validation.
+        </p>
+
+        <!-- PDTM Quick-Install Hero Bar -->
+        <div class="pdtm-hero-bar">
+          <div class="pdtm-code">
+            <span class="pdtm-prompt">$</span>
+            <span id="hero-cmd">go install -v github.com/leviathan-offsec/HostageLVX@latest</span>
+          </div>
+          <button class="copy-btn" onclick="copyCode('hero-cmd', this)">COPY</button>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#tools" class="btn-action-primary">Explore Tools ↓</a>
+          <a href="/posts/80-days-reversing-iot-dvr.html" class="btn-action-secondary">Read 80-Day DVR Case Study ↗</a>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Terminal -->
+      <div class="hero-terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dots">
+            <span class="t-dot t-dot-red"></span>
+            <span class="t-dot t-dot-yellow"></span>
+            <span class="t-dot t-dot-green"></span>
+          </div>
+          <div class="terminal-title">zsh — 84×24</div>
+          <div class="terminal-badge">LIVE DEMO</div>
+        </div>
+        <div class="terminal-screen">
+          <div class="term-line-cmd"><span class="term-prompt">$</span>cat scope.txt | surfacediff --live | HostageLVX -silent</div>
+          <div class="term-info">[INF] surfacediff: loaded 142 targets from scope.txt</div>
+          <div class="term-asset">[+] NEW_ASSET   auth-dev.corp.internal (3.218.44.12)</div>
+          <div class="term-vuln">[!] VULNERABLE  HostageLVX: dangling CNAME detected!</div>
+          <div class="term-sub">Target:   auth-dev.corp.internal → corp.s3.amazonaws.com</div>
+          <div class="term-sub">Provider: AWS S3 Bucket Takeover Verified</div>
+          <div class="term-asset">[+] FenrirLVX   2 plugins matched known CVE signatures</div>
+          <div class="term-ok">[✓] Pipeline execution finished in 482ms</div>
+          <div style="margin-top: 0.5rem;"><span class="term-prompt">$</span><span class="cursor-blink"></span></div>
+        </div>
       </div>
     </section>
 
-    <!-- Doctrine Strip -->
+    <!-- Architecture Strip -->
     <div class="philosophy-strip">
-      <div class="phil-item"><span class="phil-check">✓</span> <span>Low Footprint (ARM64 / Linux)</span></div>
-      <div class="phil-item"><span class="phil-check">✓</span> <span>Pipe-Friendly (stdin → stdout)</span></div>
-      <div class="phil-item"><span class="phil-check">✓</span> <span>Zero Telemetry / Offline First</span></div>
-      <div class="phil-item"><span class="phil-check">✓</span> <span>Deterministic Risk Logic</span></div>
+      <div class="phil-item">
+        <span class="phil-num">01</span>
+        <div>
+          <div class="phil-title">High-Speed Concurrency</div>
+          <div class="phil-sub">Go goroutine worker pools with native timeout guards</div>
+        </div>
+      </div>
+      <div class="phil-item">
+        <span class="phil-num">02</span>
+        <div>
+          <div class="phil-title">Unix Stdin/Stdout</div>
+          <div class="phil-sub">Composable pipeline design (cat targets | tool | tool)</div>
+        </div>
+      </div>
+      <div class="phil-item">
+        <span class="phil-num">03</span>
+        <div>
+          <div class="phil-title">Zero Dependency Python</div>
+          <div class="phil-sub">Standard library only for immutable perimeter diffs</div>
+        </div>
+      </div>
+      <div class="phil-item">
+        <span class="phil-num">04</span>
+        <div>
+          <div class="phil-title">Deterministic Scoring</div>
+          <div class="phil-sub">Contract-enforced KEV, EPSS & CVSS math</div>
+        </div>
+      </div>
     </div>
 
     <!-- Tooling Suite Grid -->
