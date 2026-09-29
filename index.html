@@ -263,63 +263,21 @@
       color: var(--text-muted);
       letter-spacing: 0.5px;
     }
-    .terminal-subbar {
-      background: #090d16;
-      border-bottom: 1px solid var(--card-border);
-      padding: 0.45rem 0.75rem;
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .terminal-subbar::-webkit-scrollbar {
-      display: none;
-    }
-    .term-tab {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      padding: 0.25rem 0.65rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.15s;
-      white-space: nowrap;
-    }
-    .term-tab:hover {
-      color: #fff;
-      border-color: rgba(0, 255, 204, 0.3);
-      background: rgba(0, 255, 204, 0.06);
-    }
-    .term-tab.active {
-      color: var(--accent);
-      background: rgba(0, 255, 204, 0.12);
-      border-color: var(--accent);
+    .terminal-badge {
+      font-size: 0.62rem;
       font-weight: 700;
-    }
-    .term-run-btn {
-      background: rgba(0, 255, 204, 0.12);
-      border: 1px solid var(--accent);
       color: var(--accent);
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 0.25rem 0.6rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.15s;
-      flex-shrink: 0;
-    }
-    .term-run-btn:hover {
-      background: var(--accent);
-      color: #000;
+      background: rgba(0, 255, 204, 0.1);
+      border: 1px solid rgba(0, 255, 204, 0.3);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
     }
     .terminal-screen {
       padding: 1.25rem;
       line-height: 1.7;
       color: #94a3b8;
+      overflow: hidden;
     }
     .term-line-cmd {
       color: #f1f5f9;
@@ -566,305 +524,6 @@
     .sev-high { background: rgba(251, 146, 60, 0.15); color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.35); }
     .sev-med { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.35); }
 
-    /* Interactive Telemetry Explorer Section */
-    .explorer-section {
-      margin-bottom: 4rem;
-    }
-    .explorer-box {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-    .explorer-search-bar {
-      padding: 1.25rem;
-      background: #0a0e17;
-      border-bottom: 1px solid var(--card-border);
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-    .search-input-wrap {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
-    }
-    .search-input {
-      flex: 1;
-      background: #060910;
-      border: 1px solid var(--card-border);
-      border-radius: 6px;
-      padding: 0.65rem 1rem;
-      color: var(--text);
-      font-family: var(--mono);
-      font-size: 0.88rem;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-    .search-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 10px rgba(0, 255, 204, 0.15);
-    }
-    .search-btn {
-      background: var(--accent);
-      color: #07090e;
-      border: 1px solid var(--accent);
-      padding: 0.65rem 1.25rem;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      font-weight: 700;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .search-btn:hover {
-      box-shadow: 0 0 12px var(--accent-glow);
-    }
-    .search-presets {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-    .preset-chip {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--card-border);
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
-      color: #93c5fd;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .preset-chip:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(0, 255, 204, 0.08);
-    }
-    .explorer-stats-bar {
-      padding: 0.65rem 1.25rem;
-      background: #080c14;
-      border-bottom: 1px solid var(--card-border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-    .stat-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-    .stat-dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; }
-
-    /* Telemetry Target Cards Grid */
-    .targets-list {
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-    .target-row {
-      background: #0a0e18;
-      border: 1px solid var(--card-border);
-      border-radius: 6px;
-      padding: 1rem 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      gap: 1rem;
-    }
-    .target-row:hover {
-      border-color: var(--accent);
-      background: #0d1320;
-      transform: translateX(3px);
-    }
-    .target-main {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-    .target-url {
-      font-family: var(--mono);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .target-meta {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      display: flex;
-      gap: 0.85rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .target-badges {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-shrink: 0;
-    }
-    .inspect-hint {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--accent);
-      opacity: 0.85;
-    }
-
-    /* Slide-out Telemetry Drawer */
-    .drawer-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-    .drawer-overlay.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .telemetry-drawer {
-      position: fixed;
-      top: 0;
-      right: -620px;
-      width: min(580px, 94vw);
-      height: 100vh;
-      background: #080c15;
-      border-left: 1px solid var(--card-border);
-      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      transition: right 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .telemetry-drawer.open {
-      right: 0;
-    }
-    .drawer-header {
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--card-border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #0b101c;
-    }
-    .drawer-title {
-      font-family: var(--mono);
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .drawer-close {
-      background: none;
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      width: 32px;
-      height: 32px;
-      border-radius: 4px;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      font-size: 1rem;
-      transition: all 0.15s;
-    }
-    .drawer-close:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-    .drawer-tabs {
-      display: flex;
-      background: #090d18;
-      border-bottom: 1px solid var(--card-border);
-      padding: 0 1.5rem;
-      overflow-x: auto;
-    }
-    .d-tab {
-      padding: 0.75rem 1rem;
-      background: none;
-      border: none;
-      border-bottom: 2px solid transparent;
-      color: var(--text-muted);
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      cursor: pointer;
-      transition: all 0.15s;
-      white-space: nowrap;
-    }
-    .d-tab:hover { color: #fff; }
-    .d-tab.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-      font-weight: 700;
-    }
-    .drawer-body {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1.5rem;
-    }
-    .telemetry-section-title {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.5rem;
-    }
-    .telemetry-kv-grid {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 0.6rem;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      margin-bottom: 1.5rem;
-      background: #0a0e1a;
-      padding: 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--card-border);
-    }
-    .telemetry-key { color: var(--text-muted); }
-    .telemetry-val { color: #e2e8f0; word-break: break-all; }
-    .raw-code-block {
-      background: #05080e;
-      border: 1px solid var(--card-border);
-      padding: 1rem;
-      border-radius: 6px;
-      font-family: var(--mono);
-      font-size: 0.76rem;
-      color: #93c5fd;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      word-break: break-all;
-      max-height: 260px;
-      overflow-y: auto;
-      margin-bottom: 1.5rem;
-    }
-    .drawer-footer {
-      padding: 1rem 1.5rem;
-      border-top: 1px solid var(--card-border);
-      background: #0b101c;
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
     /* Footer */
     footer {
       border-top: 1px solid var(--card-border);
@@ -895,8 +554,6 @@
       <nav class="nav-links">
         <a href="#tools">Tools</a>
         <a href="#pipeline">Pipeline</a>
-        <a href="#explorer">Explorer</a>
-        <a href="#deep-dive">Case Study</a>
         <a href="#research">Research</a>
         <a href="https://github.com/leviathan-offsec" target="_blank">GitHub ↗</a>
       </nav>
@@ -940,15 +597,9 @@
             <span class="t-dot t-dot-green"></span>
           </div>
           <div class="terminal-title">zsh — 84×24</div>
-          <button class="term-run-btn" id="termRunBtn" onclick="runCurrentTermTab()" title="Re-run simulation">▶ RUN</button>
+          <div class="terminal-badge">LIVE DEMO</div>
         </div>
-        <div class="terminal-subbar">
-          <button class="term-tab active" id="tab-pipeline" onclick="switchTermTab('pipeline')">⚡ Pipeline</button>
-          <button class="term-tab" id="tab-hostage" onclick="switchTermTab('hostage')">HostageLVX</button>
-          <button class="term-tab" id="tab-surfacediff" onclick="switchTermTab('surfacediff')">surfacediff</button>
-          <button class="term-tab" id="tab-fenrir" onclick="switchTermTab('fenrir')">FenrirLVX</button>
-        </div>
-        <div class="terminal-screen" id="termScreen">
+        <div class="terminal-screen">
           <div class="term-line-cmd"><span class="term-prompt">$</span>cat scope.txt | surfacediff --live | HostageLVX -silent</div>
           <div class="term-info">[INF] surfacediff: loaded 142 targets from scope.txt</div>
           <div class="term-asset">[+] NEW_ASSET   auth-dev.corp.internal (3.218.44.12)</div>
@@ -956,7 +607,7 @@
           <div class="term-sub">Target:   auth-dev.corp.internal → corp.s3.amazonaws.com</div>
           <div class="term-sub">Provider: AWS S3 Bucket Takeover Verified</div>
           <div class="term-asset">[+] FenrirLVX   2 plugins matched known CVE signatures</div>
-          <div class="term-ok">[✓] Pipeline execution finished in 482ms (1 takeover, 2 CVEs)</div>
+          <div class="term-ok">[✓] Pipeline execution finished in 482ms</div>
           <div style="margin-top: 0.5rem;"><span class="term-prompt">$</span><span class="cursor-blink"></span></div>
         </div>
       </div>
@@ -1145,55 +796,10 @@
       </div>
     </section>
 
-    <!-- Interactive Telemetry Grid & Surface Explorer -->
-    <section id="explorer" class="explorer-section">
-      <div class="section-title-wrap">
-        <div class="section-label">03 // Interactive Telemetry Grid</div>
-        <h2 class="section-title">Fleet Telemetry & Attack Surface Explorer</h2>
-      </div>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
-        Simulated live telemetry node inspecting edge devices, firmware builds, and protocol banners. Click any target to inspect deep telemetry and raw cryptographic handshakes:
-      </p>
-
-      <div class="explorer-box">
-        <!-- Search & Query Bar -->
-        <div class="explorer-search-bar">
-          <div class="search-input-wrap">
-            <input type="text" id="targetSearchInput" class="search-input" placeholder="Type a search — e.g. app:hikvision, port:8000, cve:2026-49865..." value="app:hikvision !decoy" onkeyup="handleSearchInput(event)">
-            <button class="search-btn" onclick="executeTargetSearch()">FILTER</button>
-          </div>
-          <div class="search-presets">
-            <span>PRESETS:</span>
-            <button class="preset-chip" onclick="applyPreset('app:hikvision !decoy')">app:hikvision !decoy</button>
-            <button class="preset-chip" onclick="applyPreset('proto:dnp port:8000')">proto:dnp port:8000</button>
-            <button class="preset-chip" onclick="applyPreset('cve:CVE-2026-49865')">cve:CVE-2026-49865</button>
-            <button class="preset-chip" onclick="applyPreset('tag:takeover')">tag:takeover</button>
-            <button class="preset-chip" onclick="applyPreset('')">all targets</button>
-          </div>
-        </div>
-
-        <!-- Telemetry Stats Bar -->
-        <div class="explorer-stats-bar">
-          <div class="stat-pill">
-            <span class="stat-dot"></span>
-            <span>1,470,909 Indexed Telemetry Nodes</span>
-          </div>
-          <div>
-            <span id="targetMatchCount" style="color: var(--accent); font-weight: 700;">4</span> targets matched · <span style="color: #10b981;">Honeypot Decoys Suppressed</span>
-          </div>
-        </div>
-
-        <!-- Target Cards List -->
-        <div class="targets-list" id="targetsList">
-          <!-- Dynamically populated by JavaScript -->
-        </div>
-      </div>
-    </section>
-
     <!-- Featured Long-Form Case Study -->
     <section id="deep-dive" style="margin-bottom: 4rem;">
       <div class="section-title-wrap">
-        <div class="section-label">04 // Featured Case Study</div>
+        <div class="section-label">03 // Featured Case Study</div>
         <h2 class="section-title">Long-Form Research & Post-Mortems</h2>
       </div>
 
@@ -1217,7 +823,7 @@
     <!-- Public Research & Advisories -->
     <section id="research">
       <div class="section-title-wrap">
-        <div class="section-label">05 // Vulnerability Research</div>
+        <div class="section-label">04 // Vulnerability Research</div>
         <h2 class="section-title">Published Advisories & Exploit PoCs</h2>
       </div>
 
@@ -1286,28 +892,7 @@
     </div>
   </footer>
 
-  <!-- Slide-out Telemetry Drawer & Overlay -->
-  <div class="drawer-overlay" id="drawerOverlay" onclick="closeTelemetryDrawer()"></div>
-  <aside class="telemetry-drawer" id="telemetryDrawer">
-    <div class="drawer-header">
-      <div class="drawer-title" id="drawerTitle">Target Telemetry</div>
-      <button class="drawer-close" onclick="closeTelemetryDrawer()" aria-label="Close drawer">✕</button>
-    </div>
-    <div class="drawer-tabs">
-      <button class="d-tab active" id="dtab-overview" onclick="switchDrawerTab('overview')">Overview</button>
-      <button class="d-tab" id="dtab-telemetry" onclick="switchDrawerTab('telemetry')">Deep Telemetry</button>
-      <button class="d-tab" id="dtab-banner" onclick="switchDrawerTab('banner')">Raw Banner</button>
-      <button class="d-tab" id="dtab-json" onclick="switchDrawerTab('json')">JSON Proof</button>
-    </div>
-    <div class="drawer-body" id="drawerBody"></div>
-    <div class="drawer-footer">
-      <button class="copy-btn" id="drawerCopyBtn" onclick="copyDrawerContent(this)">COPY TELEMETRY</button>
-      <button class="btn-action-primary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;" onclick="closeTelemetryDrawer()">CLOSE</button>
-    </div>
-  </aside>
-
   <script>
-    // Copy code button utility
     function copyCode(elementId, btn) {
       const text = document.getElementById(elementId).innerText;
       navigator.clipboard.writeText(text).then(() => {
@@ -1322,360 +907,7 @@
         }, 1500);
       });
     }
-
-    /* -------------------------------------------------------------
-       1. INTERACTIVE TERMINAL SIMULATOR
-    ------------------------------------------------------------- */
-    const termScenarios = {
-      pipeline: {
-        cmd: "cat scope.txt | surfacediff --live | HostageLVX -silent",
-        lines: [
-          { text: "[INF] surfacediff: loaded 142 targets from scope.txt", cls: "term-info" },
-          { text: "[+] NEW_ASSET   auth-dev.corp.internal (3.218.44.12)", cls: "term-asset" },
-          { text: "[!] VULNERABLE  HostageLVX: dangling CNAME detected!", cls: "term-vuln" },
-          { text: "    Target:   auth-dev.corp.internal → corp.s3.amazonaws.com", cls: "term-sub" },
-          { text: "    Provider: AWS S3 Bucket Takeover Verified", cls: "term-sub" },
-          { text: "[+] FenrirLVX   2 plugins matched known CVE signatures", cls: "term-asset" },
-          { text: "[✓] Pipeline execution finished in 482ms (1 takeover, 2 CVEs)", cls: "term-ok" }
-        ]
-      },
-      hostage: {
-        cmd: "HostageLVX -l scope.txt -t 50 -v -o takeovers.json",
-        lines: [
-          { text: "[*] HostageLVX v1.2.0 initialized (50 concurrent workers)", cls: "term-info" },
-          { text: "[*] Auditing 84 CNAME records against 32 cloud fingerprint signatures...", cls: "term-info" },
-          { text: "[-] docs.corp.com -> readthedocs.io [CLAIMED]", cls: "term-sub" },
-          { text: "[-] status.corp.com -> statuspage.io [CLAIMED]", cls: "term-sub" },
-          { text: "[!] VULNERABLE: shop-qa.corp.com -> unallocated.myshopify.com", cls: "term-vuln" },
-          { text: "    Engine: Shopify Subdomain Takeover Confirmed (NXDOMAIN / CNAME orphan)", cls: "term-sub" },
-          { text: "[+] Exported 1 confirmed takeover to takeovers.json (finished in 218ms)", cls: "term-ok" }
-        ]
-      },
-      surfacediff: {
-        cmd: "surfacediff snapshot_0925.json scan_today.json --format visual",
-        lines: [
-          { text: "[*] surfacediff: loading immutable asset ledger...", cls: "term-info" },
-          { text: "[+] ADDED_PORT   61.74.23.198:8000/tcp (DNP NetSession Hi3521a)", cls: "term-asset" },
-          { text: "[-] CLOSED_PORT  151.70.54.248:21/tcp (FTP Service Terminated)", cls: "term-info" },
-          { text: "[~] MODIFIED     vpn.corp.internal:443 (Cert: Let's Encrypt -> DigiCert)", cls: "term-sub" },
-          { text: "[!] DELTA ALERT  1 high-risk perimeter exposure detected", cls: "term-vuln" },
-          { text: "[✓] Surface diff completed: +1 added, -1 removed, ~1 modified (48ms)", cls: "term-ok" }
-        ]
-      },
-      fenrir: {
-        cmd: "FenrirLVX -u https://portal.target.corp -plugins -cve",
-        lines: [
-          { text: "[*] FenrirLVX: probing target CMS headers and asset footprints...", cls: "term-info" },
-          { text: "[+] CMS DETECTED: Kimai Time Tracker (Version <= 2.57.0)", cls: "term-asset" },
-          { text: "[!] CVE MATCH: CVE-2026-49865 (Default APP_SECRET Cryptographic Forge)", cls: "term-vuln" },
-          { text: "    Exploit Vector: Unauthenticated Administrative Session Hijack", cls: "term-sub" },
-          { text: "    Risk Scoring: CVSS 8.8 (High) | EPSS: 0.742", cls: "term-sub" },
-          { text: "[✓] Audit complete. Proof request generated in fenrir_report.json", cls: "term-ok" }
-        ]
-      }
-    };
-
-    let currentTermKey = 'pipeline';
-    let termTimeout = null;
-
-    function switchTermTab(key) {
-      if (!termScenarios[key]) return;
-      currentTermKey = key;
-      document.querySelectorAll('.term-tab').forEach(t => t.classList.remove('active'));
-      const activeBtn = document.getElementById('tab-' + key);
-      if (activeBtn) activeBtn.classList.add('active');
-      runCurrentTermTab();
-    }
-
-    function runCurrentTermTab() {
-      if (termTimeout) clearTimeout(termTimeout);
-      const screen = document.getElementById('termScreen');
-      const scenario = termScenarios[currentTermKey];
-      screen.innerHTML = '';
-
-      const cmdLine = document.createElement('div');
-      cmdLine.className = 'term-line-cmd';
-      cmdLine.innerHTML = '<span class="term-prompt">$</span><span id="typedCmd"></span><span class="cursor-blink"></span>';
-      screen.appendChild(cmdLine);
-
-      const typedCmd = document.getElementById('typedCmd');
-      let charIdx = 0;
-      const cmdText = scenario.cmd;
-
-      function typeChar() {
-        if (charIdx < cmdText.length) {
-          typedCmd.innerText += cmdText.charAt(charIdx);
-          charIdx++;
-          termTimeout = setTimeout(typeChar, 22);
-        } else {
-          // Finished typing, render lines progressively
-          renderTermLines(scenario.lines, 0);
-        }
-      }
-      typeChar();
-    }
-
-    function renderTermLines(lines, idx) {
-      if (idx >= lines.length) {
-        const promptLine = document.createElement('div');
-        promptLine.style.marginTop = '0.5rem';
-        promptLine.innerHTML = '<span class="term-prompt">$</span><span class="cursor-blink"></span>';
-        document.getElementById('termScreen').appendChild(promptLine);
-        return;
-      }
-      const item = lines[idx];
-      const div = document.createElement('div');
-      div.className = item.cls;
-      div.innerText = item.text;
-      document.getElementById('termScreen').appendChild(div);
-
-      termTimeout = setTimeout(() => {
-        renderTermLines(lines, idx + 1);
-      }, 90);
-    }
-
-    /* -------------------------------------------------------------
-       2. INTERACTIVE TELEMETRY & FLEET EXPLORER
-    ------------------------------------------------------------- */
-    const telemetryTargets = [
-      {
-        id: "t-1",
-        url: "https://p2e57ea70.dip0.t-ipconnect.de:443",
-        ip: "46.87.234.112",
-        port: "443",
-        proto: "HTTPS",
-        service: "DVRDVS-Webs",
-        location: "Germany / Bavaria / Zeitlarn (AS3320)",
-        sev: "MED",
-        score: "42.5",
-        tags: ["app:hikvision", "FW < 210628", "surveillance", "iot"],
-        banner: "HTTP/1.0 200 OK\r\nDate: Mon Sep 21 15:01:27 2026\r\nServer: DVRDVS-Webs\r\nLast-modified: Wed Jul 2 02:55:00 2014\r\nContent-length: 1581\r\nContent-type: text/html\r\n\r\n<!DOCTYPE html><html><head><title>Web Video Viewer</title></head>...",
-        firmware: "3.0.4.140702 (build 140702)",
-        arch: "ARM32 / HiSilicon Hi3521a",
-        opcodes: "0x8100 LOGIN -> 0x0120 DEVINFO (ver=0x620) -> 0x0201 DRFD",
-        telemetry: "Origin Exposed · Zero Cloudflare/CloudFront WAF · Cleartext Video RTSP on :554 · Passive Signature Match"
-      },
-      {
-        id: "t-2",
-        url: "dnp://61.74.23.198:8000",
-        ip: "61.74.23.198",
-        port: "8000",
-        proto: "DNP",
-        service: "HiSilicon NetSession",
-        location: "South Korea / Seoul (AS9318)",
-        sev: "CRIT",
-        score: "98.0",
-        tags: ["proto:dnp", "port:8000", "0x8100 bypass", "cve:F1-rce", "app:hikvision"],
-        banner: "5A A5 81 00 00 00 00 20 06 10 74 02 31 98 00 09 1B 35 0E 96 ...\r\n[DNP Binary Framing: magic=0x5AA5, cmd=0x8100, len=32]\r\n[AES-256-CBC Session Key Derived: 06107402319800091b350e96HIJKLMN]",
-        firmware: "ALL265_3r_2.3.7.9B06 / volans",
-        arch: "ARM32 / HiSilicon Hi3531d Dual-Core",
-        opcodes: "0x8100 LOGIN [Static AES-256 Key] -> 0x220 SET-SRC [sscanf injection] -> 0x221 APPLY [BL sys_system]",
-        telemetry: "Static AES-256 Key: dvr1234567!@#$%^&*()QWERTYUIOP% · sys_system filter bypass (`;` unhandled) · Root upgrade execution path"
-      },
-      {
-        id: "t-3",
-        url: "https://151.70.54.248:443",
-        ip: "151.70.54.248",
-        port: "443",
-        proto: "HTTPS",
-        service: "DVRDVS-Webs",
-        location: "Italy / Campania / Naples (AS1267)",
-        sev: "CRIT",
-        score: "90.0",
-        tags: ["cve:cisa-kev", "origin exposed", "app:hikvision"],
-        banner: "HTTP/1.1 200 OK\r\nServer: App-Webs/1.1\r\nDocument: index\r\nFenrir Classifier: Native Firmware / Appliance\r\nReverse PTR: Unassigned (Direct Host IP Exposed)\r\nWAF: None",
-        firmware: "Native Embedded Appliance (Linux 3.0.8)",
-        arch: "Embedded MIPS/ARM",
-        opcodes: "N/A (HTTP REST Interface / ONVIF SOAP port 80)",
-        telemetry: "Direct Host IP Exposed · Cleartext TLS Certificate Subject · CISA KEV Known Exploit Signature · 1-Day Threat Stream"
-      },
-      {
-        id: "t-4",
-        url: "https://auth-dev.internal.corp",
-        ip: "3.218.44.12",
-        port: "443",
-        proto: "HTTPS",
-        service: "AWS S3 / Dangling CNAME",
-        location: "United States / Virginia (AWS us-east-1)",
-        sev: "HIGH",
-        score: "85.0",
-        tags: ["tag:takeover", "cname:orphan", "aws-s3"],
-        banner: "HTTP/1.1 404 Not Found\r\nx-amz-request-id: 7G8X3Q19\r\nServer: AmazonS3\r\nCode: NoSuchBucket\r\nMessage: The specified bucket does not exist\r\nBucketName: corp-staging-auth-bucket",
-        firmware: "Cloud Edge DNS",
-        arch: "Cloud Infrastructure",
-        opcodes: "CNAME auth-dev.internal.corp -> corp-staging-auth-bucket.s3.amazonaws.com",
-        telemetry: "HostageLVX Engine Verification: Subdomain pointing to unregistered AWS S3 bucket. Deterministic 100% takeover confirmed."
-      }
-    ];
-
-    let currentDrawerTarget = null;
-    let currentDrawerTab = 'overview';
-
-    function renderTargets(filterQuery) {
-      const q = (filterQuery || '').toLowerCase().trim();
-      const list = document.getElementById('targetsList');
-      if (!list) return;
-
-      const filtered = telemetryTargets.filter(t => {
-        if (!q || q === 'all targets') return true;
-        if (q.includes('!decoy')) {
-          // All targets in our verified list are real
-          const cleanQ = q.replace('!decoy', '').trim();
-          if (!cleanQ) return true;
-          return matchTarget(t, cleanQ);
-        }
-        return matchTarget(t, q);
-      });
-
-      document.getElementById('targetMatchCount').innerText = filtered.length;
-
-      if (filtered.length === 0) {
-        list.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-muted); font-family: var(--mono); font-size: 0.85rem;">No telemetry nodes matching query. Try "app:hikvision !decoy", "port:8000", or "tag:takeover".</div>';
-        return;
-      }
-
-      list.innerHTML = filtered.map(t => {
-        const sevClass = t.sev === 'CRIT' ? 'sev-crit' : t.sev === 'HIGH' ? 'sev-high' : 'sev-med';
-        return `
-          <div class="target-row" onclick="openTelemetryDrawer('${t.id}')">
-            <div class="target-main">
-              <div class="target-url">
-                <span>${t.url}</span>
-                <span class="inspect-hint">[INSPECT] ↗</span>
-              </div>
-              <div class="target-meta">
-                <span>IP: <strong>${t.ip}</strong></span>
-                <span>Port: <strong>${t.port}</strong> (${t.proto})</span>
-                <span>Service: <strong>${t.service}</strong></span>
-                <span>Region: <strong>${t.location}</strong></span>
-              </div>
-            </div>
-            <div class="target-badges">
-              <span class="sev-pill ${sevClass}">${t.score} ${t.sev}</span>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function matchTarget(t, q) {
-      const haystack = (t.url + ' ' + t.ip + ' ' + t.port + ' ' + t.proto + ' ' + t.service + ' ' + t.location + ' ' + t.tags.join(' ')).toLowerCase();
-      const terms = q.split(' ').filter(Boolean);
-      return terms.every(term => haystack.includes(term));
-    }
-
-    function handleSearchInput(e) {
-      if (e.key === 'Enter') {
-        executeTargetSearch();
-      }
-    }
-
-    function executeTargetSearch() {
-      const q = document.getElementById('targetSearchInput').value;
-      renderTargets(q);
-    }
-
-    function applyPreset(preset) {
-      document.getElementById('targetSearchInput').value = preset;
-      renderTargets(preset);
-    }
-
-    function openTelemetryDrawer(targetId) {
-      const t = telemetryTargets.find(item => item.id === targetId);
-      if (!t) return;
-      currentDrawerTarget = t;
-      currentDrawerTab = 'overview';
-      document.getElementById('drawerTitle').innerText = t.ip + ' :' + t.port;
-      switchDrawerTab('overview');
-      document.getElementById('telemetryDrawer').classList.add('open');
-      document.getElementById('drawerOverlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeTelemetryDrawer() {
-      document.getElementById('telemetryDrawer').classList.remove('open');
-      document.getElementById('drawerOverlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function switchDrawerTab(tab) {
-      currentDrawerTab = tab;
-      document.querySelectorAll('.d-tab').forEach(b => b.classList.remove('active'));
-      const activeBtn = document.getElementById('dtab-' + tab);
-      if (activeBtn) activeBtn.classList.add('active');
-
-      const body = document.getElementById('drawerBody');
-      const t = currentDrawerTarget;
-      if (!t) return;
-
-      if (tab === 'overview') {
-        body.innerHTML = `
-          <div class="telemetry-section-title">Device & Service Overview</div>
-          <div class="telemetry-kv-grid">
-            <span class="telemetry-key">Endpoint</span><span class="telemetry-val">${t.url}</span>
-            <span class="telemetry-key">Host IP</span><span class="telemetry-val">${t.ip}</span>
-            <span class="telemetry-key">Port / Proto</span><span class="telemetry-val">${t.port} / ${t.proto}</span>
-            <span class="telemetry-key">Service</span><span class="telemetry-val">${t.service}</span>
-            <span class="telemetry-key">Firmware</span><span class="telemetry-val">${t.firmware}</span>
-            <span class="telemetry-key">Architecture</span><span class="telemetry-val">${t.arch}</span>
-            <span class="telemetry-key">Location</span><span class="telemetry-val">${t.location}</span>
-          </div>
-
-          <div class="telemetry-section-title">Risk Scoring Matrix</div>
-          <div class="telemetry-kv-grid">
-            <span class="telemetry-key">Score</span><span class="telemetry-val" style="color: var(--accent); font-weight: 700;">${t.score} / 100</span>
-            <span class="telemetry-key">Severity</span><span class="telemetry-val">${t.sev}</span>
-            <span class="telemetry-key">Active Tags</span><span class="telemetry-val">${t.tags.map(x => '<code>' + x + '</code>').join(' ')}</span>
-          </div>
-        `;
-      } else if (tab === 'telemetry') {
-        body.innerHTML = `
-          <div class="telemetry-section-title">Deep Protocol Telemetry</div>
-          <div class="telemetry-kv-grid">
-            <span class="telemetry-key">Signals</span><span class="telemetry-val">${t.telemetry}</span>
-            <span class="telemetry-key">Opcode Trace</span><span class="telemetry-val" style="color: #38bdf8;">${t.opcodes}</span>
-            <span class="telemetry-key">Hardware SoC</span><span class="telemetry-val">${t.arch}</span>
-          </div>
-
-          <div class="telemetry-section-title">Disassembly Call Chain</div>
-          <div class="raw-code-block">// Extracted from binary analysis:
-${t.opcodes}
-// Handshake status: Active listener verified.
-// Zero WAF proxy detected. Traffic terminates directly at physical SoC.</div>
-        `;
-      } else if (tab === 'banner') {
-        body.innerHTML = `
-          <div class="telemetry-section-title">Raw Wire Banner & Header Dump</div>
-          <div class="raw-code-block">${t.banner}</div>
-        `;
-      } else if (tab === 'json') {
-        body.innerHTML = `
-          <div class="telemetry-section-title">Contract-Enforced JSON Telemetry</div>
-          <div class="raw-code-block">${JSON.stringify(t, null, 2)}</div>
-        `;
-      }
-    }
-
-    function copyDrawerContent(btn) {
-      if (!currentDrawerTarget) return;
-      const json = JSON.stringify(currentDrawerTarget, null, 2);
-      navigator.clipboard.writeText(json).then(() => {
-        const orig = btn.innerText;
-        btn.innerText = 'COPIED JSON!';
-        btn.style.background = '#00ffcc';
-        btn.style.color = '#000';
-        setTimeout(() => {
-          btn.innerText = orig;
-          btn.style.background = '';
-          btn.style.color = '';
-        }, 1500);
-      });
-    }
-
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', () => {
-      renderTargets('app:hikvision !decoy');
-    });
   </script>
+
 </body>
 </html>
