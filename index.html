@@ -8,7 +8,9 @@
   <meta property="og:title" content="LEVIATHAN OFFSEC">
   <meta property="og:description" content="Fast, composable, modular offensive security tools and vulnerability research.">
   <meta property="og:url" content="https://leviathan.ac">
+  <meta property="og:image" content="https://leviathan.ac/assets/logo.png">
   <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="/assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -58,18 +60,19 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.75rem;
       font-family: var(--mono);
       font-weight: 800;
       font-size: 1.1rem;
       letter-spacing: -0.5px;
     }
-    .brand-icon {
-      width: 14px;
-      height: 14px;
-      background: var(--accent);
-      border-radius: 2px;
-      box-shadow: 0 0 10px var(--accent);
+    .brand-logo-img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid rgba(0, 255, 204, 0.4);
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.25);
     }
     .verified-pill {
       font-size: 0.65rem;
@@ -393,7 +396,7 @@
   <header>
     <div class="container nav-inner">
       <div class="brand">
-        <span class="brand-icon"></span>
+        <img src="/assets/logo.png" alt="Leviathan Logo" class="brand-logo-img">
         <span>LEVIATHAN OFFSEC</span>
         <span class="verified-pill">✓ Verified</span>
       </div>
