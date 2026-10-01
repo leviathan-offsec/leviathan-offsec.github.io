@@ -455,7 +455,7 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
       </p>
 
       <p>
-        To trigger the reboot programmatically, I used an open-source tool called <code>pwneye</code>. However, the tool crashed immediately. It had an unhandled exception when interacting with devices configured with a blank administrative password. I reversed <code>pwneye</code>'s Python code, patched the authentication check, and successfully triggered a physical reboot.
+        To trigger the reboot I used <code>pwneye</code>, an open-source ONVIF/RTSP tool. It crashed on devices with a blank admin password. Since <code>pwneye</code> is GPL and its Python source is on GitHub, I read the credential check, patched it locally to allow an empty password, and got the reboot to go through.
       </p>
 
       <p>
