@@ -1,20 +1,5 @@
 ---
 show_on_home: false
-
-# ============================================================================
-# !! EDIT YOUR PRICING HERE — these are PLACEHOLDERS, not business decisions !!
-# ============================================================================
-# Every value below is rendered from this block. Change the three prices and
-# the contact address and the whole page updates. Do not publish without
-# replacing them — a made-up price on a live domain is hard to walk back.
-pricing:
-  audit_price:    "Custom quote"
-  audit_unit:     "per engagement"
-  monitor_price:  "Contact us"   # TODO: set your real monthly price once decided
-  monitor_unit:   "recurring monitoring"
-  retainer_price: "Contact us"
-  contact:        "scoping@leviathan.ac"   # TODO: confirm this mailbox routes
-# ============================================================================
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -444,14 +429,6 @@ pricing:
     .post-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.55rem; }
     .post-card p { color: var(--text-muted); font-size: 0.89rem; line-height: 1.65; margin-bottom: 0.9rem; }
 
-    /* ---- CTA band ---- */
-    .cta-band {
-      border: 1px solid rgba(0,255,204,0.25); border-radius: 10px;
-      background: linear-gradient(135deg, rgba(0,255,204,0.06), rgba(0,240,255,0.03));
-      padding: 3.5rem 2rem; text-align: center; margin-bottom: 4rem;
-    }
-    .cta-band h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 800; letter-spacing: -0.6px; margin-bottom: 0.85rem; }
-    .cta-band p { color: var(--text-muted); max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
     .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
     footer { border-top: 1px solid var(--card-border); padding: 2.5rem 0; margin-top: 2rem; }
@@ -483,12 +460,12 @@ pricing:
       <span>LEVIATHAN OFFSEC</span>
     </a>
     <nav class="nav-links">
+      <a href="#blog">Research</a>
       <a href="#tools">Tools</a>
-      <a href="#services">Services</a>
       <a href="#pipeline">Pipeline</a>
       <a href="#research">Research</a>
       <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener">GitHub</a>
-      <a href="#services" class="nav-cta">Book a Scan</a>
+      <a href="https://github.com/leviathan-offsec" class="nav-cta">GitHub</a>
     </nav>
   </div>
 </header>
@@ -498,16 +475,17 @@ pricing:
   <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-badge"><span class="dot"></span> Continuous attack surface monitoring</div>
-      <h1>Find out what changed<br><span class="accent">before</span> someone else does.</h1>
+      <div class="hero-badge"><span class="dot"></span> IoT exposure research, at index scale</div>
+      <h1>One favicon hash.<br><span class="accent">723,646</span> hosts.</h1>
       <p class="hero-sub">
-        You already run <code>subfinder</code> and <code>httpx</code>. Point them at
-        <code>surfacediff</code> and you get a snapshot of your perimeter that either
-        matches the last one or exits non-zero. No daemon, no agent, nothing to log into.
+        A single <code>http.favicon.hash</code> from the passive index expands to 723,646
+        internet-facing hosts across 49 product strings, including Lorex and KB Vision
+        rebadges. One firmware generation, fingerprinted from a read. Nothing downloaded,
+        no device contacted.
       </p>
       <div class="hero-actions">
-        <a href="#services" class="btn-action-primary">Book an Assessment</a>
-        <a href="#tools" class="btn-action-secondary">Explore the Tools</a>
+        <a href="/posts/80-days-reversing-iot-dvr.html" class="btn-action-primary">Read the writeup</a>
+        <a href="#tools" class="btn-action-secondary">The tools</a>
       </div>
     </div>
 
@@ -567,10 +545,41 @@ pricing:
     </div>
   </div>
 
+  <!-- ================= BLOG ================= -->
+  <section id="blog" class="pipeline-section">
+    <div class="section-title-wrap">
+      <div class="section-label">01 // Research</div>
+      <h2 class="section-title">Writeups, including the ones that went nowhere.</h2>
+      <p class="section-sub">
+        Firmware reverse engineering done in public, with the disassembly and the dead
+        ends left in. Some of this found a buyer. Most of it did not.
+      </p>
+    </div>
+
+    <div class="post-list">
+      <a href="/posts/80-days-reversing-iot-dvr.html" class="post-card">
+        <div class="post-meta">Firmware Research &middot; September 2026 &middot; 16 min</div>
+        <h3>80 Days on an IoT DVR: Three Real Bugs, No Bounty</h3>
+        <p>
+          A hardcoded AES-256 key, an unsigned root upgrade chain, and a command
+          injection behind a two-character blocklist &mdash; all proven at the
+          instruction level. ZDI declined it. The vendor has no security contact.
+        </p>
+        <span class="tool-link">Read &rarr;</span>
+      </a>
+      <a href="/posts/offline-wordpress-scanner-comparison.html" class="post-card">
+        <div class="post-meta">Tooling &middot; FenrirLVX</div>
+        <h3>Offline WordPress scanner comparison</h3>
+        <p>What local CVE correlation actually catches, and what a stale database silently misses.</p>
+        <span class="tool-link">Read &rarr;</span>
+      </a>
+    </div>
+  </section>
+
   <!-- ================= TOOLS ================= -->
   <section id="tools">
     <div class="section-title-wrap">
-      <div class="section-label">01 // The Arsenal</div>
+      <div class="section-label">02 // Tools</div>
       <h2 class="section-title">Four tools. MIT licensed.</h2>
       <p class="section-sub">
         These run on hardware you already own. When we do an assessment, we run these
@@ -675,74 +684,11 @@ pricing:
   </section>
 
   <!-- ================= SERVICES ================= -->
-  <section id="services" class="pipeline-section">
-    <div class="section-title-wrap">
-      <div class="section-label">02 // Engagements</div>
-      <h2 class="section-title">Or we run them for you.</h2>
-      <p class="section-sub">
-        Written scope before anything is sent, and the same open binaries as above.
-        You get reproduction steps and a fix, not a screenshot of a dashboard.
-      </p>
-    </div>
-
-    <div class="svc-grid">
-      <div class="svc-card">
-        <div class="svc-flag pro">One-off</div>
-        <div class="svc-name">Perimeter Audit</div>
-        <div class="svc-price">{{ page.pricing.audit_price }} <span>{{ page.pricing.audit_unit }}</span></div>
-        <div class="svc-for">For startups that need to know where they stand this quarter.</div>
-        <ul class="svc-list">
-          <li><strong>Up to 5 root domains</strong>, full subdomain enumeration</li>
-          <li>Dangling DNS and subdomain takeover verification</li>
-          <li>CMS and plugin fingerprinting with CVE correlation</li>
-          <li>Risk ranking for every finding, with evidence</li>
-          <li>30-minute call to walk the report</li>
-        </ul>
-        <a href="mailto:{{ page.pricing.contact }}?subject=Perimeter%20Audit" class="svc-btn">Request a Quote</a>
-      </div>
-
-      <div class="svc-card featured">
-        <div class="svc-flag pop">Most teams</div>
-        <div class="svc-name">Continuous Monitoring</div>
-        <div class="svc-price">{{ page.pricing.monitor_price }} <span>{{ page.pricing.monitor_unit }}</span></div>
-        <div class="svc-for">For teams who want to know the moment something changes.</div>
-        <ul class="svc-list">
-          <li>Everything in the Perimeter Audit, re-run <strong>daily</strong></li>
-          <li>Change-only alerts. You hear about <strong>deltas</strong>, not repeats of things you already fixed.</li>
-          <li>New asset, takeover, and exposure notification within 24h</li>
-          <li>CVE correlation against your actual stack, not a generic feed</li>
-          <li>Cancel any month, no lock-in</li>
-        </ul>
-        <a href="mailto:{{ page.pricing.contact }}?subject=Continuous%20Monitoring" class="svc-btn primary">Start Monitoring</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-flag ent">Enterprise</div>
-        <div class="svc-name">Embedded Retainer</div>
-        <div class="svc-price">{{ page.pricing.retainer_price }}</div>
-        <div class="svc-for">For teams that need remediation help, not just detection.</div>
-        <ul class="svc-list">
-          <li>Unlimited domains and shared-drive scoping</li>
-          <li>Internal network ranges, not just external DNS</li>
-          <li>Direct engineer contact on a shared channel</li>
-          <li>Remiation guidance and re-verification after each fix</li>
-          <li>Quarterly review against your actual risk posture</li>
-        </ul>
-        <a href="mailto:{{ page.pricing.contact }}?subject=Enterprise%20Retainer" class="svc-btn">Talk to Us</a>
-      </div>
-    </div>
-
-    <p class="svc-note">
-      All work is authorised, written-scope only. We do not scan third-party infrastructure
-      you do not control, and we do not provide working exploits for unpatched issues.
-      <a href="mailto:{{ page.pricing.contact }}">{{ page.pricing.contact }}</a>
-    </p>
-  </section>
 
   <!-- ================= PIPELINE ================= -->
   <section id="pipeline">
     <div class="section-title-wrap">
-      <div class="section-label">03 // Unix Composability</div>
+      <div class="section-label">03 // Pipeline</div>
       <h2 class="section-title">It reads stdin and writes stdout.</h2>
       <p class="section-sub">
         Nothing to install but a Go binary. <code>surfacediff</code> and
@@ -768,7 +714,7 @@ pricing:
   <!-- ================= RESEARCH ================= -->
   <section id="research" class="pipeline-section">
     <div class="section-title-wrap">
-      <div class="section-label">04 // Vulnerability Research</div>
+      <div class="section-label">04 // Advisories</div>
       <h2 class="section-title">Published advisories and patch analysis.</h2>
       <p class="section-sub">
         Independent research into supply-chain and CMS vulnerabilities, published with
@@ -838,17 +784,6 @@ pricing:
   </section>
 
   <!-- ================= CTA BAND ================= -->
-  <section class="cta-band">
-    <h2>Not sure where you stand?</h2>
-    <p>
-      Send us your root domains. We will run the enumeration and tell you what we find
-      before you commit to anything. No charge, no obligation.
-    </p>
-    <div class="cta-actions">
-      <a href="mailto:{{ page.pricing.contact }}?subject=Free%20surface%20check" class="btn-action-primary">Request a Free Surface Check</a>
-      <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener" class="btn-action-secondary">Browse the Source</a>
-    </div>
-  </section>
 
 </div>
 
@@ -858,8 +793,9 @@ pricing:
       <span class="footer-note">© 2026 Leviathan OffSec — leviathan.ac</span>
       <nav class="footer-links">
         <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener">GitHub</a>
-        <a href="mailto:{{ page.pricing.contact }}">Contact</a>
-        <a href="#tools">Tools</a>
+        <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener">GitHub</a>
+        <a href="#blog">Research</a>
+      <a href="#tools">Tools</a>
       </nav>
     </div>
     <p class="footer-disclaimer">
