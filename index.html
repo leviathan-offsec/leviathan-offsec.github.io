@@ -490,9 +490,9 @@ show_on_home: false
     <nav class="nav-links">
       <a href="#blog">Research</a>
       <a href="#tools">Tools</a>
+      <a href="#advisories">Advisories</a>
       <a href="#pipeline">Pipeline</a>
-      <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://github.com/leviathan-offsec" class="nav-cta">GitHub</a>
+      <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener" class="nav-cta">GitHub</a>
     </nav>
   </div>
 </header>
@@ -511,7 +511,7 @@ show_on_home: false
         no device contacted.
       </p>
       <div class="hero-actions">
-        <a href="/posts/80-days-reversing-iot-dvr.html" class="btn-action-primary">Read the writeup</a>
+        <a href="#blog" class="btn-action-primary">Read the research</a>
         <a href="#tools" class="btn-action-secondary">The tools</a>
       </div>
     </div>
@@ -582,65 +582,7 @@ show_on_home: false
       </p>
     </div>
 
-    <div class="research-table-wrap">
-      <table class="research-table">
-        <thead>
-          <tr>
-            <th>Advisory</th>
-            <th>Severity</th>
-            <th>Class</th>
-            <th>Target &amp; impact</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="vuln-name">decompress CWE-59</span></td>
-            <td><span class="sev-pill sev-high">High</span></td>
-            <td>CWE-59</td>
-            <td>Symlink escape and hardlink write bypass in <code>decompress@4.2.1</code>, a package with millions of weekly npm downloads. Patch analysis published; reproduction steps documented.</td>
-          </tr>
-          <tr>
-            <td><span class="vuln-name">CVE-2026-52824</span><br><span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-muted)">GHSA-jr9p-4h4j-6c58</span></td>
-            <td><span class="sev-pill sev-high">High</span></td>
-            <td>CWE-287</td>
-            <td>Default <code>APP_SECRET</code> enabling cryptographic session forgery in Kimai &le; 2.57.0, resulting in administrative session hijack.</td>
-          </tr>
-          <tr>
-            <td><span class="vuln-name">Tianwen ERP</span></td>
-            <td><span class="sev-pill sev-crit">Critical</span></td>
-            <td>CWE-434</td>
-            <td>Unauthenticated arbitrary file upload in Tianwen Property Management ERP. Vendor notified; reproduction steps documented in the advisory.</td>
-          </tr>
-          <tr>
-            <td><span class="vuln-name">braces DoS</span></td>
-            <td><span class="sev-pill sev-med">Medium</span></td>
-            <td>CWE-400</td>
-            <td>Patch analysis of CVE-2024-4068: comma-separated brace expansion strings remain unmitigated in <code>braces@3.0.3</code>.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
 
-    <p class="advisory-note">
-      <strong>Reporting a vulnerability in your own product?</strong>
-      Responsible disclosure is handled directly — no bug bounty programme, no middleman.
-      Email the details and we will confirm receipt and coordinate a fix timeline with you.
-    </p>
-
-    {% assign research_posts = site.pages | where: "show_on_home", true | sort: "date" | reverse %}
-    {% if research_posts.size > 0 %}
-    <div class="post-list" style="margin-top:2.5rem">
-      {% for post in research_posts %}
-      <a href="{{ post.url | relative_url }}" class="post-card">
-        <div class="post-meta">{{ post.category }} &middot; {{ post.date | date: "%B %Y" }}</div>
-        <h3>{{ post.title }}</h3>
-        <p>{{ post.description }}</p>
-        <span class="tool-link">Read research &rarr;</span>
-      </a>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </section>
 
   <!-- ================= TOOLS ================= -->
   <section id="tools">
@@ -648,8 +590,8 @@ show_on_home: false
       <div class="section-label">02 // Tools</div>
       <h2 class="section-title">Four tools. MIT licensed.</h2>
       <p class="section-sub">
-        These run on hardware you already own. When we do an assessment, we run these
-        same binaries, so you can check our work against the source.
+        These run on hardware you already own, and they are MIT licensed, so you can
+        read every line before you trust it with your own perimeter.
       </p>
     </div>
 
@@ -766,10 +708,82 @@ label web: +0 -0 ~1
 
   <!-- ================= SERVICES ================= -->
 
+  <!-- ================= ADVISORIES ================= -->
+  <section id="advisories" class="pipeline-section">
+    <div class="section-title-wrap">
+      <div class="section-label">03 // Advisories</div>
+      <h2 class="section-title">Published advisories and patch analysis.</h2>
+      <p class="section-sub">
+        Independent research into supply-chain and CMS vulnerabilities, with full
+        technical analysis. Where an issue is unpatched upstream we publish the
+        analysis and reproduction steps, not a turnkey weapon.
+      </p>
+    </div>
+
+    <div class="research-table-wrap">
+      <table class="research-table">
+        <thead>
+          <tr>
+            <th>Advisory</th>
+            <th>Severity</th>
+            <th>Class</th>
+            <th>Target &amp; impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="vuln-name">decompress CWE-59</span></td>
+            <td><span class="sev-pill sev-high">High</span></td>
+            <td>CWE-59</td>
+            <td>Symlink escape and hardlink write bypass in <code>decompress@4.2.1</code>, a package with millions of weekly npm downloads. Patch analysis published; reproduction steps documented.</td>
+          </tr>
+          <tr>
+            <td><span class="vuln-name">CVE-2026-52824</span><br><span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-muted)">GHSA-jr9p-4h4j-6c58</span></td>
+            <td><span class="sev-pill sev-high">High</span></td>
+            <td>CWE-287</td>
+            <td>Default <code>APP_SECRET</code> enabling cryptographic session forgery in Kimai &le; 2.57.0, resulting in administrative session hijack.</td>
+          </tr>
+          <tr>
+            <td><span class="vuln-name">Tianwen ERP</span></td>
+            <td><span class="sev-pill sev-crit">Critical</span></td>
+            <td>CWE-434</td>
+            <td>Unauthenticated arbitrary file upload in Tianwen Property Management ERP. Vendor notified; reproduction steps documented in the advisory.</td>
+          </tr>
+          <tr>
+            <td><span class="vuln-name">braces DoS</span></td>
+            <td><span class="sev-pill sev-med">Medium</span></td>
+            <td>CWE-400</td>
+            <td>Patch analysis of CVE-2024-4068: comma-separated brace expansion strings remain unmitigated in <code>braces@3.0.3</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="advisory-note">
+      <strong>Reporting a vulnerability in your own product?</strong>
+      Responsible disclosure is handled directly — no bug bounty programme, no middleman.
+      Email the details and we will confirm receipt and coordinate a fix timeline with you.
+    </p>
+
+    {% assign research_posts = site.pages | where: "show_on_home", true | sort: "date" | reverse %}
+    {% if research_posts.size > 0 %}
+    <div class="post-list" style="margin-top:2.5rem">
+      {% for post in research_posts %}
+      <a href="{{ post.url | relative_url }}" class="post-card">
+        <div class="post-meta">{{ post.category }} &middot; {{ post.date | date: "%B %Y" }}</div>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.description }}</p>
+        <span class="tool-link">Read research &rarr;</span>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
   <!-- ================= PIPELINE ================= -->
   <section id="pipeline">
     <div class="section-title-wrap">
-      <div class="section-label">03 // Pipeline</div>
+      <div class="section-label">04 // Pipeline</div>
       <h2 class="section-title">It reads stdin and writes stdout.</h2>
       <p class="section-sub">
         Nothing to install but a Go binary. <code>surfacediff</code> and
@@ -795,6 +809,8 @@ label web: +0 -0 ~1
 
   <!-- ================= CTA BAND ================= -->
 
+
+  </section>
 </div>
 
 <footer>
@@ -802,7 +818,6 @@ label web: +0 -0 ~1
     <div class="footer-inner">
       <span class="footer-note">© 2026 Leviathan OffSec — leviathan.ac</span>
       <nav class="footer-links">
-        <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener">GitHub</a>
         <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener">GitHub</a>
         <a href="#blog">Research</a>
       <a href="#tools">Tools</a>
