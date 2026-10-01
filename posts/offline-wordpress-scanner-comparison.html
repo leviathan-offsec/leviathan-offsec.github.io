@@ -1,0 +1,222 @@
+---
+layout: null
+title: "Offline WordPress Scanners Compared: CMSmap, Nuclei, Wapiti, FenrirLVX"
+description: "Four offline WordPress vulnerability scanners compared on what they detect, how they source advisory data, and whether they tell you when their database has no coverage of a plugin."
+category: "Tooling // Comparison"
+date: 2026-10-01
+show_on_home: true
+---
+
+<div class="container">
+<article class="content">
+
+<div class="article-header">
+  <span class="meta-tag">Tooling // Comparison</span>
+  <h1>Offline WordPress Scanners:<br>What They Find and What They Don't</h1>
+  <div class="byline">
+    <span>@cyeezy08 // Leviathan OffSec</span>
+    <span>|</span>
+    <span>October 2026</span>
+    <span>|</span>
+    <span>9 min read</span>
+  </div>
+</div>
+
+<p>
+  WPScan's free tier is one API call per plugin. The standard answer is to go offline, and there are three good ones: <a href="https://github.com/dionach/CMSmap">CMSmap</a>, <a href="https://github.com/projectdiscovery/nuclei">Nuclei</a>, and <a href="https://github.com/wapiti-scanner/wapiti">Wapiti</a>. All three are maintained. All three work without a hosted API.
+</p>
+
+<p>
+  They differ in one way that matters more than feature lists, and it is not usually discussed: <strong>what each tool tells you when it has no data for a plugin.</strong>
+</p>
+
+<h2>1. The problem with a clean result</h2>
+
+<p>
+  Every scanner here correlates detected plugin versions against an advisory database. That correlation fails silently. If a plugin's slug is missing from the database, the tool has nothing to match, finds nothing, and reports the plugin as clean.
+</p>
+
+<pre><code>Plugin detected:   jetpack 10.0
+Advisory lookup:   no match in database
+Reported:          clean</code></pre>
+
+<p>
+  The scan looks identical whether the plugin genuinely has no known issues or the database has never heard of it. There is no way to tell from the output.
+</p>
+
+<p>
+  This matters more than usual for the WordPress plugin ecosystem. Slugs are not the display names, they are not stable across rebrands, and advisory feeds lag new releases by weeks. Any database will have holes. The question is whether the tool admits which ones.
+</p>
+
+<h2>2. How each tool sources advisory data</h2>
+
+<table>
+  <thead>
+    <tr><th>Tool</th><th>Data source</th><th>Needs key</th><th>Refresh</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>CMSmap</strong></td>
+      <td>Exploit-DB</td>
+      <td>No</td>
+      <td><code>-U</code> on demand</td>
+    </tr>
+    <tr>
+      <td><strong>Nuclei</strong></td>
+      <td>Community YAML templates</td>
+      <td>No</td>
+      <td>Yes, template pull</td>
+    </tr>
+    <tr>
+      <td><strong>Wapiti</strong></td>
+      <td>Wapiti database, plus optional NVD module</td>
+      <td>No, unless using NVD</td>
+      <td>One command</td>
+    </tr>
+    <tr>
+      <td><strong>FenrirLVX</strong></td>
+      <td>Wordfence Intelligence, converted to a local map</td>
+      <td>Key only to rebuild the map, not to run</td>
+      <td>One command</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  Wordfence is the deepest free source of WordPress-specific advisories, which is why FenrirLVX converts it into <code>vuln_db.json</code> rather than shipping a hand-edited list. The conversion is a documented step:
+</p>
+
+<pre><code># pull current advisories, convert, done
+WORDfENCE_API_KEY=... go run ./tools/fetch
+go run ./tools/convertor.go
+./fenrir -t https://target</code></pre>
+
+<p>
+  The 158 MB Wordfence export is not committed and is not shipped. It is an input, not a deliverable. Release archives contain the binary, the 10 MB database, and a checksum file, which keeps a platform archive around 5 MB instead of 17 MB.
+</p>
+
+<h2>3. What each tool does with a missing slug</h2>
+
+<table>
+  <thead>
+    <tr><th>Tool</th><th>Plugin not in database</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>CMSmap</strong></td>
+      <td>Not reported. The plugin is detected, no advisory matches, output looks clean.</td>
+    </tr>
+    <tr>
+      <td><strong>Nuclei</strong></td>
+      <td>Not reported. A missing template is indistinguishable from a clean plugin.</td>
+    </tr>
+    <tr>
+      <td><strong>Wapiti</strong></td>
+      <td>Not surfaced as a coverage figure in the default output.</td>
+    </tr>
+    <tr>
+      <td><strong>FenrirLVX</strong></td>
+      <td>Counted, and printed on both the finding and the clean path.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  This is the whole difference. From FenrirLVX:
+</p>
+
+<pre><code>[+] staging.example.com Clean
+    database coverage  3/7 plugins matched  4 with no advisory data
+
+[!] staging.example.com  confidence=78/100
+    plugins  akismet 4.1, jetpack 10.0, woocommerce 7.4
+    database coverage  3/7 plugins matched  4 with no advisory data
+    [!] CVE-2023-1234  akismet  5.0-6.0  CVSS 7.5</code></pre>
+
+<p>
+  A clean verdict now tells you the scanner only had data for three of seven plugins. That is the difference between a result you can act on and a result you can only hope about.
+</p>
+
+<h2>4. Where each tool is genuinely better</h2>
+
+<p>
+  This comparison is not a ranking. Three of these are better than FenrirLVX at their actual job.
+</p>
+
+<ul>
+  <li><strong>CMSmap</strong> covers Joomla, Drupal and Moodle as well as WordPress, and draws from Exploit-DB, which reaches exploits that never received a CVE. If you run anything other than WordPress, it is the better first tool.</li>
+  <li><strong>Nuclei</strong> is a scanner platform, not a CMS auditor. It finds things a CMS-specific tool will never look for, because you can write a template for anything. FenrirLVX only knows about plugins, themes and CVEs.</li>
+  <li><strong>Wapiti</strong> is a general web application scanner. Misconfiguration, injection classes, and other server-side issues are outside what any of the CMS tools look for.</li>
+</ul>
+
+<p>
+  FenrirLVX is narrower: WordPress plugin and theme versions, correlated against a database it can rebuild from Wordfence on demand, with coverage stated in every result.
+</p>
+
+<h2>5. Running them together</h2>
+
+<p>
+  They are complementary rather than competing. A defensible order, roughly:
+</p>
+
+<pre><code># 1. broad coverage
+nuclei -l wordpress-templates.txt -u https://target
+
+# 2. what Nuclei cannot express: per-plugin CVE correlation
+fenrir -t https/target          # prints its database coverage line
+
+# 3. non-WordPress surfaces
+cmsmap -d https://target        # Joomla, Drupal
+wapiti -u https://target        # general web vulns
+
+# 4. diff the attack surface between runs
+surfacediff snap -l subs
+surfacediff diff -l subs</code></pre>
+
+<h2>6. What none of them do</h2>
+
+<p>
+  All four correlate versions against a database. None of them tells you whether the version they read off the target is trustworthy, whether an advisory had no upper bound so it matched everything, or whether the match was made on a version they could not actually parse.
+</p>
+
+<p>
+  FenrirLVX flags the second case and reports the third. A finding now carries the detected version, the range it fell in, and whether that range was unbounded, so a reader can discount a match that fired because the advisory was open-ended.
+</p>
+
+<div class="callout">
+  <strong>One caveat worth stating plainly.</strong> A coverage number is not a quality number. Knowing your database has 4 of 7 plugins tells you where to look next. It does not make the tool more accurate on the 3 it does cover. Read the coverage line as a map of your blind spots, not a score.
+</div>
+
+<h2>7. Choosing</h2>
+
+<table>
+  <thead>
+    <tr><th>If you need</th><th>Use</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Broad coverage across many vulnerability classes</td><td>Nuclei</td></tr>
+    <tr><td>Non-WordPress CMSs and Exploit-DB entries</td><td>CMSmap</td></tr>
+    <tr><td>General web application vulns, not just CMS</td><td>Wapiti</td></tr>
+    <tr><td>WordPress plugin CVEs with the gaps in your data shown to you</td><td>FenrirLVX</td></tr>
+    <tr><td>Continuous monitoring of your own surface</td><td>surfacediff</td></tr>
+  </tbody>
+</table>
+
+<p>
+  FenrirLVX is <a href="https://github.com/leviathan-offsec/FenrirLVX">MIT licensed</a> and the database is rebuildable from a Wordfence key in one command, so the tool does not rot when its data does.
+</p>
+
+<div class="author-box">
+  <h4>About the Author</h4>
+  <p>
+    <strong>@cyeezy08</strong> is an offensive security researcher and systems tooling developer. Founder of <a href="https://leviathan.ac">Leviathan OffSec</a>.
+  </p>
+  <div class="author-links">
+    <a href="https://github.com/cyeezy08" target="_blank">Personal GitHub</a>
+    <a href="https://github.com/leviathan-offsec" target="_blank">Leviathan OffSec</a>
+    <a href="mailto:chinyeezy08@gmail.com">Contact</a>
+  </div>
+</div>
+
+</article>
+</div>
