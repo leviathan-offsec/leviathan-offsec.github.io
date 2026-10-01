@@ -1,0 +1,453 @@
+[We listened. Neo is now free to try!](https://projectdiscovery.io/pricing "We listened. Neo is now free to try!")
+
+[ProjectDiscovery](https://projectdiscovery.io/)
+
+[132.8k](https://github.com/projectdiscovery/)
+
+Solutions
+
+[AI Pentesting](https://projectdiscovery.io/solutions/ai-pentesting) [PR Security Review](https://projectdiscovery.io/solutions/pr-security-review) [Threat Modeling](https://projectdiscovery.io/solutions/threat-modeling) [Vulnerability Remediation](https://projectdiscovery.io/solutions/vulnerability-remediation) [Exposure Analysis](https://projectdiscovery.io/solutions/exposure-analysis) [Triage](https://projectdiscovery.io/triage)
+
+[Open Source](https://projectdiscovery.io/open-source)
+
+[Nuclei](https://projectdiscovery.io/nuclei) [Nuclei Templates](https://cloud.projectdiscovery.io/templates) [Subfinder](https://github.com/projectdiscovery/subfinder) [HTTPx](https://github.com/projectdiscovery/httpx) [Naabu](https://github.com/projectdiscovery/naabu) [VulnX](https://github.com/projectdiscovery/vulnx)
+
+[Pricing](https://projectdiscovery.io/pricing)
+
+[Research](https://projectdiscovery.io/research)
+
+[About](https://projectdiscovery.io/about-us)
+
+[Resources](https://projectdiscovery.io/resources)
+
+[Documentation](https://docs.neo.projectdiscovery.io/) [Blog](https://projectdiscovery.io/blog) [Whitepapers](https://projectdiscovery.io/resources?type=whitepaper) [Webinars](https://projectdiscovery.io/resources?type=webinar) [Podcasts](https://projectdiscovery.io/resources?type=podcast) [Case Studies](https://projectdiscovery.io/resources?type=case-study) [Research](https://projectdiscovery.io/resources?type=research) [Events](https://projectdiscovery.io/resources?type=event) [Programs](https://projectdiscovery.io/resources?type=program)
+
+Login
+
+[Neo](https://neo.projectdiscovery.io/sign-in) [Cloud](https://cloud.projectdiscovery.io/sign-in)
+
+[Book a demo](https://projectdiscovery.io/request-demo) Open menu
+
+# Stay ahead of every exploit
+
+Exploit your own cloud, internal network, code, and endpoints first, so your team remediates faster and catches regressions.
+
+[Get Started](https://projectdiscovery.io/pricing) [Book a demo](https://projectdiscovery.io/request-demo)
+
+Built by the team behind
+
+[nuclei](https://github.com/projectdiscovery/nuclei) [subfinder](https://github.com/projectdiscovery/subfinder) [httpx](https://github.com/projectdiscovery/httpx) [20+ open-source tools](https://projectdiscovery.io/open-source)
+
+Trusted by security teams
+
+CommunityThe most-used offensive security stack on the internet.
+
+100K+Security professionals
+
+[![RSA Conference Innovation Sandbox Winner 2025](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2FRSAC-Innovation-Sandbox-Winner-2025.445fvp9lmxnqf.png&w=640&q=75)](https://www.rsaconference.com/library/press-release/2025-isb-winner)[![Black Hat Startup Spotlight Winner 2025](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2FBlackhat-2025-winner.00ax-g5c0g7du.png&w=640&q=75)](https://www.blackhat.com/html/blog/2025-05-13.html)
+
+Award winning
+
+![CISA](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2Fcisa-seal.3oad9q_sa2lmz.png&w=1080&q=75)![Centre for Cybersecurity Belgium](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2Fbelgium-ccb.2h2mbc16qici1.png&w=3840&q=75)![NSM, Norwegian National Security Authority](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2Fnsm.3818_k2wg011l.png&w=1920&q=75)![Canadian Centre for Cyber Security](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2Fcanada-cds.28zeqnz_580yf.png&w=256&q=75)
+
+National cyber agencies
+
+## Stop wiring up scanners.  Run one connected security system.
+
+AppSecAppSecCloudCloudVulnerability ManagementVulnerability ManagementRed TeamRed TeamComplianceCompliance
+
+ProjectDiscovery
+
+Context
+
+acme/apiprod-us-eastapp.acme.com
+
+Add integration
+
+Agent instructions
+
+Log in with the test account, crawl every authenticated flow with the repo as context, and retest the open backlog on every deploy. Post proven findings to#security.
+
+### Bugs a scanner never reaches
+
+Agents authenticate like a real user, chain findings across code and runtime, and surface business-logic flaws no template can match.
+
+[Learn about AppSec testing](https://projectdiscovery.io/solutions/ai-pentesting)
+
+> “This is the best security tool released in probably 10 years. Maybe longer. It’s Nessus, except transparent and automatable, and for AppSec as well.”
+
+![Daniel Miessler](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2Fdaniel-miessler.3fon_o3_ykecu.jpg&w=3840&q=75)
+
+Daniel Miessler
+
+Author, Unsupervised Learning
+
+## See everything you own.External, internal and code, discovered continuously and connected in one living context.
+
+![](https://projectdiscovery.io/_next/static/immutable/media/pd-mark-light.2b4z2pxd9h_vo.svg)![](https://projectdiscovery.io/_next/static/immutable/media/pd-mark-dark.2kk7xkqhjr0n3.svg)
+
+Assets
+
+Search assets…
+
+12,480 assets
+
+MapReachabilityTable
+
+Exposed · 37No hostname · 57New this week · 214
+
+s3://acme-support-uploads · public10.20.4.17 · no hostnamecheckout.acme.comacme/checkout
+
+![Grafana](https://projectdiscovery.io/_next/static/immutable/media/grafana.40dx0p0xofgy_.svg)grafana.ops.internal
+
+Exposed
+
+Ops dashboards for the payments stack, admin panel open to the internet without SSO.
+
+Inventory
+
+Assets12,480
+
+Domains & IPs2,640
+
+Internal hosts4,380
+
+Cloud resources5,300
+
+Buckets118
+
+Repositories42
+
+## Know what’s exploitable.Every finding replays against the live target and lands with proof, or not at all.
+
+Issues
+
+Triaging2
+
+ISSUE-2048ML
+
+Grafana admin reachable without SSO
+
+High1,521Reasoning
+
+ISSUE-2044AC
+
+IDOR on invoice download for org members
+
+Low340Reasoning
+
+Validated3
+
+ISSUE-2041PR
+
+Race condition in coupon redemption
+
+High2,122
+
+ISSUE-2033SO
+
+Password reset token reusable after use
+
+Medium870
+
+ISSUE-2027JP
+
+Public S3 bucket serving support uploads
+
+Low109
+
+Fixed · Retesting3
+
+ISSUE-2019ML
+
+Team invite links valid after revocation
+
+Medium1,120Retesting
+
+ISSUE-2011SO
+
+Session cookie missing SameSite on SSO
+
+Low891Retesting
+
+ISSUE-1998AC
+
+Verification emails leak tenant names
+
+Low64
+
+## Close the loop, not just the ticket.Every finding gets a pull request for the fix and a regression test.
+
+![](https://projectdiscovery.io/_next/static/immutable/media/pd-mark-light.2b4z2pxd9h_vo.svg)![](https://projectdiscovery.io/_next/static/immutable/media/pd-mark-dark.2kk7xkqhjr0n3.svg)
+
+IssuesRace condition in coupon redemption
+
+Subscribed···
+
+ISSUE-2041
+
+### Race condition in coupon redemption
+
+Concurrent apply-coupon requests all pass the single-use check before any of them marks the code redeemed, so one code discounts the same order several times.
+
+TitleRace condition in coupon redemption
+
+SeverityHigh
+
+AssigneePRPriya Raman
+
+StatusValidated
+
+Targetcheckout.acme.com/api/cart/apply-coupon
+
+RegressionYes
+
+First seen36 minutes ago
+
+Last seenJust now
+
+Evidence3 exchanges
+
+Affected assets14
+
+H-2H-1NowFixH+1
+
+ActivityEvidenceAssets
+
+1. Vulnerability discovered
+
+
+
+Neo found a race in/api/cart/apply-coupon on checkout.acme.com during the scheduled scan: concurrent requests each read a single-use code as unused before the first redeem lands.
+
+
+
+
+
+checkout.acme.com·apply-coupon · 3 parallel requestsOpen
+
+
+
+
+
+1POST /api/cart/apply-coupon HTTP/2
+
+
+
+2{ "code": "WELCOME20", "cart\_token": "ct\_9f2…41a" } // sent ×3, same instant
+
+
+
+3
+
+
+
+4HTTP/2 200 OK
+
+
+
+5{ "applied": \["WELCOME20", "WELCOME20", "WELCOME20"\] }
+
+2. Drafting a fix…
+
+
+
+Making the redeem an atomic compare-and-set on thecoupon\_codes row, and adding a regression test in acme/checkout that fires the request in parallel and expects one redemption. Opening a pull request.
+
+
+## Enterprise-grade controls.Scoped, logged, inside your own network, and reviewable after the fact.
+
+[**Agent logs** \\
+\\
+Every action an agent takes is logged: queryable, filterable, and exportable to your SIEM.\\
+\\
+Capturing.\\
+\\
+- Scoped run to staging\\
+- Signed in as qa-reviewer\\
+- Validated ISSUE-2041\\
+- Opened fix PR #482\\
+- Exported run log to Splunk](https://docs.neo.projectdiscovery.io/concepts/security-privacy) [**VPC deployments** \\
+\\
+Run in our managed cloud, or a dedicated VPC with static egress IPs your team can allowlist.\\
+\\
+![Microsoft Azure](https://projectdiscovery.io/_next/static/immutable/media/azure.35v1_ub8qxff3.svg)\\
+\\
+![Amazon Web Services](https://projectdiscovery.io/_next/static/immutable/media/aws_light.25q7ce81wmiuu.svg)![](https://projectdiscovery.io/_next/static/immutable/media/aws_dark.0rpwi161kxojf.svg)\\
+\\
+![Google Cloud](https://projectdiscovery.io/_next/static/immutable/media/google-cloud.1oepcwwqntp-b.svg)](https://docs.neo.projectdiscovery.io/concepts/byo-vpc)
+
+[SSO / SAML\\
+\\
+TOTP · MFA\\
+\\
+VPN · SSH\\
+\\
+**Authenticated testing** \\
+\\
+Neo signs in like a real user with SSO and TOTP MFA, and tests every role.](https://docs.neo.projectdiscovery.io/platform/agents/testing/browser-agent) [staging.acme.dev\\
+\\
+prod.acme.dev\\
+\\
+Never touch prod\\
+\\
+**Scope guardrails** \\
+\\
+Sandboxed runs stop at the edge of the boundary you draw.](https://docs.neo.projectdiscovery.io/platform/projects) [![](https://projectdiscovery.io/_next/static/immutable/media/claude-ai-icon.1ii5zk87j7dq3.svg)Claude Opus 5\\
+\\
+![](https://projectdiscovery.io/_next/static/immutable/media/openai.1dqmodehdryhx.svg)![](https://projectdiscovery.io/_next/static/immutable/media/openai_dark.0femlz1fdu2jy.svg)GPT-5.6\\
+\\
+![](https://projectdiscovery.io/_next/static/immutable/media/gemini.2oat2ebbkahth.svg)Gemini 3.8 Flash\\
+\\
+![](https://projectdiscovery.io/_next/static/immutable/media/deepseek.27_j5qk10f3k8.svg)DeepSeek V4 · US hosted\\
+\\
+![](https://projectdiscovery.io/_next/static/immutable/media/grok-light.0nwkbi1350kjk.svg)![](https://projectdiscovery.io/_next/static/immutable/media/grok-dark.3xvhc103dbxqn.svg)Grok 4.6\\
+\\
+**Model controls** \\
+\\
+Choose which frontier models power your runs, or bring your own key.](https://docs.neo.projectdiscovery.io/platform/settings/models) [**Integration library** \\
+\\
+Fires on PRs, triages findings, routes them to Jira and Slack.](https://docs.neo.projectdiscovery.io/essentials/connecting-your-stack)
+
+- [![AICPA SOC](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2FSOC2_logo_new.3_1tkeoe5blfr.png&w=48&q=75)SOC 2 Type II](https://docs.neo.projectdiscovery.io/concepts/security-privacy)
+- [Zero data retention · US hosted](https://docs.neo.projectdiscovery.io/concepts/security-privacy)
+- [SSO · SAML & OIDC](https://docs.neo.projectdiscovery.io/platform/settings/team)
+
+## The Latest
+
+[![Supply Chain Security Analysis of a 9.5M-Install VS Code Extension](https://projectdiscovery.io/_next/image?url=https%3A%2F%2Fstorage.ghost.io%2Fc%2F70%2Ff3%2F70f3700b-f26d-40f9-990d-eef899cce263%2Fcontent%2Fimages%2F2026%2F06%2Fneo-mpe-wavedrom-hero-1.png&w=3840&q=75)\\
+\\
+**Supply Chain Security Analysis of a 9.5M-Install VS Code Extension** \\
+\\
+Your code editor extensions auto-update and run with your privileges on the machine that holds your source code, your SSH keys, and your publishing credentials, but they rarely show up in a software bill of materials.\\
+\\
+Using Neo we audited one of the most popular ones, Markdown Preview Enhanced has roughly 9.5 million installs. The neo found five CVEs across two attack surfaces. A WaveDrom rendering bug turned an ordinary Markdown file into JavaScript execution inside the preview, then into arb\\
+\\
+Aug 16, 2026](https://projectdiscovery.io/blog/a-9-5m-install-vs-code-extension-one-markdown-file-and-a-supply-chain-foothold)
+
+[![Watching Agents Work: A Behavioral Audit of Offensive-Security LLM Runs](https://projectdiscovery.io/_next/image?url=https%3A%2F%2Fstorage.ghost.io%2Fc%2F70%2Ff3%2F70f3700b-f26d-40f9-990d-eef899cce263%2Fcontent%2Fimages%2F2026%2F08%2FWatching_Agents_Work-blog_thumb.png&w=3840&q=75)\\
+\\
+**Watching Agents Work: A Behavioral Audit of Offensive-Security LLM Runs** \\
+\\
+What closed and open models actually do when you tell them to hack a website\\
+\\
+Summary\\
+\\
+The cybersecurity capability of a model is currently measured by a solve rate, a percentage, and that number tells you almost nothing worth knowing. It doesn't tell you how the model behaved. It doesn't tell you what it is actually capable of, or where it is lacking, or how far it still is from doing the job end to end. And when you put an agent next to a human practitioner, the entire comparison collapses in\\
+\\
+Aug 3, 2026](https://projectdiscovery.io/blog/watching-agents-work-a-behavioral-audit-of-offensive-security-llm-runs)
+
+[![Oh My Rogue Agent](https://projectdiscovery.io/_next/image?url=https%3A%2F%2Fstorage.ghost.io%2Fc%2F70%2Ff3%2F70f3700b-f26d-40f9-990d-eef899cce263%2Fcontent%2Fimages%2F2026%2F07%2Fblog-Hugging_Face-blog_header.png&w=3840&q=75)\\
+\\
+**Oh My Rogue Agent** \\
+\\
+Yesterday, Hugging Face came out saying they'd detected an AI autonomous-agent-powered cyberattack and that they had to use open-source models to actually investigate and remediate it. Later we heard from OpenAI that their agent was responsible; it happened during an ExploitGym eval, and the agent just drifted off the goal. It escaped the sandbox, reached OpenAI Research Environment, got access to internet, and hacked Hugging Face production environment trying to find the solution for the benchm\\
+\\
+Jul 22, 2026](https://projectdiscovery.io/blog/oh-my-rogue-agent)
+
+[![Introducing Internal Network Scanning: see your network the way an attacker inside it would](https://projectdiscovery.io/_next/image?url=https%3A%2F%2Fstorage.ghost.io%2Fc%2F70%2Ff3%2F70f3700b-f26d-40f9-990d-eef899cce263%2Fcontent%2Fimages%2F2026%2F07%2Fblog-Internal_Network_Scanning-blog_thumb.png&w=3840&q=75)\\
+\\
+**Introducing Internal Network Scanning: see your network the way an attacker inside it would** \\
+\\
+Most breaches don't begin with a zero-day but with something ordinary like a forgotten server, an unmanaged network device, a service reachable across a segment that was supposed to be isolated. Internal scanning was supposed to catch exactly that but most scanners match a host's banner and version against a CVE list and flag everything potentially affected, so the few reachable exposures sit lost among thousands that were never exploitable.\\
+\\
+That noise is expensive now that the window to respon\\
+\\
+Jul 21, 2026](https://projectdiscovery.io/blog/introducing-internal-network-scanning-see-your-network-the-way-an-attacker-inside-it-would)
+
+[![Community Spotlight: Rishi (@rxerium)](https://projectdiscovery.io/_next/image?url=https%3A%2F%2Fstorage.ghost.io%2Fc%2F70%2Ff3%2F70f3700b-f26d-40f9-990d-eef899cce263%2Fcontent%2Fimages%2F2026%2F07%2FTwitter-post---7--1--1.jpg&w=3840&q=75)\\
+\\
+**Community Spotlight: Rishi (@rxerium)**\\
+\\
+“Open source isn’t about perfection; it’s about putting an idea forward and improving it together as a community.” Rishi (@rxerium)\\
+\\
+If you’ve spent any time in the Nuclei Templates repository, you’ve almost certainly run something Rishi engineered. With over 500 templates merged, picked up by the likes of the UK’s National Cyber Security Center (NCSC), California Cybersecurity Integration Center, CERT Polska, Spain’s national security agency, and many others, he’s one of the most prolific con\\
+\\
+Jul 13, 2026](https://projectdiscovery.io/blog/community-spotlight-rishi-rxerium)
+
+[![The Vulnerability Curve Bent With the AI Curve](https://projectdiscovery.io/_next/image?url=https%3A%2F%2Fstorage.ghost.io%2Fc%2F70%2Ff3%2F70f3700b-f26d-40f9-990d-eef899cce263%2Fcontent%2Fimages%2F2026%2F06%2FSlide-16_9---1--8-.png&w=3840&q=75)\\
+\\
+**The Vulnerability Curve Bent With the AI Curve** \\
+\\
+How CVE volume, known-exploited counts and time-to-exploit all changed shape across the LLM build-out and why defenders are now on the wrong side of the clock.\\
+\\
+In 2018 the world published about 18,000 CVEs and the average vulnerability took roughly two months to get exploited after it went public. By 2025 the world was publishing nearly 50,000 CVEs a year and the average vulnerability was being exploited before it was disclosed.\\
+\\
+Those two facts are the whole story. The number of vulnerabilitie\\
+\\
+Jun 18, 2026](https://projectdiscovery.io/blog/the-vulnerability-curve-bent-with-the-ai-curve)
+
+[See more on the blog](https://projectdiscovery.io/blog)
+
+## Footer
+
+## Stay ahead of  every exploit
+
+[Get Started](https://projectdiscovery.io/pricing) [Book a demo](https://projectdiscovery.io/request-demo)
+
+### Solutions
+
+- [AI Pentesting](https://projectdiscovery.io/solutions/ai-pentesting)
+- [PR Security Review](https://projectdiscovery.io/solutions/pr-security-review)
+- [Threat Modeling](https://projectdiscovery.io/solutions/threat-modeling)
+- [Vulnerability Remediation](https://projectdiscovery.io/solutions/vulnerability-remediation)
+- [Exposure Analysis](https://projectdiscovery.io/solutions/exposure-analysis)
+- [Triage](https://projectdiscovery.io/triage)
+
+### Open Source
+
+- [Nuclei](https://projectdiscovery.io/nuclei)
+- [Nuclei Templates](https://cloud.projectdiscovery.io/templates)
+- [Subfinder](https://github.com/projectdiscovery/subfinder)
+- [HTTPx](https://github.com/projectdiscovery/httpx)
+- [Naabu](https://github.com/projectdiscovery/naabu)
+- [VulnX](https://github.com/projectdiscovery/vulnx)
+- [All tools](https://projectdiscovery.io/open-source)
+
+### Resources
+
+- [Blog](https://projectdiscovery.io/blog)
+- [Whitepapers](https://projectdiscovery.io/resources?type=whitepaper)
+- [Webinars](https://projectdiscovery.io/resources?type=webinar)
+- [Podcasts](https://projectdiscovery.io/resources?type=podcast)
+- [Case Studies](https://projectdiscovery.io/resources?type=case-study)
+- [Research](https://projectdiscovery.io/resources?type=research)
+- [Events](https://projectdiscovery.io/resources?type=event)
+- [Programs](https://projectdiscovery.io/resources?type=program)
+
+### Documentation
+
+- [PDCP Platform](https://docs.projectdiscovery.io/cloud/introduction)
+- [PDCP APIs](https://docs.projectdiscovery.io/api-reference/introduction)
+- [Neo Platform](https://docs.neo.projectdiscovery.io/)
+- [Neo APIs](https://docs.neo.projectdiscovery.io/api-reference/overview)
+
+### Company
+
+- [About](https://projectdiscovery.io/about-us)
+- [Security](https://security.projectdiscovery.io/)
+- [Privacy](https://projectdiscovery.io/privacy)
+- [Terms](https://projectdiscovery.io/terms)
+- [Contact](https://projectdiscovery.io/contact)
+
+Copyright © 2026 ProjectDiscovery, Inc. All rights reserved.
+
+ProjectDiscovery™, Nuclei™ and Neo™ are trademarks of ProjectDiscovery, Inc.
+
+Cookie Preferences [Do Not Sell or Share My Personal Information](https://projectdiscovery.io/privacy-choices)
+
+[Discord](https://discord.com/invite/projectdiscovery) [GitHub](https://github.com/projectdiscovery) [X](https://twitter.com/pdiscoveryio) [LinkedIn](https://www.linkedin.com/company/projectdiscovery) [YouTube](https://www.youtube.com/@projectdiscovery)
+
+![SOC2 Compliant](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2FSOC2_logo_new.3_1tkeoe5blfr.png&w=3840&q=75)![RSA](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2FRSAC-Innovation-Sandbox-Winner-2025.445fvp9lmxnqf.png&w=640&q=75)![Blackhat](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2FBlackhat-2025-winner.00ax-g5c0g7du.png&w=640&q=75)[![G2](https://projectdiscovery.io/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2FG2-Logo.3el5mdcqmi1og.png&w=640&q=75)](https://www.g2.com/products/projectdiscovery/reviews)
+
+[All systems operational](https://status.projectdiscovery.io/)
+
+![](https://projectdiscovery.io/_next/static/immutable/media/pd-mark-light.2b4z2pxd9h_vo.svg)
+
+![](https://projectdiscovery.io/_next/static/immutable/media/pd-mark-dark.2kk7xkqhjr0n3.svg)
+
+## We value your privacy
+
+We use tools on this site to collect and record your data (e.g., your searches), which we and our vendors may use to provide, improve, and personalize our offerings, make recommendations, and for analytics and marketing. Some of these tools identify visitors and link website activity to business contact and company information so we can better understand interest in our services and tailor our outreach. We may share your data with third parties, such as advertising vendors, social media companies, and research partners, which may be "targeted advertising," "selling," or "sharing" under applicable privacy laws. Continuing to browse our site means you accept these terms and our [Privacy Policy](https://projectdiscovery.io/privacy). To opt out, click the [Your Privacy Choices](https://projectdiscovery.io/privacy-choices) link in the footer.
+
+I understand
