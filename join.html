@@ -1,0 +1,115 @@
+---
+title: Join the Leviathan digest
+permalink: /join/
+show_on_home: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join the digest — LEVIATHAN OFFSEC</title>
+  <meta name="description" content="A weekly digest of perimeter changes and newly-exploitable CVEs triaged against real stacks. Free, no spam, unsubscribe in one click.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#07090e; --card-bg:#0d111a; --card-border:#1b2333;
+      --text:#f1f5f9; --text-muted:#8e9bb0; --accent:#00ffcc;
+      --accent-glow:rgba(0,255,204,.2); --red:#f43f5e; --green:#10b981;
+      --mono:'JetBrains Mono',monospace;
+      --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    }
+    *,html,body{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:640px;margin:0 auto;padding:3.5rem 1.5rem 5rem}
+    .back{font-family:var(--mono);font-size:.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
+    .label{font-family:var(--mono);font-size:.74rem;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin:2.5rem 0 .6rem}
+    h1{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;letter-spacing:-.9px;line-height:1.15;margin-bottom:1rem}
+    .sub{color:var(--text-muted);font-size:1.02rem;line-height:1.7;margin-bottom:2.5rem}
+    form{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:1.75rem}
+    label{display:block;font-family:var(--mono);font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.5rem}
+    input[type=email]{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--card-border);border-radius:5px;padding:.85rem 1rem;color:var(--text);font-family:var(--mono);font-size:.92rem;margin-bottom:1.25rem;transition:border-color .2s}
+    input[type=email]:focus{outline:none;border-color:var(--accent)}
+    input[type=text]{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--card-border);border-radius:5px;padding:.85rem 1rem;color:var(--text);font-family:var(--mono);font-size:.92rem;margin-bottom:1.25rem;transition:border-color .2s}
+    input[type=text]:focus{outline:none;border-color:var(--accent)}
+    button{width:100%;font-family:var(--mono);font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:var(--accent);color:#04211c;padding:.95rem;border:none;border-radius:5px;cursor:pointer;transition:box-shadow .2s,transform .15s}
+    button:hover{box-shadow:0 0 26px var(--accent-glow);transform:translateY(-1px)}
+    .fine{font-size:.78rem;color:var(--text-muted);margin-top:1.25rem;line-height:1.65}
+    .perks{list-style:none;margin:2.5rem 0}
+    .perks li{padding:.65rem 0 .65rem 1.75rem;position:relative;color:var(--text-muted);font-size:.93rem;line-height:1.6}
+    .perks li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+    .perks li strong{color:var(--text)}
+    .note{border-left:2px solid var(--card-border);padding:.9rem 1.1rem;color:var(--text-muted);font-size:.85rem;line-height:1.7;margin-top:2.5rem}
+    .note strong{color:var(--text)}
+    code{font-family:var(--mono);font-size:.88em;background:rgba(0,255,204,.08);padding:.12em .35em;border-radius:3px}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a href="/" class="back">← leviathan.ac</a>
+
+  <div class="label">The digest</div>
+  <h1>Know what changed before<br>someone else finds it.</h1>
+  <p class="sub">
+    One email a week. Perimeter changes that matter and CVEs that are actually
+    exploitable in what you're running — triaged, ranked, and cut down to the part
+    you need to act on.
+  </p>
+
+  <ul class="perks">
+    <li><strong>Change-only alerts.</strong> No repeat noise, no "new CVE published" filler.</li>
+    <li><strong>Ranked by real risk</strong> — CVSS <em>and</em> EPSS <em>and</em> CISA KEV, not a single opaque score.</li>
+    <li><strong>Free.</strong> The paid tier is realtime; this is the weekly read.</li>
+    <li><strong>No spam, ever.</strong> Unsubscribe in one click, and we don't sell your address.</li>
+  </ul>
+
+  <form id="join-form" novalidate>
+    <label for="email">Email address</label>
+    <input type="email" id="email" name="email" placeholder="you@company.com" required autocomplete="email">
+
+    <label for="stack">What do you run? <span style="text-transform:none;opacity:.65">(optional — improves the triage)</span></label>
+    <input type="text" id="stack" name="stack" placeholder="e.g. AWS, Kubernetes, WordPress, Kubernetes">
+
+    <button type="submit" id="submit">Subscribe</button>
+  </form>
+
+  <p class="fine">
+    By subscribing you agree to receive the weekly digest. That's it. Unsubscribe any time.
+  </p>
+
+  <p class="note">
+    <strong>Responsible disclosure.</strong> We publish analysis and reproduction steps for
+    patched issues. We do not ship working exploits for unpatched vulnerabilities.
+    If you've found something in your own stack, email us directly instead of posting it here.
+  </p>
+
+  <p class="note">
+    <strong>Build status.</strong> The signup endpoint isn't wired up yet — this form
+    currently validates and confirms locally but does not transmit. It's live-ready;
+    it just needs a working Brevo key behind it.
+  </p>
+</div>
+
+<script>
+  var form = document.getElementById('join-form');
+  var btn = document.getElementById('submit');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = document.getElementById('email').value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      btn.textContent = 'Enter a valid email';
+      btn.style.background = 'var(--red)';
+      setTimeout(function(){ btn.textContent='Subscribe'; btn.style.background='var(--accent)'; }, 2000);
+      return;
+    }
+    btn.textContent = 'Not yet wired — see note below';
+    btn.style.background = 'var(--red)';
+  });
+</script>
+</body>
+</html>
