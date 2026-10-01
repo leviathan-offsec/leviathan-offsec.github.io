@@ -242,7 +242,7 @@ show_on_home: true
       </div>
 
       <p>
-        Most firmware writeups end with a CVE. This one does not. It ends with a clear-eyed account of what happens when the bugs are real, provable, and worth nothing to anyone you report them to.
+        Most firmware writeups end with a CVE. This one does not. What I have instead is three real bugs, proven at the instruction level, and about two months of watching them go nowhere.
       </p>
 
       <p>
@@ -254,7 +254,7 @@ show_on_home: true
       </p>
 
       <div class="callout">
-        <strong>What this post is for.</strong> The three bugs are the deliverable, and they are reproducible from the material here. The second half is about the part nobody writes down: how to decide whether a target is worth 80 days before you spend the 80 days, and what to do when a correct report goes nowhere.
+        The three bugs are the deliverable, and you can reproduce them from what's in this post. The other half is the part I couldn't find written down anywhere: how to tell whether a target is worth two months before you spend the two months, and what to do when a correct report goes nowhere.
       </div>
 
       <h2>1. One DVR on the Bench, 28,006 on the Internet</h2>
@@ -285,7 +285,7 @@ Primary open ports    : 80, 443, 8000, 8080
 Geographic spread     : Global (heavy density in APAC, EMEA, Latin America)</code></pre>
 
       <p>
-        Seeing <strong>28,000+ internet-facing devices</strong> running a custom binary daemon on port 8000 made the question obvious: <em>Can an unauthenticated remote attacker compromise this fleet?</em>
+        Seeing over 28,000 internet-facing devices running a custom binary daemon on port 8000 made the question obvious: <em>Can an unauthenticated remote attacker compromise this fleet?</em>
       </p>
 
       <h2>2. Architecture & Multi-Generational Firmware Extraction</h2>
@@ -334,7 +334,7 @@ Geographic spread     : Global (heavy density in APAC, EMEA, Latin America)</cod
       </p>
 
       <div class="callout">
-        <strong>The Revelation:</strong> There were <strong>zero callers</strong> in <code>libdal</code> from the network dispatcher for the iSCSI functions. They were invoked exclusively by the local Qt GUI (<code>gui-indus-3r</code>, <code>TSetupIscsi</code>), reading local config files. They were physically unreachable over the network.
+        Zero callers. Not one path from the network dispatcher into the iSCSI functions in <code>libdal</code>. They were invoked exclusively by the local Qt GUI (<code>gui-indus-3r</code>, <code>TSetupIscsi</code>), reading local config files. Physically unreachable over the network.
       </div>
 
       <p>
@@ -368,7 +368,7 @@ IV  = b"123456789012345\x00"
 [+] devinfo serial=50400768 ver=0x00000620 name='HD ANALOG 04'</code></pre>
 
       <p>
-        Anyone knowing the static key can authenticate to any internet-facing device on port 8000 without credentials.
+        Anyone who has the static key can log in to any internet-facing device on port 8000. No credentials, no password database, nothing to steal.
       </p>
 
       <h3>Finding 2: The Unsigned Root Boot Upgrade Flow</h3>
@@ -387,7 +387,7 @@ if [ -f "$FWR" ]; then
 fi</code></pre>
 
       <p>
-        There is <strong>zero cryptographic signature verification</strong>. No RSA public key check, no digest validation. If a <code>tar.gz</code> archive containing an executable named <code>./upgrade</code> is placed at <code>/dvr/fwr</code>, it executes automatically as <code>root</code> (uid 0) during boot.
+        There is no cryptographic signature verification anywhere in it. No RSA public key check, no digest validation. If a <code>tar.gz</code> archive containing an executable named <code>./upgrade</code> is placed at <code>/dvr/fwr</code>, it executes automatically as <code>root</code> (uid 0) during boot.
       </p>
 
       <h3>Finding 3: Sscanf Command Injection & The Flawed Gate</h3>
@@ -481,14 +481,13 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
       <h2>8. The Firmware Divergence Problem</h2>
 
       <p>
-        This was the problem that decided how the last month went:
+        This is the part that ended the project.
       </p>
 
       <div class="callout">
-        <strong>The Firmware Divergence:</strong>
         <ul>
           <li>Firmware versions <code>2.3.4.x</code> and <code>2.3.7.x</code> contained both the vulnerable <code>0x220/0x221</code> code and the active network dispatch handlers.</li>
-          <li>My Shodan census proved that <strong>2,956 internet-facing devices</strong> were actively running the vulnerable <code>2.3.7.x</code> build.</li>
+          <li>My Shodan census put the number of internet-facing devices still running the vulnerable <code>2.3.7.x</code> build at 2,956.</li>
           <li>However, my physical bench unit had been updated to <code>3.1.14.0 (0x620)</code>. On this newer branch, the vendor had migrated or dropped <code>0x220/0x221</code> from the network dispatch table.</li>
         </ul>
       </div>
@@ -526,14 +525,32 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
       <h2>10. What I Would Do Differently</h2>
 
       <p>
-        No money came out of 80 days on this. Three things I would tell myself at the start:
+        Nothing. I mean that literally. The technical work held up, the findings are real,
+        and I'd defend every claim in this post. What I'd change is the order I did it in.
       </p>
 
-      <ol>
-        <li>Check who pays before you start. Complexity is not value. Confirm there is either a funded reward program or a vendor with a security team who will act, before you spend a month reversing the firmware.</li>
-        <li>Write down what is binary-proven separately from what is live-network reachable. I could have claimed a fleet-wide 0-day here by ignoring that my bench unit had already been updated. The build difference was the whole story and it would have been easy to bury.</li>
-        <li>The skills transferred. ARM32 disassembly, Ghidra, Unicorn emulation, and protocol auditing all feed directly into the tooling I build at <a href="https://github.com/leviathan-offsec">Leviathan OffSec</a>.</li>
-      </ol>
+      <p>
+        I picked this target because the protocol looked interesting. I should have spent
+        the first week finding out who pays before I spent the second week reversing
+        ARM32 firmware. That's the whole mistake, and it's the one I'd warn anyone
+        starting out to avoid, because it's the one that feels free to skip.
+      </p>
+
+      <p>
+        The other thing I'd do is keep two columns from day one: what the binary proves,
+        and what the network can actually reach. I didn't. By the end I had a
+        fleet-wide finding on paper and a bench unit that had already been patched past
+        the vulnerable code. Nothing stopped me from writing up 2,956 remote RCEs.
+        The build divergence was the entire story, and it would have been very easy to
+        leave out of the writeup and very easy to get a bounty for. I'd rather this post
+        read slower and mean exactly what it says.
+      </p>
+
+      <p>
+        The tooling wasn't wasted, though. The ARM32 disassembly, Ghidra and Unicorn work,
+        and the protocol auditing all went straight into what I build at
+        <a href="https://github.com/leviathan-offsec">Leviathan OffSec</a>.
+      </p>
 
       <h2>11. Reproducing This</h2>
 
@@ -563,10 +580,7 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
 python3 unicorn-rce.py libdal-volans-hi3531d.so</code></pre>
 
       <div class="callout">
-        <strong>Scope note.</strong> The work above was performed on hardware owned
-        by the author. I did not send traffic to any of the 28,006 indexed
-        devices, and none of it should be reproduced against infrastructure you
-        do not own.
+        Everything above was done on hardware I own. I did not send a single packet to any of the 28,006 indexed devices, and none of it should be reproduced against infrastructure you do not own.
       </div>
 
       <div class="author-box">
