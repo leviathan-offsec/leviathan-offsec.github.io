@@ -694,6 +694,7 @@ show_on_home: false
           <div class="term-sub">Target:   auth-dev.corp.internal -> corp.s3.amazonaws.com</div>
           <div class="term-sub">Provider: AWS S3 Bucket Takeover Verified</div>
           <div class="term-asset">[+] FenrirLVX   2 plugins matched known CVE signatures</div>
+          <div class="term-sub">    database coverage  2/7 plugins matched  5 with no advisory data</div>
           <div class="term-ok">[ok] Pipeline execution finished in 482ms</div>
           <div style="margin-top: 0.5rem;"><span class="term-prompt">$</span><span class="cursor-blink"></span></div>
         </div>
@@ -797,13 +798,14 @@ show_on_home: false
               <div class="tool-tag">CMS Auditor</div>
             </div>
             <p class="tool-desc">
-              Low-footprint Go CLI for WordPress and CMS auditing: plugin fingerprinting, embedded offline vulnerability correlation (<code>vuln_db.json</code>), and Shodan queries.
+              Low-footprint Go CLI for WordPress and CMS auditing: plugin fingerprinting, offline vulnerability correlation, and Shodan queries. Every verdict reports how much of the target the database could actually speak to, so a clean result is never confused with a stale one.
             </p>
           </div>
           <div>
             <div class="tool-install-box">
               <span class="install-prompt">$</span>
-              <code id="cmd-fenrir" title="go install -v github.com/leviathan-offsec/FenrirLVX@latest">go install -v github.com/leviathan-offsec/FenrirLVX@latest</code>
+              <code id="cmd-fenrir" title="Download a release archive, then run the binary from the directory containing vuln_db.json"># release archive includes vuln_db.json
+              ./fenrir -t https://target</code>
               <button class="copy-btn" onclick="copyCode('cmd-fenrir', this)">COPY</button>
             </div>
             <div class="tool-footer">
