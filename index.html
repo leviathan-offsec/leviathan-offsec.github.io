@@ -310,6 +310,34 @@ show_on_home: false
       padding: 0.2rem 0.45rem; border-radius: 3px; cursor: pointer; transition: 0.2s;
     }
     .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    /* ---- real tool output ---- */
+    .tool-output {
+      background: rgba(0,0,0,0.45); border: 1px solid var(--card-border);
+      border-radius: 6px; overflow: hidden; margin-bottom: 1rem;
+    }
+    .tool-output-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 0.55rem 0.85rem; border-bottom: 1px solid var(--card-border);
+      background: rgba(0,0,0,0.3);
+    }
+    .tool-output-title {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--text-muted);
+    }
+    .tool-output-exit {
+      font-family: var(--mono); font-size: 0.62rem; color: var(--red);
+      border: 1px solid rgba(244,63,94,0.3); padding: 0.1rem 0.4rem;
+      border-radius: 3px; white-space: nowrap;
+    }
+    .tool-output-body {
+      font-family: var(--mono); font-size: 0.73rem; line-height: 1.75;
+      padding: 0.9rem 1rem; overflow-x: auto; white-space: pre;
+    }
+    .op-prompt { color: var(--accent); }
+    .op-chg { color: var(--amber); font-weight: 700; }
+    .op-key { color: var(--accent-cyan); }
+    .op-val { color: var(--red); }
+    .op-info { color: var(--text-muted); }
+
     .tool-footer { display: flex; gap: 1.25rem; align-items: center; }
     .tool-link {
       font-family: var(--mono); font-size: 0.76rem; color: var(--accent);
@@ -496,23 +524,21 @@ show_on_home: false
         <span class="terminal-badge">LIVE</span>
       </div>
       <div class="terminal-screen">
-<span class="term-prompt">$</span> <span class="term-line-cmd">cat scope.txt | surfacediff --live | HostageLVX -silent</span>
+<span class="term-prompt">$</span> <span class="term-line-cmd">httpx -l subs.txt -json -silent | surfacediff snap -l web</span>
 <br>
-<span class="term-info">[INF]</span> <span class="term-sub">surfacediff: loaded 142 targets from scope.txt</span>
+<span class="term-info">[INF]</span> <span class="term-sub">surfacediff: 6 asset(s) snapshotted</span>
 <br>
-<span class="term-ok">[+]</span> <span class="term-asset">NEW_ASSET</span> <span class="term-line-cmd">auth-dev.corp.internal</span> <span class="term-sub">(3.218.44.12)</span>
+<span class="term-asset">[~]</span> <span class="term-line-cmd">legacy-erp.corp.internal</span>
 <br>
-<span class="term-vuln}[!]</span> <span class="term-vuln">VULNERABLE</span> <span class="term-sub">dangling CNAME detected</span>
+<span class="term-sub">&nbsp;&nbsp;&nbsp;&nbsp;status_code:</span> <span class="term-line-cmd">200</span> <span class="term-vuln">403</span>
 <br>
-<span class="term-sub">&nbsp;&nbsp;&nbsp;&nbsp;Target:</span>   <span class="term-line-cmd">auth-dev.corp.internal -> corp.s3.amazonaws.com</span>
+<span class="term-sub">&nbsp;&nbsp;&nbsp;&nbsp;title:</span> <span class="term-line-cmd">ERP Login</span> <span class="term-vuln">ERP Login (Disabled)</span>
 <br>
-<span class="term-sub">&nbsp;&nbsp;&nbsp;&nbsp;Provider:</span> <span class="term-line-cmd">AWS S3 Bucket Takeover</span> <span class="term-ok">verified</span>
+<span class="term-ok">[+]</span> <span class="term-asset">NEW_ASSET</span> <span class="term-line-cmd">jenkins.corp.internal:8080</span>
 <br>
-<span class="term-ok">[+]</span> <span class="term-line-cmd">FenrirLVX</span> <span class="term-sub">2 plugins matched known CVE signatures</span>
+<span class="term-ok">[+]</span> <span class="term-asset">NEW_ASSET</span> <span class="term-line-cmd">vpn-staging.corp.internal:443</span>
 <br>
-<span class="term-sub">&nbsp;&nbsp;&nbsp;&nbsp;database coverage</span> <span class="term-asset">2/7 plugins matched</span> <span class="term-sub">&middot; 5 with no advisory data</span>
-<br>
-<span class="term-ok">[ok]</span> <span class="term-sub">pipeline finished in</span> <span class="term-line-cmd">482ms</span>
+<span class="term-vuln">[!]</span> <span class="term-sub">surface changed</span> <span class="term-line-cmd">exit 1</span>
 <span class="cursor-blink"></span>
       </div>
     </div>
@@ -621,6 +647,21 @@ show_on_home: false
           perimeters. Pipe in any recon output; exits <code>1</code> on a detected attack
           surface delta, so it drops straight into cron and CI without a wrapper.
         </p>
+        <div class="tool-output">
+          <div class="tool-output-bar">
+            <span class="tool-output-title">actual run &mdash; httpx input, two snapshots</span>
+            <span class="tool-output-exit">exit 1</span>
+          </div>
+          <pre class="tool-output-body"><span class="op-prompt">$</span> surfacediff diff -l web
+label web: +0 -0 ~1
+20261001T122748Z.jsonl -&gt; 20261001T122748Z_1.jsonl
+  <span class="op-chg">~</span> url|https://legacy-erp.corp.internal
+      <span class="op-key">status_code</span>: 200 -&gt; <span class="op-val">403</span>
+      <span class="op-key">title</span>: ERP Login -&gt; <span class="op-val">ERP Login (Disabled)</span>
+
+<span class="op-info"># new hosts print as +host:port, vanished ones as -host:port</span>
+<span class="op-info"># --json gives added / removed / changed with per-field deltas</span></pre>
+        </div>
         <div class="tool-install-box">
           <span class="c-flag">$</span>
           <span class="c-cmd">pip install git+https://github.com/leviathan-offsec/surfacediff.git</span>
