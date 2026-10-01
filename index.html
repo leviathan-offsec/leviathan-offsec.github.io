@@ -170,7 +170,6 @@ description: "Fast, composable, modular offensive security tools and vulnerabili
       .nav-links a:not(.nav-cta) { display: none; }
     }
 
-    /* ---- Hero ---- */
     .hero { padding: 6rem 0 4rem; position: relative; }
     .hero::before {
       content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
@@ -178,18 +177,6 @@ description: "Fast, composable, modular offensive security tools and vulnerabili
       background: radial-gradient(ellipse at center, rgba(0,255,204,0.07), transparent 70%);
     }
     .hero-content { position: relative; text-align: center; max-width: 820px; margin: 0 auto; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--accent);
-      border: 1px solid rgba(0,255,204,0.25); background: rgba(0,255,204,0.05);
-      padding: 0.35rem 0.85rem; border-radius: 999px; margin-bottom: 1.75rem;
-    }
-    .hero-badge .dot {
-      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
-      animation: pulse 2.4s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
     .hero h1 {
       font-size: clamp(2.1rem, 6vw, 3.6rem); font-weight: 800;
       letter-spacing: -1.5px; line-height: 1.08; margin-bottom: 1.5rem;
@@ -258,19 +245,10 @@ description: "Fast, composable, modular offensive security tools and vulnerabili
     }
     @keyframes blink { 50% { opacity: 0; } }
 
-    /* ---- Philosophy ---- */
     .philosophy-strip {
       padding: 3.5rem 0; border-top: 1px solid var(--card-border);
       border-bottom: 1px solid var(--card-border); margin-top: 4rem;
     }
-    .phil-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-    @media (max-width: 900px) { .phil-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 540px) { .phil-grid { grid-template-columns: 1fr; } }
-    .phil-num {
-      font-family: var(--mono); font-size: 0.8rem; color: var(--accent); margin-bottom: 0.5rem;
-    }
-    .phil-title { font-weight: 700; font-size: 0.98rem; margin-bottom: 0.35rem; }
-    .phil-sub { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
 
     /* ---- Sections ---- */
     section[id] { padding: 5.5rem 0; scroll-margin-top: 4rem; }
@@ -450,6 +428,7 @@ description: "Fast, composable, modular offensive security tools and vulnerabili
 
     /* ---- Posts ---- */
     .post-list { display: grid; gap: 1.25rem; }
+    .post-card-all { display: flex; align-items: center; justify-content: center; padding: 1.1rem; }
     .post-card {
       background: var(--card-bg); border: 1px solid var(--card-border);
       border-radius: 8px; padding: 1.6rem; transition: border-color 0.2s, transform 0.2s;
@@ -495,7 +474,7 @@ description: "Fast, composable, modular offensive security tools and vulnerabili
     <nav class="nav-links">
       <a href="#tools">Tools</a>
       <a href="#pipeline">Pipeline</a>
-      <a href="/research/">Research</a>
+      <a href="#latest">Research</a>
       <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener" class="nav-cta">GitHub</a>
     </nav>
   </div>
@@ -506,7 +485,6 @@ description: "Fast, composable, modular offensive security tools and vulnerabili
   <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-badge"><span class="dot"></span> IoT exposure research, at index scale</div>
       <h1>One favicon hash.<br><span class="accent">723,646</span> hosts.</h1>
       <p class="hero-sub">
         A single <code>http.favicon.hash</code> from the passive index expands to 723,646
@@ -548,41 +526,13 @@ description: "Fast, composable, modular offensive security tools and vulnerabili
   </section>
 
   <!-- ================= PHILOSOPHY ================= -->
-  <div class="philosophy-strip">
-    <div class="container phil-grid">
-      <div>
-        <div class="phil-num">01</div>
-        <div class="phil-title">High-Speed Concurrency</div>
-        <div class="phil-sub">Go goroutine worker pools with native timeout guards.</div>
-      </div>
-      <div>
-        <div class="phil-num">02</div>
-        <div class="phil-title">Unix Stdin/Stdout</div>
-        <div class="phil-sub">Composes like any unix filter: <code>cat targets | tool | tool</code>.</div>
-      </div>
-      <div>
-        <div class="phil-num">03</div>
-        <div class="phil-title">Zero Dependency</div>
-        <div class="phil-sub"><code>surfacediff</code> is standard library only, so it
-        adds no supply-chain surface of its own.</div>
-      </div>
-      <div>
-        <div class="phil-num">04</div>
-        <div class="phil-title">Deterministic Scoring</div>
-        <div class="phil-sub">Contract-enforced CVSS, EPSS, and CISA KEV math you can audit.</div>
-      </div>
-    </div>
-  </div>
-
-
   <!-- ================= TOOLS ================= -->
   <section id="tools">
     <div class="section-title-wrap">
       <div class="section-label">01 // Tools</div>
-      <h2 class="section-title">Four tools. MIT licensed.</h2>
+      <h2 class="section-title">Snapshot, diff, catch takeovers.</h2>
       <p class="section-sub">
-        These run on hardware you already own, and they are MIT licensed, so you can
-        read every line before you trust it with your own perimeter.
+        MIT licensed. Read the source before you point any of it at your own perimeter.
       </p>
     </div>
 
@@ -593,10 +543,9 @@ description: "Fast, composable, modular offensive security tools and vulnerabili
           <div class="tool-tag">Takeover Engine</div>
         </div>
         <p class="tool-desc">
-          High-speed dangling DNS and subdomain takeover engine in Go. 81 CNAME
-          fingerprints across 21 providers, each with its own takeover signature and
-          expected dangling status, so a CNAME pointing at a live bucket is not
-          reported as a finding.
+          Dangling DNS and subdomain takeover detection in Go. 81 CNAME fingerprints
+          across 21 providers, each with its own takeover signature, so a CNAME at a
+          live bucket is not reported as a finding.
         </p>
         <div class="tool-install-box">
           <span class="c-flag">$</span>
@@ -616,9 +565,8 @@ description: "Fast, composable, modular offensive security tools and vulnerabili
           <div class="tool-tag">Surface Diffing</div>
         </div>
         <p class="tool-desc">
-          Immutable, content-addressed snapshotting and field-by-field diffing for external
-          perimeters. Pipe in any recon output; exits <code>1</code> on a detected attack
-          surface delta, so it drops straight into cron and CI without a wrapper.
+          Content-addressed snapshots of your perimeter, diffed field by field. Takes
+          recon output on stdin, exits <code>1</code> on a delta. No daemon.
         </p>
         <div class="tool-output">
           <div class="tool-output-bar">
@@ -653,10 +601,9 @@ label web: +0 -0 ~1
           <div class="tool-tag">CMS Auditor</div>
         </div>
         <p class="tool-desc">
-          Low-footprint Go CLI for WordPress and CMS auditing: plugin fingerprinting,
-          offline vulnerability correlation, and Shodan queries. Every verdict reports
-          how much of the target the local database could actually speak to, so a clean
-          result is never confused with a stale one.
+          WordPress and CMS auditing in Go. Plugin fingerprinting and offline CVE
+          correlation, with each verdict stating how much of the target the local
+          database could actually speak to.
         </p>
         <div class="tool-install-box">
           <span class="c-flag">$</span>
@@ -677,11 +624,9 @@ label web: +0 -0 ~1
           <div class="tool-tag">Risk Kernel</div>
         </div>
         <p class="tool-desc">
-          Audited, contract-enforced vulnerability risk scoring kernel. Replaces black-box
-          vendor scores with explainable formulas computed against CVSS vectors, EPSS
-          probability and CISA KEV presence, so you can see why something ranked where
-          it did. Pulls the NVD, EPSS and KEV feeds directly; needs
-          <code>requests</code> and <code>PyYAML</code>.
+          Risk scoring you can audit. Computes from CVSS vectors, EPSS probability and
+          CISA KEV presence rather than a vendor's black box, so the ranking has a
+          reason. Needs <code>requests</code> and <code>PyYAML</code>.
         </p>
         <div class="tool-install-box">
           <span class="c-flag">$</span>
@@ -700,15 +645,39 @@ label web: +0 -0 ~1
   <!-- ================= SERVICES ================= -->
 
 
+  <!-- ================= LATEST ================= -->
+  <section id="latest" class="pipeline-section">
+    <div class="section-title-wrap">
+      <div class="section-label">02 // Latest</div>
+      <h2 class="section-title">Recent writeups.</h2>
+    </div>
+
+    {% assign latest = site.pages | where: "show_on_home", true | sort: "date" | reverse %}
+    {% if latest.size > 0 %}
+    <div class="post-list">
+      {% for post in latest limit: 2 %}
+      <a href="{{ post.url | relative_url }}" class="post-card">
+        <div class="post-meta">{{ post.category }} &middot; {{ post.date | date: "%B %Y" }}</div>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.description }}</p>
+        <span class="tool-link">Read &rarr;</span>
+      </a>
+      {% endfor %}
+      <a href="/research/" class="post-card post-card-all">
+        <span class="tool-link">All research &rarr;</span>
+      </a>
+    </div>
+    {% endif %}
+  </section>
+
   <!-- ================= PIPELINE ================= -->
   <section id="pipeline">
     <div class="section-title-wrap">
-      <div class="section-label">02 // Pipeline</div>
-      <h2 class="section-title">It reads stdin and writes stdout.</h2>
+      <div class="section-label">03 // Pipeline</div>
+      <h2 class="section-title">Pipes into what you already run.</h2>
       <p class="section-sub">
-        Nothing to install but a Go binary. <code>surfacediff</code> and
-        <code>HostageLVX</code> sit between the recon tools you already have, in your
-        terminal or your cron job.
+        <code>surfacediff</code> and <code>HostageLVX</code> take stdin and write stdout.
+        They sit between tools you already have.
       </p>
     </div>
 
@@ -735,7 +704,7 @@ label web: +0 -0 ~1
       <span class="footer-note">© 2026 Leviathan OffSec — leviathan.ac</span>
       <nav class="footer-links">
         <a href="#tools">Tools</a>
-        <a href="/research/">Research</a>
+        <a href="#latest">Research</a>
         <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
