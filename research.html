@@ -1,0 +1,202 @@
+---
+title: Research
+description: Firmware reverse engineering writeups and published vulnerability advisories from Leviathan OffSec, including the findings that found no buyer.
+permalink: /research/
+show_on_home: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research — LEVIATHAN OFFSEC</title>
+  <meta name="description" content="Firmware reverse engineering writeups and published vulnerability advisories, with the disassembly and the dead ends left in.">
+  <meta property="og:title" content="Research — Leviathan OffSec">
+  <meta property="og:description" content="Writeups, including the ones that went nowhere.">
+  <meta property="og:url" content="https://leviathan.ac/research/">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://leviathan.ac/research/">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/png" href="/assets/logo.png?v=3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#07090e; --card-bg:#0d111a; --card-border:#1b2333; --card-hover:#26334d;
+      --text:#f1f5f9; --text-muted:#8e9bb0; --accent:#00ffcc; --accent-cyan:#00f0ff;
+      --red:#f43f5e; --green:#10b981; --amber:#f59e0b;
+      --mono:'JetBrains Mono',monospace;
+      --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    }
+    *,html,body{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    code{font-family:var(--mono);font-size:.9em}
+    .container{max-width:1000px;margin:0 auto;padding:0 1.5rem}
+    header{padding:1.25rem 0;border-bottom:1px solid var(--card-border);position:sticky;top:0;background:rgba(7,9,14,.9);backdrop-filter:blur(14px);z-index:100}
+    .nav-inner{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .brand{display:flex;align-items:center;gap:.75rem;font-family:var(--mono);font-weight:800;font-size:1.1rem;letter-spacing:-.5px;white-space:nowrap}
+    .brand img{width:28px;height:28px}
+    .nav-links{display:flex;align-items:center;gap:1.5rem}
+    .nav-links a{font-family:var(--mono);font-size:.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;transition:color .2s}
+    .nav-links a:hover{color:var(--accent)}
+    .nav-cta{color:#04211c!important;background:var(--accent);padding:.5rem .95rem;border-radius:4px;font-weight:600;font-size:.78rem!important}
+    .nav-cta:hover{box-shadow:0 0 20px rgba(0,255,204,.2)}
+    @media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
+    section{padding:4.5rem 0;scroll-margin-top:4rem}
+    .section-label{font-family:var(--mono);font-size:.74rem;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.65rem}
+    .section-title{font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:800;letter-spacing:-.8px;line-height:1.15;margin-bottom:.9rem}
+    .section-sub{color:var(--text-muted);max-width:660px;line-height:1.7}
+    .post-list{display:grid;gap:1.25rem;margin-top:2.5rem}
+    .post-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:1.6rem;display:block;transition:border-color .2s,transform .2s}
+    .post-card:hover{border-color:var(--card-hover);transform:translateY(-2px)}
+    .post-meta{font-family:var(--mono);font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.7rem}
+    .post-card h3{font-size:1.12rem;font-weight:700;margin-bottom:.55rem}
+    .post-card p{color:var(--text-muted);font-size:.9rem;line-height:1.65;margin-bottom:.9rem}
+    .tool-link{font-family:var(--mono);font-size:.78rem;color:var(--accent)}
+    .research-table-wrap{overflow-x:auto;border:1px solid var(--card-border);border-radius:8px;margin-top:2rem}
+    table{width:100%;border-collapse:collapse;font-size:.87rem;min-width:720px}
+    thead th{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);text-align:left;padding:.9rem 1.1rem;border-bottom:1px solid var(--card-border);background:rgba(0,0,0,.25)}
+    td{padding:1rem 1.1rem;border-bottom:1px solid var(--card-border);vertical-align:top}
+    tr:last-child td{border-bottom:none}
+    td:last-child{color:var(--text-muted);line-height:1.55}
+    .vuln-name{font-family:var(--mono);font-weight:600;font-size:.84rem}
+    .sev-pill{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;padding:.18rem .45rem;border-radius:3px;font-weight:600;white-space:nowrap}
+    .sev-crit{color:var(--red);background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.3)}
+    .sev-high{color:var(--amber);background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3)}
+    .sev-med{color:var(--accent-cyan);background:rgba(0,240,255,.1);border:1px solid rgba(0,240,255,.3)}
+    .disclosure{border-left:2px solid var(--card-border);padding:.9rem 1.1rem;color:var(--text-muted);font-size:.85rem;line-height:1.7;margin-top:2rem}
+    .disclosure strong{color:var(--text)}
+    footer{border-top:1px solid var(--card-border);padding:2.5rem 0;margin-top:2rem}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap}
+    .footer-note,.footer-links a{font-family:var(--mono);font-size:.76rem;color:var(--text-muted)}
+    .footer-links{display:flex;gap:1.5rem}
+    .footer-links a:hover{color:var(--accent)}
+    .foot-note{font-size:.75rem;color:var(--text-muted);line-height:1.65;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--card-border)}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav-inner">
+    <a href="/" class="brand">
+      <img src="/assets/logo.png" alt="Leviathan OffSec">
+      <span>LEVIATHAN OFFSEC</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/">Tools</a>
+      <a href="/research/">Research</a>
+      <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener" class="nav-cta">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ================= POSTS ================= -->
+  <section id="writing">
+    <div class="section-label">01 // Writeups</div>
+    <h1 class="section-title">Writeups, including the ones that went nowhere.</h1>
+    <p class="section-sub">
+      Firmware reverse engineering done in public, with the disassembly and the dead ends
+      left in. Some of this found a buyer. Most of it did not.
+    </p>
+
+    {% assign research_posts = site.pages | where: "show_on_home", true | sort: "date" | reverse %}
+    {% if research_posts.size > 0 %}
+    <div class="post-list">
+      {% for post in research_posts %}
+      <a href="{{ post.url | relative_url }}" class="post-card">
+        <div class="post-meta">{{ post.category }} &middot; {{ post.date | date: "%B %Y" }}</div>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.description }}</p>
+        <span class="tool-link">Read &rarr;</span>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="section-sub" style="margin-top:2rem">No writeups published yet.</p>
+    {% endif %}
+  </section>
+
+  <!-- ================= ADVISORIES ================= -->
+  <section id="advisories">
+    <div class="section-label">02 // Advisories</div>
+    <h2 class="section-title">Published advisories and patch analysis.</h2>
+    <p class="section-sub">
+      Independent research into supply-chain and CMS vulnerabilities, with full technical
+      analysis. Where an issue is unpatched upstream we publish the analysis and
+      reproduction steps, not a turnkey weapon.
+    </p>
+
+    <div class="research-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Advisory</th>
+            <th>Severity</th>
+            <th>Class</th>
+            <th>Target &amp; impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="vuln-name">decompress CWE-59</span></td>
+            <td><span class="sev-pill sev-high">High</span></td>
+            <td>CWE-59</td>
+            <td>Symlink escape and hardlink write bypass in <code>decompress@4.2.1</code>, a package with millions of weekly npm downloads. Patch analysis published; reproduction steps documented.</td>
+          </tr>
+          <tr>
+            <td><span class="vuln-name">CVE-2026-52824</span><br><span style="font-family:var(--mono);font-size:.72rem;color:var(--text-muted)">GHSA-jr9p-4h4j-6c58</span></td>
+            <td><span class="sev-pill sev-high">High</span></td>
+            <td>CWE-287</td>
+            <td>Default <code>APP_SECRET</code> enabling cryptographic session forgery in Kimai &le; 2.57.0, resulting in administrative session hijack.</td>
+          </tr>
+          <tr>
+            <td><span class="vuln-name">Tianwen ERP</span></td>
+            <td><span class="sev-pill sev-crit">Critical</span></td>
+            <td>CWE-434</td>
+            <td>Unauthenticated arbitrary file upload in Tianwen Property Management ERP. Vendor notified; reproduction steps documented in the advisory.</td>
+          </tr>
+          <tr>
+            <td><span class="vuln-name">braces DoS</span></td>
+            <td><span class="sev-pill sev-med">Medium</span></td>
+            <td>CWE-400</td>
+            <td>Patch analysis of CVE-2024-4068: comma-separated brace expansion strings remain unmitigated in <code>braces@3.0.3</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="disclosure">
+      <strong>Reporting a vulnerability in your own product?</strong>
+      Responsible disclosure is handled directly, no middleman. Email the details and we
+      will confirm receipt and coordinate a fix timeline with you.
+    </p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-note">© 2026 Leviathan OffSec — leviathan.ac</span>
+      <nav class="footer-links">
+        <a href="/">Tools</a>
+        <a href="/research/">Research</a>
+        <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+    <p class="foot-note">
+      <strong>Authorised testing only.</strong> Leviathan OffSec operates exclusively against
+      infrastructure with written client authorisation. We do not provide operational
+      exploits for unpatched vulnerabilities, and we do not assist with unauthorised
+      access to systems you do not own or have permission to test.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
