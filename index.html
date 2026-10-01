@@ -556,7 +556,8 @@ pricing:
       <div>
         <div class="phil-num">03</div>
         <div class="phil-title">Zero Dependency</div>
-        <div class="phil-sub">Python standard library only. No supply-chain surface of our own.</div>
+        <div class="phil-sub"><code>surfacediff</code> is standard library only, so it
+        adds no supply-chain surface of its own.</div>
       </div>
       <div>
         <div class="phil-num">04</div>
@@ -584,9 +585,10 @@ pricing:
           <div class="tool-tag">Takeover Engine</div>
         </div>
         <p class="tool-desc">
-          High-speed dangling DNS and subdomain takeover engine in Go. Native CNAME
-          verification across 30+ cloud and edge providers, including signature-free
-          fingerprinting of S3, Azure, GCP, Fastly, and legacy shared-hosting footguns.
+          High-speed dangling DNS and subdomain takeover engine in Go. 81 CNAME
+          fingerprints across 21 providers, each with its own takeover signature and
+          expected dangling status, so a CNAME pointing at a live bucket is not
+          reported as a finding.
         </p>
         <div class="tool-install-box">
           <span class="c-flag">$</span>
@@ -654,11 +656,13 @@ pricing:
         <p class="tool-desc">
           Audited, contract-enforced vulnerability risk scoring kernel. Replaces black-box
           vendor scores with explainable formulas computed against CVSS vectors, EPSS
-          probability and CISA KEV presence, so you can see why something ranked where it did.
+          probability and CISA KEV presence, so you can see why something ranked where
+          it did. Pulls the NVD, EPSS and KEV feeds directly; needs
+          <code>requests</code> and <code>PyYAML</code>.
         </p>
         <div class="tool-install-box">
           <span class="c-flag">$</span>
-          <span class="c-cmd">git clone https://github.com/leviathan-offsec/leviathan-core.git</span>
+          <span class="c-cmd">pip install git+https://github.com/leviathan-offsec/leviathan-core.git</span>
           <button class="copy-btn" data-copy="git clone https://github.com/leviathan-offsec/leviathan-core.git">Copy</button>
         </div>
         <div class="tool-footer">
