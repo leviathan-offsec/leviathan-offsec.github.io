@@ -256,12 +256,12 @@ description: "Snapshot and diff your attack surface. Dangling DNS and subdomain 
     }
     .section-sub { color: var(--text-muted); margin-top: 0.9rem; max-width: 640px; line-height: 1.7; }
 
-    /* ---- Tools ---- */
-    .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; align-items: start; }
+    .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
     @media (max-width: 880px) { .tools-grid { grid-template-columns: 1fr; } }
     .tool-card {
       background: var(--card-bg); border: 1px solid var(--card-border);
       border-radius: 8px; padding: 1.75rem; transition: border-color 0.2s, transform 0.2s;
+      display: flex; flex-direction: column;
     }
     .tool-card:hover { border-color: var(--card-hover); transform: translateY(-3px); }
     .tool-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
@@ -271,7 +271,7 @@ description: "Snapshot and diff your attack surface. Dangling DNS and subdomain 
       color: var(--accent); border: 1px solid rgba(0,255,204,0.25);
       padding: 0.2rem 0.5rem; border-radius: 3px; white-space: nowrap;
     }
-    .tool-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 1.25rem; }
+    .tool-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 1.25rem; flex-grow: 1; }
     .tool-install-box {
       background: rgba(0,0,0,0.35); border: 1px solid var(--card-border);
       border-radius: 5px; padding: 0.7rem 0.85rem; margin-bottom: 1rem;
@@ -316,7 +316,7 @@ description: "Snapshot and diff your attack surface. Dangling DNS and subdomain 
     .op-info { color: var(--text-muted); }
     .op-arrow { color: var(--text-muted); }
 
-    .tool-footer { display: flex; gap: 1.25rem; align-items: center; margin-top: 1.25rem; }
+    .tool-footer { display: flex; gap: 1.25rem; align-items: center; margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(27,35,51,0.5); }
     .tool-link {
       font-family: var(--mono); font-size: 0.76rem; color: var(--accent);
       display: inline-flex; align-items: center; gap: 0.35rem;
@@ -562,21 +562,6 @@ description: "Snapshot and diff your attack surface. Dangling DNS and subdomain 
           Content-addressed snapshots of your perimeter, diffed field by field. Takes
           recon output on stdin, exits <code>1</code> on a delta. No daemon.
         </p>
-        <div class="tool-output">
-          <div class="tool-output-bar">
-            <span class="tool-output-title">actual run &mdash; httpx input, two snapshots</span>
-            <span class="tool-output-exit">exit 1</span>
-          </div>
-          <pre class="tool-output-body"><span class="op-prompt">$</span> surfacediff diff -l web
-label web: +0 -0 ~1
-20261001T122748Z.jsonl -&gt; 20261001T122748Z_1.jsonl
-  <span class="op-chg">~</span> url|https://legacy-erp.corp.internal
-      <span class="op-key">status_code</span>: 200 -&gt; <span class="op-val">403</span>
-      <span class="op-key">title</span>: ERP Login -&gt; <span class="op-val">ERP Login (Disabled)</span>
-
-<span class="op-info"># new hosts print as +host:port, vanished ones as -host:port</span>
-<span class="op-info"># --json gives added / removed / changed with per-field deltas</span></pre>
-        </div>
         <div class="tool-install-box">
           <span class="c-flag">$</span>
           <span class="c-cmd">pip install git+https://github.com/leviathan-offsec/surfacediff.git</span>

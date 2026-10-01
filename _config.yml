@@ -3,8 +3,6 @@ description: "Open-source attack surface monitoring tools. Perimeter diffing, su
 url: "https://leviathan.ac"
 baseurl: ""
 
-# Keep .html extensions working and serve clean /research/ permalink
-permalink: pretty
 
 # Don't touch these files
 exclude:
