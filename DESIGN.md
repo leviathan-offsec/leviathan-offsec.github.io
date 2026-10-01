@@ -1,100 +1,93 @@
-# DESIGN.md: ProjectDiscovery vs Leviathan OffSec
+# DESIGN.md
 
-## Source
-- URL: https://projectdiscovery.io & https://github.com/projectdiscovery
-- Capture date: October 2026
-- Evidence: Firecrawl branding tokens, asset tree, full-page screenshots, and GitHub organization scrapes.
+Implementation spec for the Leviathan OffSec surfaces: [leviathan.ac](https://leviathan.ac),
+the tool READMEs, and the Hermes dashboard.
 
-## Reference Screenshot
-![ProjectDiscovery Reference Screenshot](./.firecrawl/projectdiscovery-screenshot.png)
+**`assets/brand.css` is the source of truth for tokens. This file is the spec for
+how they get used.** If the two disagree, `brand.css` wins and this file is wrong.
 
-Use this screenshot as the visual source of truth for layout, hierarchy, density, and feel. Tokens below describe the design system in machine-readable form.
+Positioning, voice and the rules that outrank taste are in [BRAND.md](BRAND.md).
 
-## Design Summary
-ProjectDiscovery uses a high-contrast, developer-first cybersecurity aesthetic:
-- **Clean Dark Baseline:** Deep near-black backgrounds (`#0A0A0A` / `#07090E`) with cold slate panels (`#0D111A`) and subtle borders (`#1B2333`).
-- **Cyber Accents:** Electric neon green (`#22C55E` / `#00FFCC`) and terminal cyan for command lines, status badges, and interactive hovers.
-- **Dual-Font System:** High-legibility `Inter` for clean narrative and structure, paired with `JetBrains Mono` for code, flags, and telemetry.
-- **Card Rhythm:** Symmetrical 2-column or 3-column grids where every card has identical structural weight: title + pill, concise copy, one-liner CLI snippet, and pinned metadata footer.
+## Provenance
 
----
+The base palette was sampled from projectdiscovery.io in October 2026 using the
+`firecrawl-website-design-clone` workflow. Raw capture is kept in
+`.firecrawl/projectdiscovery-branding.json` and the reference screenshot in
+`.firecrawl/projectdiscovery-screenshot.png`.
 
-## Design Tokens
+That sample is a starting point, not an identity. What is ours on top of it:
 
-### Colors
-| Token | Role | Hex Value | Source |
-|---|---|---|---|
-| `--bg-canvas` | Deep background | `#07090E` / `#0A0A0A` | Observed |
-| `--bg-panel` | Card / surface background | `#0D111A` | Observed |
-| `--bg-code` | Terminal / snippet block | `#0B0F19` | Observed |
-| `--border-subtle` | Card & container borders | `#1B2333` | Observed |
-| `--border-hover` | Hover state border glow | `#26334D` / `rgba(0,255,204,0.3)` | Observed |
-| `--text-primary` | Headings & high-contrast text | `#F1F5F9` / `#FFFFFF` | Observed |
-| `--text-muted` | Body text & secondary labels | `#8E9BB0` / `#94A3B8` | Observed |
-| `--accent` | Primary neon action & flags | `#00FFCC` / `#22C55E` | Observed |
-| `--accent-glow` | Button & card hover shadows | `rgba(0,255,204,0.18)` | Observed |
-| `--status-error` | Exit 1 / Critical finding | `#F43F5E` | Observed |
-| `--status-warn` | Changed diff / High finding | `#F59E0B` | Observed |
-| `--status-ok` | Clean / Mitigated finding | `#10B981` | Observed |
+- **`--amber` is not a severity colour here.** It means *could not be evaluated*.
+  The `.evidence` component exists so that number never sits next to a pass in
+  the same neutral weight.
+- **`--slate`** means *evaluated and refused*, which is a third state distinct
+  from both a finding and a gap.
+- **`--blue`** carries structure and counts, never risk.
+- **`.evidence` and `.chain`** are the recurring components. No other tool in this
+  space ships a coverage block, so it is the part worth owning.
 
-### Typography
-- **Primary / Body:** `Inter, -apple-system, BlinkMacSystemFont, sans-serif`
-  - Body copy: `15px` - `16px`, `line-height: 1.7` - `1.8`, color `#CBD5E1`.
-- **Monospace / Code:** `'JetBrains Mono', monospace`
-  - Font sizes: `0.75rem` (badges/pills), `0.85rem` (CLI snippets), `0.9rem` (inline code).
-- **Headings:**
-  - `H1`: `clamp(2rem, 5vw, 2.85rem)`, `font-weight: 800`, `letter-spacing: -1px`.
-  - `H2`: `1.6rem`, `font-weight: 700`, `letter-spacing: -0.5px`.
-  - `H3`: `1.22rem`, `font-weight: 600`.
+## Tokens
 
-### Spacing And Layout
-- **Max Width Containers:**
-  - Marketing / Landing page: `1140px`
-  - Research dossier / Post layout: `840px` (optimized for long-form reading density)
-- **Grid Gaps:** `1.5rem` (`24px`)
-- **Border Radius:**
-  - Cards & code blocks: `8px`
-  - Badges & pills: `4px`
-  - CTA Buttons: `5px` (Leviathan) to `9999px` (PD pill style)
+### Colour
 
----
+| Token | Value | Means |
+| --- | --- | --- |
+| `--bg` | `#07090E` | page |
+| `--bg-raised` | `#0A0E17` | raised surface |
+| `--card-bg` | `#0D111A` | card |
+| `--surface-sunk` | `#080B12` | code and evidence blocks |
+| `--card-border` | `#1B2333` | border |
+| `--card-hover` | `#26334D` | hover border |
+| `--text` | `#F1F5F9` | primary |
+| `--text-muted` | `#8E9BB0` | secondary |
+| `--text-faint` | `#64748B` | labels, table headers |
+| `--accent` | `#00FFCC` | brand, the finding, live edge |
+| `--accent-cyan` | `#00F0FF` | secondary accent, chain hops |
+| `--green` | `#10B981` | evaluated and permitted |
+| `--amber` | `#F59E0B` | could not be evaluated |
+| `--slate` | `#94A3B8` | evaluated and refused |
+| `--red` | `#F43F5E` | critical, admin, the thing sought |
+| `--blue` | `#38BDF8` | structure, graph shape, counts |
+| `--orange` | `#FB923C` | elevated, needs a human |
+
+### Type
+
+- Body: `Inter`, `15px` to `16px`, `line-height: 1.7`, colour `#CBD5E1`.
+- Data: `JetBrains Mono` for every number, path, ARN, counter and CLI snippet.
+  Monospace is not a style choice here, it is what makes a changed digit visible
+  and a column of counts align.
+- `h1` `clamp(2rem, 5vw, 2.85rem)` weight 800, `letter-spacing: -1px`
+- `h2` `1.6rem` weight 700 · `h3` `1.22rem` weight 600
+
+### Geometry
+
+- Measure: `1140px` marketing, `840px` long-form research
+- Grid gap: `1.5rem`
+- Radius: `8px` cards and code, `4px` badges, `9999px` pills
 
 ## Components
 
-### 1. Sticky Navigation Bar
-- `backdrop-filter: blur(14px)` with 90% opacity background.
-- Left: Brand icon (`24px`) + uppercase mono title (`LEVIATHAN OFFSEC`).
-- Right: Monospace navigation links (`TOOLS`, `RESEARCH`) + High-contrast accent CTA (`GITHUB`).
+1. **Sticky nav.** `backdrop-filter: blur(14px)` at 90% opacity. Brand mark plus
+   uppercase mono `LEVIATHAN OFFSEC` left, mono links right, accent CTA last.
+2. **Tool card.** Name in mono 700 plus a category pill. Two or three sentences
+   of technical description on `flex-grow: 1` so cards in a row match height. A
+   terminal install block with a copy button. Pinned footer with repo link, MIT
+   tag and language pill.
+3. **Terminal demo.** Window chrome with the three dots, then real captured output.
+   Never simulated numbers.
+4. **Evidence block.** `.evidence` with a `data-label` header and `.ok` `.warn`
+   `.skip` `.bad` `.info` `.dim` spans. This is the component the whole identity
+   is built around.
+5. **Chain.** `.chain`, one hop per line, `.kind` in accent-cyan, `.unverified`
+   in amber.
+6. **Research dossier.** Category pill, date, read time, `.table-wrap` for wide
+   tables, callouts with a `3px` accent left border, author box.
 
-### 2. Symmetrical Tool Card
-- Header: Tool name (`JetBrains Mono`, `font-weight: 700`) + category badge pill.
-- Body: 2-3 sentence technical description (`flex-grow: 1`).
-- Install Box: Terminal background with green prompt (`$`), command, and instant one-click `Copy` button.
-- Pinned Footer: Baseline-aligned repository link (`→`), license tag (`MIT`), and language pill (`Go | CLI`).
+## Build rules
 
-### 3. Pipeline / Terminal Demo
-- Simulated macOS / Linux terminal header with red, yellow, green window controls and badge.
-- Monospace output showing stdin/stdout chaining (`httpx | surfacediff | hostage`).
-
-### 4. Long-form Research Dossier Layout
-- Category pill + publication timestamp + read time.
-- Responsive dark-bordered comparison tables (`.table-wrap`).
-- Callout boxes with accent left border (`border-left: 3px solid var(--accent)`).
-- Author bio dossier box linking directly to personal and organization profiles.
-
----
-
-## Agent Build Instructions
-When generating or refactoring pages for this stack:
-1. Always keep CSS scoped and consistent using CSS custom properties (`:root`).
-2. Ensure every grid row has equal-height cards using `display: flex; flex-direction: column` and `flex-grow: 1` on descriptions.
-3. Every route must support both clean directory URLs (`/path/`) and direct `.html` endpoints using `jekyll-redirect-from`.
-4. Ensure dark contrast standards: never use pure black text on dark backgrounds; maintain `#CBD5E1` on `#07090E`.
-
-## Rerun Inputs
-```yaml
-workflow: firecrawl-website-design-clone
-source_url: https://projectdiscovery.io
-target_stack: Jekyll / GitHub Pages (Vanilla CSS + HTML5)
-output: DESIGN.md
-```
+1. Tokens via custom properties only. Never a raw hex in page CSS.
+2. Equal-height cards: flex column with `flex-grow: 1` on the description.
+3. Every route serves both `/path/` and `/path.html` via `jekyll-redirect-from`.
+4. Contrast: `#CBD5E1` on `#07090E`, never pure black on dark.
+5. A number ships with the count of what it excludes, or it does not ship.
+6. Unknown never renders as zero.
