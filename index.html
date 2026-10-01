@@ -477,6 +477,7 @@ description: "Snapshot and diff your attack surface. Dangling DNS and subdomain 
       <div class="hero-actions">
         <a href="#tools" class="btn-action-primary">The tools</a>
         <a href="/research/" class="btn-action-secondary">Read the research</a>
+        <a href="mailto:leviathanx@agentmail.to" class="btn-action-secondary">Scope an engagement</a>
       </div>
     </div>
 
@@ -654,7 +655,7 @@ description: "Snapshot and diff your attack surface. Dangling DNS and subdomain 
 <span class="pdtm-prompt">$</span> surfacediff diff -l subs || echo "New subdomains found!"
 
 <span class="pdtm-hero-bar"># 2. Pipe live subdomains straight into the takeover engine</span>
-<span class="pdtm-prompt">$</span> cat subs.txt | hostage -threads 50 -verify
+<span class="pdtm-prompt">$</span> cat subs.txt | hostage -t 50
 
 <span class="pdtm-hero-bar"># 3. Snapshot web service changes (status flips, title changes, new tech)</span>
 <span class="pdtm-prompt">$</span> httpx -l subs.txt -json -silent | surfacediff snap -l web --source httpx
@@ -662,6 +663,52 @@ description: "Snapshot and diff your attack surface. Dangling DNS and subdomain 
     </div>
   </section>
 
+
+<!-- ================= ENGAGE ================= -->
+  <section id="engage">
+    <div class="section-title-wrap">
+      <div class="section-label">04 // Engagement</div>
+      <h2 class="section-title">The tools are free. Running them for you is not.</h2>
+      <p class="section-sub">
+        Every tool here is MIT and you can read the source before pointing it at your
+        perimeter. When you would rather not operate it yourself, or when a finding has to
+        survive an auditor, that is an engagement.
+      </p>
+    </div>
+
+    <div class="container">
+      <div class="tool-grid">
+        <div class="tool-card">
+          <h3>Perimeter diffing, run weekly</h3>
+          <p>
+            We run <code>surfacediff</code> against your perimeter on a schedule and hand you
+            the deltas: new hosts, dead hosts, flipped status codes, changed titles. Delivered
+            as JSONL, wired into whatever you already alert on.
+          </p>
+        </div>
+        <div class="tool-card">
+          <h3>Takeover verification with evidence</h3>
+          <p>
+            <code>HostageLVX</code> against your domains, every finding backed by the CNAME
+            chain, the response signature and the exact claim step. Not a score, the chain
+            that produced it.
+          </p>
+        </div>
+        <div class="tool-card">
+          <h3>CMS attack surface, with the gaps shown</h3>
+          <p>
+            <code>FenrirLVX</code> fingerprinted against the offline advisory set, reporting
+            what it matched and what it could not evaluate. An unknown is never rendered as a
+            clean result.
+          </p>
+        </div>
+      </div>
+      <p class="section-sub">
+        Authorised testing only, scoped in writing before anything runs.
+        <a href="mailto:leviathanx@agentmail.to">leviathanx@agentmail.to</a>
+      </p>
+    </div>
+  </section>
 
 </div>
 
@@ -672,6 +719,7 @@ description: "Snapshot and diff your attack surface. Dangling DNS and subdomain 
       <nav class="footer-links">
         <a href="#tools">Tools</a>
         <a href="#latest">Research</a>
+        <a href="mailto:leviathanx@agentmail.to">Contact</a>
         <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
