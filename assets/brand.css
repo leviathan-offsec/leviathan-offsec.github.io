@@ -1,0 +1,159 @@
+/* ==========================================================================
+   LEVIATHAN OFFSEC brand tokens and evidence components
+   Single source of truth. Consumed by:
+     - leviathan.ac            (index.html, posts)
+     - README files            (raw.githubusercontent.com link)
+     - the Hermes web dashboard
+   Change a value here, not in a page. Every surface inherits it.
+   ========================================================================== */
+
+:root {
+  /* Surfaces */
+  --bg:            #07090e;
+  --bg-raised:     #0a0e17;
+  --card-bg:       #0d111a;
+  --card-border:   #1b2333;
+  --card-hover:    #26334d;
+  --surface-sunk:  #080b12;
+
+  /* Type */
+  --text:          #f1f5f9;
+  --text-muted:    #8e9bb0;
+  --text-faint:    #64748b;
+  --text-inverse:  #07090e;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Accent */
+  --accent:        #00ffcc;
+  --accent-cyan:   #00f0ff;
+  --accent-glow:   rgba(0, 255, 204, 0.2);
+
+  /* Semantic. These are not decoration, they map onto evidence states:
+     green  = evaluated and permitted
+     amber  = could not be evaluated, the number is reported not hidden
+     slate  = evaluated and refused, excluded on purpose
+     red    = the thing you are looking for
+     blue   = structural context, graph shape, counts
+     orange = elevated, needs a human */
+  --green:         #10b981;
+  --amber:         #f59e0b;
+  --slate:         #94a3b8;
+  --red:           #f43f5e;
+  --blue:          #38bdf8;
+  --orange:        #fb923c;
+
+  /* Geometry */
+  --radius:        8px;
+  --radius-lg:     10px;
+  --gap:           1rem;
+  --measure:       1140px;
+}
+
+/* --------------------------------------------------------------------------
+   Evidence block. The recurring element across every tool README and post.
+   It exists because the numbers are the product: a scanner that cannot say
+   what it failed to evaluate is asking to be trusted on faith.
+   -------------------------------------------------------------------------- */
+
+.evidence {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 1rem 1.15rem;
+  background: var(--surface-sunk);
+  border: 1px solid var(--card-border);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--text);
+  overflow-x: auto;
+  white-space: pre;
+  tab-size: 2;
+}
+
+.evidence::before {
+  content: attr(data-label);
+  display: block;
+  margin-bottom: 0.65rem;
+  font-family: var(--sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.evidence .k    { color: var(--text-muted); }
+.evidence .ok   { color: var(--green); }
+.evidence .warn { color: var(--amber); }   /* could not be evaluated */
+.evidence .skip { color: var(--slate); }   /* evaluated and refused */
+.evidence .bad  { color: var(--red); }     /* the finding */
+.evidence .info { color: var(--blue); }
+.evidence .hi   { color: var(--accent); }
+.evidence .dim  { color: var(--text-faint); }
+
+/* --------------------------------------------------------------------------
+   Chain display. An escalation path, one hop per line.
+   -------------------------------------------------------------------------- */
+
+.chain {
+  margin: 1.25rem 0;
+  padding: 0.9rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.85;
+  overflow-x: auto;
+}
+
+.chain .hop      { color: var(--text); }
+.chain .kind     { color: var(--accent-cyan); }
+.chain .action   { color: var(--text-muted); }
+.chain .arrow    { color: var(--text-faint); }
+.chain .unverified { color: var(--amber); }
+
+/* --------------------------------------------------------------------------
+   Status pill. For dashboards and tables.
+   -------------------------------------------------------------------------- */
+
+.pill {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid currentColor;
+}
+
+.pill--live       { color: var(--green); }
+.pill--unverified { color: var(--amber); }
+.pill--blocked    { color: var(--slate); }
+.pill--admin      { color: var(--red); }
+
+/* --------------------------------------------------------------------------
+   Base, so a README or dashboard fragment is legible without a full page.
+   Opt in with class="leviathan".
+   -------------------------------------------------------------------------- */
+
+.leviathan {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.leviathan code,
+.leviathan pre { font-family: var(--mono); }
+
+.leviathan a { color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .leviathan *, .evidence * { animation: none !important; transition: none !important; }
+}
