@@ -12,9 +12,9 @@ show_on_home: true
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>80 Days Reverse Engineering an IoT DVR: What I Found and Why It Didn't Work Out — Leviathan OffSec</title>
-  <meta name="description" content="An honest post-mortem of 80 days spent reverse engineering stripped ARM32 IoT surveillance firmware, discovering hardcoded AES keys and root upgrade chains, and the harsh realities of target selection.">
+  <meta name="description" content="80 days reverse engineering a HiSilicon ARM32 surveillance DVR: hardcoded AES keys, an unsigned root upgrade chain, and a two-character blocklist bypass. Three proven findings, no bounty.">
   <meta property="og:title" content="80 Days Reverse Engineering an IoT DVR: What I Found and Why It Didn't Work Out">
-  <meta property="og:description" content="An honest post-mortem of 80 days spent reverse engineering stripped ARM32 IoT surveillance firmware.">
+  <meta property="og:description" content="80 days on a HiSilicon ARM32 surveillance DVR: hardcoded AES keys, an unsigned root upgrade chain, and a two-character blocklist bypass. Three proven findings, no bounty.">
   <meta property="og:url" content="https://leviathan.ac/posts/80-days-reversing-iot-dvr.html">
   <meta property="og:image" content="https://leviathan.ac/assets/logo.png?v=2">
   <meta property="og:type" content="article">
@@ -242,27 +242,19 @@ show_on_home: true
       </div>
 
       <p>
-        Most vulnerability research writeups read like polished victory laps: the researcher glances at a binary, spots an unauthenticated pre-auth RCE in an afternoon, scripts a clean exploit, cashes a five-figure bounty check, and walks away.
+        I spent about 80 days on stripped ARM32 firmware from a white-label OEM surveillance DVR platform. Bootloader extraction, hardcoded AES-256 keys, an unsigned root upgrade path, and a command injection I could prove at the instruction level.
       </p>
 
       <p>
-        This is not that writeup.
+        The payout was $0. No bug bounty, no vendor response, and the vulnerable build turned out to be unreachable on the one device I owned.
       </p>
 
       <p>
-        I spent roughly 80 sleepless days dissecting stripped ARM32 firmware binaries powering tens of thousands of white-label OEM surveillance DVRs globally. I extracted bootloader sequences, broke hardcoded AES-256 crypto, uncovered an unauthenticated root firmware execution vector, disassembled custom network daemons, and wrote instruction-level CPU emulators in Unicorn and QEMU.
-      </p>
-
-      <p>
-        And when the dust settled? <strong>I had $0 in bounties, expired server hosting, no live remote shell on the physical hardware, and an orphaned vulnerability.</strong>
-      </p>
-
-      <p>
-        Here is the unfiltered engineering reality of how it started, what I found, the rabbit holes I fell into, the shims I built, and the harsh lessons about target selection in the real-world offensive security economy.
+        Here is how it went, what I actually found, where I went sideways, and what I would do differently.
       </p>
 
       <div class="callout">
-        <strong>TL;DR:</strong> Audited an OEM HiSilicon ARM32 surveillance DVR platform deployed across 28,000+ internet-facing units. Proved a protocol auth bypass (hardcoded AES-256 keys), an unsigned root upgrade execution chain in vendor code, and a flawed command sanitization gate. But the physical bench hardware ran a modern build with dormant network update opcodes, the white-label vendor has no security program, and exploit brokers like ZDI only purchase bugs for enterprise brands. Here is the post-mortem.
+        <strong>TL;DR:</strong> An OEM HiSilicon ARM32 surveillance DVR platform, 28,006 internet-facing units. Three findings, all proven at the binary level: a protocol auth bypass from hardcoded AES-256 keys, an unsigned root upgrade chain, and a command injection behind a two-character blocklist. The bench unit had already been updated past the vulnerable code, the vendor has no security contact, and ZDI declined. No bounty. Details below.
       </div>
 
       <h2>1. How It Started: Bench Hardware vs. 28,006 Internet Hosts</h2>
@@ -317,7 +309,7 @@ Geographic spread     : Global (heavy density in APAC, EMEA, Latin America)</cod
 └── lib/
     └── libdal.so           # Hardware abstraction layer & DNP protocol demux</code></pre>
 
-      <h2>3. The iSCSI Rabbit Hole: A Lesson in Intellectual Honesty</h2>
+      <h2>3. The iSCSI Dead End</h2>
 
       <p>
         Early in static analysis, I thought I had struck gold within 48 hours. Grepping strings inside <code>libdal.so</code> revealed blatant shell injection templates:
@@ -334,7 +326,7 @@ Geographic spread     : Global (heavy density in APAC, EMEA, Latin America)</cod
       </p>
 
       <p>
-        The result? The live device immediately threw a <code>ConnectionError</code> and closed the socket.
+        The live device threw a <code>ConnectionError</code> and closed the socket immediately.
       </p>
 
       <p>
@@ -412,7 +404,7 @@ sys_system(buf);</code></pre>
         Looking at the disassembly of <code>sys_system()</code> at address <code>0x9cc70</code>, the vendor had implemented a custom character filter. It checked and rejected only two characters: <strong>backticks (<code>`</code>) and dollar signs (<code>$</code>)</strong>.
       </p>
       <p>
-        Semicolons (<code>;</code>), pipes (<code>|</code>), and output redirects (<code>></code>) were completely unhandled!
+        Semicolons (<code>;</code>), pipes (<code>|</code>), and output redirects (<code>></code>) passed through unfiltered.
       </p>
       <pre><code># Attacker payload:
 fname:/dev/null;id>/www/pages/ROOTPWN.txt;# size:1 ver:1.2.3.4
@@ -456,14 +448,14 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
 [!] CAPTURED r0 -> system("mv /dev/null;id>/www/pages/ROOTPWN.txt;# /dvr/fwr.tmp")
 [+] PROVEN: Vendor ARM32 code passes unauthenticated attacker bytes directly to system()</code></pre>
 
-      <h2>6. The NTP Injection & The Hardware Reboot Trap</h2>
+      <h2>6. The NTP Injection and a Reboot That Did Nothing</h2>
 
       <p>
         While investigating secondary attack surfaces, I discovered a command injection in the device's NTP configuration interface. Supplying a command in the NTP server parameter successfully wrote the payload into NVRAM, where it persisted across power cycles.
       </p>
 
       <p>
-        To trigger the reboot programmatically, I used an open-source tool called <code>pwneye</code>. However, the tool crashed immediately—it had an unhandled exception when interacting with devices configured with a blank administrative password. I reversed <code>pwneye</code>'s Python code, patched the authentication check, and successfully triggered a physical reboot.
+        To trigger the reboot programmatically, I used an open-source tool called <code>pwneye</code>. However, the tool crashed immediately. It had an unhandled exception when interacting with devices configured with a blank administrative password. I reversed <code>pwneye</code>'s Python code, patched the authentication check, and successfully triggered a physical reboot.
       </p>
 
       <p>
@@ -486,10 +478,10 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
         <li>For testing against the physical hardware, traffic was routed through a dedicated Tor circuit (<code>.onion</code>) to ensure clean separation from personal IP addresses.</li>
       </ul>
 
-      <h2>8. The "Dead Zone" Paradox: 2,956 Fleet Hosts vs. 1 Bench Unit</h2>
+      <h2>8. Firmware Divergence: 2,956 Vulnerable Hosts, One Unreachable Bench Unit</h2>
 
       <p>
-        Here is the central dilemma that defined the final month of the research:
+        This was the problem that decided how the last month went:
       </p>
 
       <div class="callout">
@@ -502,21 +494,21 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
       </div>
 
       <p>
-        Because I maintain strict research ethics, <strong>I refused to touch or fire test packets at any of the 2,956 third-party devices on the internet.</strong> Testing was strictly confined to my bench hardware.
+        I did not send test packets at any of those 2,956 devices. Every test ran against the bench unit.
       </p>
 
       <p>
         On my bench hardware, the wire trigger was closed. On the internet fleet, the wire trigger was open, but off-limits.
       </p>
 
-      <h2>9. The White-Label Orphan Trap & ZDI Rejection</h2>
+      <h2>9. No Security Contact, and ZDI Passed</h2>
 
       <p>
         I attempted coordinated vulnerability disclosure. There was no security contact, no <code>security.txt</code>, and no vendor portal. The only contact listed in the device manual was an unmonitored WhatsApp number. I sent detailed vulnerability advisories; no response ever arrived.
       </p>
 
       <p>
-        Next, I packaged the entire dossier—Ghidra disassemblies, Unicorn emulation scripts, wire transcripts, and PoCs—and submitted it to the <strong>Zero Day Initiative (ZDI)</strong>.
+        Next, I packaged the Ghidra disassemblies, Unicorn emulation scripts, wire transcripts, and PoCs into a dossier and submitted it to the <strong>Zero Day Initiative (ZDI)</strong>.
       </p>
 
       <p>
@@ -534,13 +526,13 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
       <h2>10. The Real Takeaways</h2>
 
       <p>
-        Spending 80 days on an intense technical rabbit hole with zero financial return was a harsh reality check. But it taught me three principles that no certification can simulate:
+        No money came out of 80 days on this. Three things I would tell myself at the start:
       </p>
 
       <ol>
-        <li><strong>Target Selection is Everything:</strong> Technical complexity does not equal commercial value. Before dedicating months to reversing an embedded target, verify that there is a funded vulnerability reward program or an enterprise vendor accountable for patching it.</li>
-        <li><strong>Intellectual Honesty is the Only Currency:</strong> It is easy to fabricate hype or claim "fleet-wide 0-days" by glossing over build differences. Documenting the exact boundaries—what is binary-proven vs. what is live-network reachable—is what separates genuine researchers from charlatans.</li>
-        <li><strong>Low-Level Engineering Skills Compound:</strong> The 80 days were not wasted. The deep fluency with ARM32 assembly, Ghidra decompilation, Unicorn CPU emulation, and protocol auditing directly powers the high-concurrency tooling I build today at <a href="https://github.com/leviathan-offsec">Leviathan OffSec</a>.</li>
+        <li>Check who pays before you start. Complexity is not value. Confirm there is either a funded reward program or a vendor with a security team who will act, before you spend a month reversing the firmware.</li>
+        <li>Write down what is binary-proven separately from what is live-network reachable. I could have claimed a fleet-wide 0-day here by ignoring that my bench unit had already been updated. The build difference was the whole story and it would have been easy to bury.</li>
+        <li>The skills transferred. ARM32 disassembly, Ghidra, Unicorn emulation, and protocol auditing all feed directly into the tooling I build at <a href="https://github.com/leviathan-offsec">Leviathan OffSec</a>.</li>
       </ol>
 
       <div class="author-box">
