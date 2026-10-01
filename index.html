@@ -21,16 +21,16 @@ pricing:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LEVIATHAN OFFSEC // Attack Surface Monitoring &amp; Offensive Security Tooling</title>
-  <meta name="description" content="Continuous attack surface monitoring for teams without a full-time AppSec hire. Open-source Go and Python tooling for perimeter mapping, dangling DNS takeover detection, and deterministic CVE triage.">
-  <meta property="og:title" content="LEVIATHAN OFFSEC — Continuous Attack Surface Monitoring">
-  <meta property="og:description" content="Pipe standard recon binaries into immutable perimeter diffing. Deterministic CVE triage against CVSS, EPSS, and CISA KEV.">
+  <title>LEVIATHAN OFFSEC — perimeter diffing and takeover detection</title>
+  <meta name="description" content="Open-source Go and Python tools that snapshot your attack surface and diff it against last week. MIT licensed. Run them yourself or have us run them for you.">
+  <meta property="og:title" content="LEVIATHAN OFFSEC">
+  <meta property="og:description" content="Snapshot your perimeter. Diff it against last week. surfacediff, HostageLVX, FenrirLVX and leviathan-core, all MIT licensed.">
   <meta property="og:url" content="https://leviathan.ac">
   <meta property="og:image" content="https://leviathan.ac/assets/logo.png?v=3">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="LEVIATHAN OFFSEC — Continuous Attack Surface Monitoring">
-  <meta name="twitter:description" content="Pipe standard recon binaries into immutable perimeter diffing. Deterministic CVE triage against CVSS, EPSS, and CISA KEV.">
+  <meta name="twitter:title" content="LEVIATHAN OFFSEC">
+  <meta name="twitter:description" content="Four MIT-licensed tools for perimeter diffing, subdomain takeover detection and CMS auditing. Or we run them for you.">
   <meta name="twitter:image" content="https://leviathan.ac/assets/logo.png?v=3">
   <link rel="canonical" href="https://leviathan.ac/">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -499,12 +499,11 @@ pricing:
   <section class="hero">
     <div class="hero-content">
       <div class="hero-badge"><span class="dot"></span> Continuous attack surface monitoring</div>
-      <h1>Know your perimeter<br>changed <span class="accent">before</span> someone else does.</h1>
+      <h1>Find out what changed<br><span class="accent">before</span> someone else does.</h1>
       <p class="hero-sub">
-        Leviathan turns the recon tooling you already run into a continuous monitoring
-        pipeline. Pipe <code>subfinder</code>, <code>httpx</code>, and DNS resolution straight
-        into immutable perimeter diffing and deterministic CVE triage — no daemon, no agent,
-        no black-box scoring.
+        You already run <code>subfinder</code> and <code>httpx</code>. Point them at
+        <code>surfacediff</code> and you get a snapshot of your perimeter that either
+        matches the last one or exits non-zero. No daemon, no agent, nothing to log into.
       </p>
       <div class="hero-actions">
         <a href="#services" class="btn-action-primary">Book an Assessment</a>
@@ -552,7 +551,7 @@ pricing:
       <div>
         <div class="phil-num">02</div>
         <div class="phil-title">Unix Stdin/Stdout</div>
-        <div class="phil-sub">Composable by design — <code>cat targets | tool | tool</code>.</div>
+        <div class="phil-sub">Composes like any unix filter: <code>cat targets | tool | tool</code>.</div>
       </div>
       <div>
         <div class="phil-num">03</div>
@@ -571,11 +570,10 @@ pricing:
   <section id="tools">
     <div class="section-title-wrap">
       <div class="section-label">01 // The Arsenal</div>
-      <h2 class="section-title">Open tooling. Auditable by construction.</h2>
+      <h2 class="section-title">Four tools. MIT licensed.</h2>
       <p class="section-sub">
-        Everything below is MIT licensed and runs on hardware you already own. The
-        assessments below are built on exactly these same binaries — you are never
-        handed a closed binary you cannot inspect.
+        These run on hardware you already own. When we do an assessment, we run these
+        same binaries, so you can check our work against the source.
       </p>
     </div>
 
@@ -656,7 +654,7 @@ pricing:
         <p class="tool-desc">
           Audited, contract-enforced vulnerability risk scoring kernel. Replaces black-box
           vendor scores with explainable formulas computed against CVSS vectors, EPSS
-          probability, and CISA KEV catalog presence — so every ranking has a reason.
+          probability and CISA KEV presence, so you can see why something ranked where it did.
         </p>
         <div class="tool-install-box">
           <span class="c-flag">$</span>
@@ -676,12 +674,10 @@ pricing:
   <section id="services" class="pipeline-section">
     <div class="section-title-wrap">
       <div class="section-label">02 // Engagements</div>
-      <h2 class="section-title">You keep the tooling. We run it for you.</h2>
+      <h2 class="section-title">Or we run them for you.</h2>
       <p class="section-sub">
-        Every engagement runs on the same open-source binaries listed above, scoped in
-        writing, and authorised by your team before any request is sent. Findings arrive
-        with reproduction steps and a fix recommendation — not a screenshot of a scanner
-        dashboard.
+        Written scope before anything is sent, and the same open binaries as above.
+        You get reproduction steps and a fix, not a screenshot of a dashboard.
       </p>
     </div>
 
@@ -708,7 +704,7 @@ pricing:
         <div class="svc-for">For teams who want to know the moment something changes.</div>
         <ul class="svc-list">
           <li>Everything in the Perimeter Audit, re-run <strong>daily</strong></li>
-          <li>Change-only alerts — you only hear about <strong>deltas</strong>, not repeats</li>
+          <li>Change-only alerts. You hear about <strong>deltas</strong>, not repeats of things you already fixed.</li>
           <li>New asset, takeover, and exposure notification within 24h</li>
           <li>CVE correlation against your actual stack, not a generic feed</li>
           <li>Cancel any month, no lock-in</li>
@@ -743,11 +739,11 @@ pricing:
   <section id="pipeline">
     <div class="section-title-wrap">
       <div class="section-label">03 // Unix Composability</div>
-      <h2 class="section-title">Pipe it. Schedule it. Alert on it.</h2>
+      <h2 class="section-title">It reads stdin and writes stdout.</h2>
       <p class="section-sub">
-        No proprietary daemon, no agent, no account portal. Combine the standard recon
-        binaries you already trust with <code>surfacediff</code> and <code>HostageLVX</code>
-        directly in your terminal or your cron job.
+        Nothing to install but a Go binary. <code>surfacediff</code> and
+        <code>HostageLVX</code> sit between the recon tools you already have, in your
+        terminal or your cron job.
       </p>
     </div>
 
@@ -842,7 +838,7 @@ pricing:
     <h2>Not sure where you stand?</h2>
     <p>
       Send us your root domains. We will run the enumeration and tell you what we find
-      before you commit to anything — no charge, no obligation.
+      before you commit to anything. No charge, no obligation.
     </p>
     <div class="cta-actions">
       <a href="mailto:{{ page.pricing.contact }}?subject=Free%20surface%20check" class="btn-action-primary">Request a Free Surface Check</a>
