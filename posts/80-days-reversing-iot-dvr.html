@@ -1,8 +1,8 @@
 ---
 layout: null
-title: "80 Days Reverse Engineering an IoT DVR: What I Found and Why It Didn't Work Out"
-description: "HiSilicon ARM32 surveillance firmware, 28,006 internet-facing units. Three findings proven at the binary level, with disassembly. No bounty."
-category: "Embedded Firmware // Post-Mortem"
+title: "80 Days on an IoT DVR: Three Real Bugs, No Bounty"
+description: "HiSilicon ARM32 surveillance firmware across 28,006 internet-facing units. A hardcoded AES key, an unsigned root upgrade chain, and a two-character blocklist bypass, with the disassembly for each."
+category: "Embedded Firmware // Research Notes"
 date: 2026-09-01
 show_on_home: true
 ---
@@ -11,9 +11,9 @@ show_on_home: true
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>80 Days Reverse Engineering an IoT DVR: What I Found and Why It Didn't Work Out — Leviathan OffSec</title>
+  <title>80 Days on an IoT DVR: Three Real Bugs, No Bounty — Leviathan OffSec</title>
   <meta name="description" content="80 days reverse engineering a HiSilicon ARM32 surveillance DVR: hardcoded AES keys, an unsigned root upgrade chain, and a two-character blocklist bypass. Three proven findings, no bounty.">
-  <meta property="og:title" content="80 Days Reverse Engineering an IoT DVR: What I Found and Why It Didn't Work Out">
+  <meta property="og:title" content="80 Days on an IoT DVR: Three Real Bugs, No Bounty">
   <meta property="og:description" content="80 days on a HiSilicon ARM32 surveillance DVR: hardcoded AES keys, an unsigned root upgrade chain, and a two-character blocklist bypass. Three proven findings, no bounty.">
   <meta property="og:url" content="https://leviathan.ac/posts/80-days-reversing-iot-dvr.html">
   <meta property="og:image" content="https://leviathan.ac/assets/logo.png?v=2">
@@ -230,34 +230,34 @@ show_on_home: true
     <article class="content">
 
       <div class="article-header">
-        <span class="meta-tag">Firmware Vulnerability Research // Post-Mortem</span>
-        <h1>80 Days Reverse Engineering an IoT DVR:<br>What I Found and Why It Didn't Work Out</h1>
+        <span class="meta-tag">Firmware Vulnerability Research // Field Notes</span>
+        <h1>80 Days on an IoT DVR:<br>Three Real Bugs, No Bounty</h1>
         <div class="byline">
           <span>@cyeezy08 // Leviathan OffSec</span>
           <span>|</span>
           <span>September 2026</span>
           <span>|</span>
-          <span>15 min read</span>
+          <span>16 min read</span>
         </div>
       </div>
 
       <p>
-        I spent about 80 days on stripped ARM32 firmware from a white-label OEM surveillance DVR platform. Bootloader extraction, hardcoded AES-256 keys, an unsigned root upgrade path, and a command injection I could prove at the instruction level.
+        Most firmware writeups end with a CVE. This one does not. It ends with a clear-eyed account of what happens when the bugs are real, provable, and worth nothing to anyone you report them to.
       </p>
 
       <p>
-        The payout was $0. No bug bounty, no vendor response, and the vulnerable build turned out to be unreachable on the one device I owned.
+        The target was a white-label OEM surveillance DVR, HiSilicon Hi3521a, ARM32. Eighty days of reversing produced three genuine findings: a protocol authentication bypass from a hardcoded AES-256 key, an unsigned root upgrade chain that executes as uid 0 at boot, and a command injection sitting behind a two-character blocklist. All three are proven at the instruction level, with the disassembly in this post.
       </p>
 
       <p>
-        Here is how it went, what I actually found, where I went sideways, and what I would do differently.
+        All three also paid nothing. The vendor has no security contact. ZDI, which does pay, declined on the grounds that consumer DVRs carry no enterprise acquisition value. The vulnerable firmware is real and in the wild, but the only device I could test had already been updated past it, so I never had a confirmed live exploit.
       </p>
 
       <div class="callout">
-        <strong>TL;DR:</strong> An OEM HiSilicon ARM32 surveillance DVR platform, 28,006 internet-facing units. Three findings, all proven at the binary level: a protocol auth bypass from hardcoded AES-256 keys, an unsigned root upgrade chain, and a command injection behind a two-character blocklist. The bench unit had already been updated past the vulnerable code, the vendor has no security contact, and ZDI declined. No bounty. Details below.
+        <strong>What this post is for.</strong> The three bugs are the deliverable, and they are reproducible from the material here. The second half is about the part nobody writes down: how to decide whether a target is worth 80 days before you spend the 80 days, and what to do when a correct report goes nowhere.
       </div>
 
-      <h2>1. How It Started: Bench Hardware vs. 28,006 Internet Hosts</h2>
+      <h2>1. One DVR on the Bench, 28,006 on the Internet</h2>
 
       <p>
         The research began on my lab workbench with an owner-operated, 4-channel analog surveillance DVR (<code>HD ANALOG 04</code>, serial <code>50400768</code>). The device was powered by a <strong>HiSilicon Hi3521a SoC (ARM32)</strong> running an embedded Linux kernel.
@@ -309,7 +309,7 @@ Geographic spread     : Global (heavy density in APAC, EMEA, Latin America)</cod
 └── lib/
     └── libdal.so           # Hardware abstraction layer & DNP protocol demux</code></pre>
 
-      <h2>3. The iSCSI Dead End</h2>
+      <h2>3. The iSCSI Lead That Was Not One</h2>
 
       <p>
         Early in static analysis, I thought I had struck gold within 48 hours. Grepping strings inside <code>libdal.so</code> revealed blatant shell injection templates:
@@ -341,7 +341,7 @@ Geographic spread     : Global (heavy density in APAC, EMEA, Latin America)</cod
         I formally retracted the finding in my notes. In security research, intellectual honesty is everything: code existing in a binary does not equal an exploitable remote vulnerability.
       </p>
 
-      <h2>4. The Real Findings: Crypto & Firmware Update Chains</h2>
+      <h2>4. Three Findings in the Firmware</h2>
 
       <h3>Finding 1: Protocol Authentication Bypass via Static AES-256 Key</h3>
       <p>
@@ -448,7 +448,7 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
 [!] CAPTURED r0 -> system("mv /dev/null;id>/www/pages/ROOTPWN.txt;# /dvr/fwr.tmp")
 [+] PROVEN: Vendor ARM32 code passes unauthenticated attacker bytes directly to system()</code></pre>
 
-      <h2>6. The NTP Injection and a Reboot That Did Nothing</h2>
+      <h2>6. NTP Injection: The Reboot That Proved Nothing</h2>
 
       <p>
         While investigating secondary attack surfaces, I discovered a command injection in the device's NTP configuration interface. Supplying a command in the NTP server parameter successfully wrote the payload into NVRAM, where it persisted across power cycles.
@@ -466,7 +466,7 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
         Disassembly of the 3.x startup sequence revealed the catch: <strong>the vendor had disabled the automated NTP synchronization routine at boot time</strong> in this build. The payload was safely stored in NVRAM, but the code path to execute it was dead.
       </p>
 
-      <h2>7. The Remote Lab Infrastructure: Codespaces & Tor</h2>
+      <h2>7. Lab Infrastructure: Codespaces and Tor</h2>
 
       <p>
         Running heavy emulation and static decompilation on a Raspberry Pi 5 bench machine was impractical. I containerized the analysis environment and moved it to <strong>GitHub Codespaces</strong>:
@@ -478,7 +478,7 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
         <li>For testing against the physical hardware, traffic was routed through a dedicated Tor circuit (<code>.onion</code>) to ensure clean separation from personal IP addresses.</li>
       </ul>
 
-      <h2>8. Firmware Divergence: 2,956 Vulnerable Hosts, One Unreachable Bench Unit</h2>
+      <h2>8. The Firmware Divergence Problem</h2>
 
       <p>
         This was the problem that decided how the last month went:
@@ -501,7 +501,7 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
         On my bench hardware, the wire trigger was closed. On the internet fleet, the wire trigger was open, but off-limits.
       </p>
 
-      <h2>9. No Security Contact, and ZDI Passed</h2>
+      <h2>9. Disclosure: No Contact, and a Broker Decline</h2>
 
       <p>
         I attempted coordinated vulnerability disclosure. There was no security contact, no <code>security.txt</code>, and no vendor portal. The only contact listed in the device manual was an unmonitored WhatsApp number. I sent detailed vulnerability advisories; no response ever arrived.
@@ -523,7 +523,7 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
         By day 80, my Contabo VPS hosting had expired, my pocket balance was $0, and I couldn't afford to pay for OSCP+.
       </p>
 
-      <h2>10. The Real Takeaways</h2>
+      <h2>10. What I Would Do Differently</h2>
 
       <p>
         No money came out of 80 days on this. Three things I would tell myself at the start:
@@ -534,6 +534,40 @@ map blob file[0:0x2c0000) @ 0x00400000 (entry f4cac=0x004f4cac)
         <li>Write down what is binary-proven separately from what is live-network reachable. I could have claimed a fleet-wide 0-day here by ignoring that my bench unit had already been updated. The build difference was the whole story and it would have been easy to bury.</li>
         <li>The skills transferred. ARM32 disassembly, Ghidra, Unicorn emulation, and protocol auditing all feed directly into the tooling I build at <a href="https://github.com/leviathan-offsec">Leviathan OffSec</a>.</li>
       </ol>
+
+      <h2>11. Reproducing This</h2>
+
+      <p>
+        The three findings are reproducible. Nothing below requires the original
+        device, a vendor relationship, or network access to a third party.
+      </p>
+
+      <pre><code># 1. Command injection (Finding 3)
+#    libdal opcode 0x220 -> sscanf -> ctx->src_path
+#    opcode 0x221 -> sprintf(buf, "mv %s /dvr/fwr.tmp", ctx->src_path)
+#              -> sys_system(buf)
+#    Blocklist covers only ` and $. Everything else passes.
+#
+#    Proof: emulate the stripped ARM32 object, set the context struct, capture
+#    the argument register at the sys_system call site.
+#
+# 2. Unsigned upgrade (Finding 2)
+#    /etc/init.d/S90dvrd -> /dvr/fwr
+#    No RSA check, no digest. A tar.gz containing ./upgrade placed at
+#    /dvr/fwr executes as uid 0 on next boot.
+#
+# 3. Hardcoded key (Finding 1)
+#    Static AES-256 material in the protocol handshake, identical across units.
+#    Extract with strings on the stripped .so, verify against a packet capture.
+
+python3 unicorn-rce.py libdal-volans-hi3531d.so</code></pre>
+
+      <div class="callout">
+        <strong>Scope note.</strong> The work above was performed on hardware owned
+        by the author. I did not send traffic to any of the 28,006 indexed
+        devices, and none of it should be reproduced against infrastructure you
+        do not own.
+      </div>
 
       <div class="author-box">
         <h4>About the Author</h4>
