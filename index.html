@@ -1,19 +1,108 @@
 ---
 show_on_home: false
+
+# ============================================================================
+# !! EDIT YOUR PRICING HERE — these are PLACEHOLDERS, not business decisions !!
+# ============================================================================
+# Every value below is rendered from this block. Change the three prices and
+# the contact address and the whole page updates. Do not publish without
+# replacing them — a made-up price on a live domain is hard to walk back.
+pricing:
+  audit_price:    "Custom quote"
+  audit_unit:     "per engagement"
+  monitor_price:  "Contact us"   # TODO: set your real monthly price once decided
+  monitor_unit:   "recurring monitoring"
+  retainer_price: "Contact us"
+  contact:        "scoping@leviathan.ac"   # TODO: confirm this mailbox routes
+# ============================================================================
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LEVIATHAN OFFSEC // Modular Offensive Security Tools & Research</title>
-  <meta name="description" content="Fast, composable, modular offensive security tools and vulnerability research by Leviathan OffSec.">
-  <meta property="og:title" content="LEVIATHAN OFFSEC">
-  <meta property="og:description" content="Fast, composable, modular offensive security tools and vulnerability research.">
+  <title>LEVIATHAN OFFSEC // Attack Surface Monitoring &amp; Offensive Security Tooling</title>
+  <meta name="description" content="Continuous attack surface monitoring for teams without a full-time AppSec hire. Open-source Go and Python tooling for perimeter mapping, dangling DNS takeover detection, and deterministic CVE triage.">
+  <meta property="og:title" content="LEVIATHAN OFFSEC — Continuous Attack Surface Monitoring">
+  <meta property="og:description" content="Pipe standard recon binaries into immutable perimeter diffing. Deterministic CVE triage against CVSS, EPSS, and CISA KEV.">
   <meta property="og:url" content="https://leviathan.ac">
-  <meta property="og:image" content="https://leviathan.ac/assets/logo.png?v=2">
+  <meta property="og:image" content="https://leviathan.ac/assets/logo.png?v=3">
   <meta property="og:type" content="website">
-  <link rel="icon" type="image/png" href="/assets/logo.png?v=2">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LEVIATHAN OFFSEC — Continuous Attack Surface Monitoring">
+  <meta name="twitter:description" content="Pipe standard recon binaries into immutable perimeter diffing. Deterministic CVE triage against CVSS, EPSS, and CISA KEV.">
+  <meta name="twitter:image" content="https://leviathan.ac/assets/logo.png?v=3">
+  <link rel="canonical" href="https://leviathan.ac/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Leviathan OffSec">
+  <meta name="theme-color" content="#07090e">
+
+  <!-- Open Graph: full article-shaped set for link unfurl on X/LinkedIn/Discord -->
+  <meta property="og:site_name" content="Leviathan OffSec">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image:alt" content="Leviathan OffSec — attack surface monitoring">
+  <meta name="twitter:image:alt" content="Leviathan OffSec — attack surface monitoring">
+
+  <!-- Structured data: makes the org + its OSS tools machine-readable to search engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://leviathan.ac/#org",
+        "name": "Leviathan OffSec",
+        "url": "https://leviathan.ac",
+        "logo": "https://leviathan.ac/assets/logo.png",
+        "description": "Continuous attack surface monitoring and open-source offensive security tooling.",
+        "sameAs": [
+          "https://github.com/leviathan-offsec",
+          "https://x.com/secleviathsnx"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://leviathan.ac/#site",
+        "url": "https://leviathan.ac",
+        "name": "Leviathan OffSec",
+        "publisher": { "@id": "https://leviathan.ac/#org" }
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "HostageLVX",
+        "codeRepository": "https://github.com/leviathan-offsec/HostageLVX",
+        "programmingLanguage": "Go",
+        "license": "https://opensource.org/licenses/MIT",
+        "description": "Dangling DNS and subdomain takeover engine with native multi-cloud CNAME verification."
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "surfacediff",
+        "codeRepository": "https://github.com/leviathan-offsec/surfacediff",
+        "programmingLanguage": "Python",
+        "license": "https://opensource.org/licenses/MIT",
+        "description": "Content-addressed snapshotting and perimeter delta diffing for external attack surfaces."
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "FenrirLVX",
+        "codeRepository": "https://github.com/leviathan-offsec/FenrirLVX",
+        "programmingLanguage": "Go",
+        "license": "https://opensource.org/licenses/MIT",
+        "description": "CMS auditing CLI with plugin fingerprinting and offline CVE correlation."
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "leviathan-core",
+        "codeRepository": "https://github.com/leviathan-offsec/leviathan-core",
+        "programmingLanguage": "Python",
+        "license": "https://opensource.org/licenses/MIT",
+        "description": "Contract-enforced vulnerability risk scoring kernel using CVSS, EPSS, and CISA KEV."
+      }
+    ]
+  }
+  </script>
+  <link rel="icon" type="image/png" href="/assets/logo.png?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -30,10 +119,10 @@ show_on_home: false
       --accent-cyan: #00f0ff;
       --red: #f43f5e;
       --green: #10b981;
+      --amber: #f59e0b;
       --mono: 'JetBrains Mono', monospace;
       --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
-    /* Custom Sleek Dark Scrollbar */
     *, html, body {
       box-sizing: border-box;
       margin: 0;
@@ -41,20 +130,10 @@ show_on_home: false
       scrollbar-width: thin;
       scrollbar-color: #1e293b #07090e;
     }
-    ::-webkit-scrollbar {
-      width: 7px;
-      height: 7px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #07090e;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1e293b;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent);
-    }
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: #07090e; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
     body {
       background-color: var(--bg);
       color: var(--text);
@@ -66,7 +145,7 @@ show_on_home: false
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
 
-    /* Top Nav */
+    /* ---- Nav ---- */
     header {
       padding: 1.25rem 0;
       border-bottom: 1px solid var(--card-border);
@@ -76,912 +155,734 @@ show_on_home: false
       backdrop-filter: blur(14px);
       z-index: 100;
     }
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-family: var(--mono);
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: -0.5px;
+      display: flex; align-items: center; gap: 0.75rem;
+      font-family: var(--mono); font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px;
+      white-space: nowrap;
     }
-    .brand-logo-img {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      object-fit: cover;
-      border: 1px solid rgba(0, 255, 204, 0.4);
-      box-shadow: 0 0 10px rgba(0, 255, 204, 0.25);
+    .brand-logo-img { width: 28px; height: 28px; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.06em; transition: color 0.2s;
     }
-    .verified-pill {
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 0.15rem 0.45rem;
-      border-radius: 4px;
-      background: rgba(16, 185, 129, 0.12);
-      color: var(--green);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      font-family: var(--mono);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 1.75rem;
-      font-family: var(--mono);
-      font-size: 0.85rem;
-    }
-    .nav-links a { color: var(--text-muted); transition: color 0.15s; }
     .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      font-family: var(--mono); font-size: 0.78rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: #04211c !important; background: var(--accent);
+      padding: 0.5rem 0.95rem; border-radius: 4px;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-1px); }
+    @media (max-width: 820px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
 
-    /* Hero Section (Two-Column Grid) */
-    .hero {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 3.5rem;
-      align-items: center;
-      padding: 4.5rem 0 3.5rem;
+    /* ---- Hero ---- */
+    .hero { padding: 6rem 0 4rem; position: relative; }
+    .hero::before {
+      content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 500px; pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(0,255,204,0.07), transparent 70%);
     }
-    @media (max-width: 960px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        padding: 3rem 0 2rem;
-      }
-    }
-    .hero-content {
-      text-align: left;
-    }
+    .hero-content { position: relative; text-align: center; max-width: 820px; margin: 0 auto; }
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.25rem 0.65rem;
-      border-radius: 4px;
-      background: rgba(0, 255, 204, 0.08);
-      border: 1px solid rgba(0, 255, 204, 0.3);
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent);
+      border: 1px solid rgba(0,255,204,0.25); background: rgba(0,255,204,0.05);
+      padding: 0.35rem 0.85rem; border-radius: 999px; margin-bottom: 1.75rem;
     }
+    .hero-badge .dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
     .hero h1 {
-      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -1px;
-      margin-bottom: 1.25rem;
+      font-size: clamp(2.1rem, 6vw, 3.6rem); font-weight: 800;
+      letter-spacing: -1.5px; line-height: 1.08; margin-bottom: 1.5rem;
     }
-    .hero h1 span {
-      color: var(--accent);
-      text-shadow: 0 0 25px var(--accent-glow);
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--accent), var(--accent-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .hero-sub {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 2rem;
+      font-size: 1.08rem; color: var(--text-muted); max-width: 660px;
+      margin: 0 auto 2.25rem; line-height: 1.7;
     }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 1.5rem;
-      font-family: var(--mono);
-      font-size: 0.85rem;
-    }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
     .btn-action-primary {
-      background: var(--accent);
-      color: #07090e !important;
-      font-weight: 700;
-      padding: 0.65rem 1.25rem;
-      border-radius: 6px;
-      border: 1px solid var(--accent);
-      transition: all 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.88rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      background: var(--accent); color: #04211c; padding: 0.9rem 1.75rem;
+      border-radius: 5px; transition: box-shadow 0.2s, transform 0.15s;
     }
-    .btn-action-primary:hover {
-      box-shadow: 0 0 15px var(--accent-glow);
-      transform: translateY(-1px);
-    }
+    .btn-action-primary:hover { box-shadow: 0 0 28px var(--accent-glow); transform: translateY(-2px); }
     .btn-action-secondary {
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text) !important;
-      padding: 0.65rem 1.25rem;
-      border-radius: 6px;
-      border: 1px solid var(--card-border);
-      transition: all 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.88rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      border: 1px solid var(--card-hover); color: var(--text); padding: 0.9rem 1.75rem;
+      border-radius: 5px; transition: border-color 0.2s, background 0.2s;
     }
-    .btn-action-secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent) !important;
-      transform: translateY(-1px);
-    }
+    .btn-action-secondary:hover { border-color: var(--accent); background: rgba(0,255,204,0.05); }
 
-    /* PDTM Install Hero Bar */
-    .pdtm-hero-bar {
-      background: #0a0e17;
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 0.75rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    }
-    .pdtm-code {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: #93c5fd;
-      flex: 1;
-      min-width: 0;
-      overflow-x: auto;
-      white-space: nowrap;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .pdtm-code::-webkit-scrollbar {
-      display: none;
-      width: 0;
-      height: 0;
-    }
-    .pdtm-prompt { color: var(--accent); font-weight: 700; user-select: none; }
-    .copy-btn {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.15s;
-      flex-shrink: 0;
-    }
-    .copy-btn:hover {
-      background: var(--accent);
-      color: #000;
-      border-color: var(--accent);
-    }
-
-    /* Hero Terminal Component */
+    /* ---- Terminal ---- */
     .hero-terminal {
-      background: #080b12;
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 255, 204, 0.05);
-      overflow: hidden;
-      font-family: var(--mono);
-      font-size: 0.8rem;
+      margin: 3.5rem auto 0; max-width: 860px; text-align: left;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
     }
     .terminal-bar {
-      background: #0c101b;
-      border-bottom: 1px solid var(--card-border);
-      padding: 0.65rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1rem; border-bottom: 1px solid var(--card-border);
+      background: rgba(0,0,0,0.25);
     }
-    .terminal-dots {
-      display: flex;
-      gap: 6px;
-    }
-    .t-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    .t-dot-red { background: #f43f5e; }
-    .t-dot-yellow { background: #eab308; }
-    .t-dot-green { background: #10b981; }
+    .terminal-dots { display: flex; gap: 0.4rem; }
+    .terminal-dots span { width: 11px; height: 11px; border-radius: 50%; }
+    .t-dot-red { background: #ff5f57; } .t-dot-yellow { background: #febc2e; } .t-dot-green { background: #28c840; }
     .terminal-title {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
+      font-family: var(--mono); font-size: 0.74rem; color: var(--text-muted);
+      margin-left: auto; margin-right: auto; letter-spacing: 0.05em;
     }
     .terminal-badge {
-      font-size: 0.62rem;
-      font-weight: 700;
-      color: var(--accent);
-      background: rgba(0, 255, 204, 0.1);
-      border: 1px solid rgba(0, 255, 204, 0.3);
-      padding: 0.1rem 0.4rem;
-      border-radius: 3px;
-      text-transform: uppercase;
+      font-family: var(--mono); font-size: 0.66rem; color: var(--accent);
+      border: 1px solid rgba(0,255,204,0.3); padding: 0.1rem 0.45rem; border-radius: 3px;
     }
     .terminal-screen {
-      padding: 1.25rem;
-      line-height: 1.7;
-      color: #94a3b8;
-      overflow: hidden;
+      padding: 1.15rem 1.25rem; font-family: var(--mono);
+      font-size: 0.8rem; line-height: 1.75; overflow-x: auto;
     }
-    .term-line-cmd {
-      color: #f1f5f9;
-      margin-bottom: 0.6rem;
-      font-weight: 600;
-    }
-    .term-prompt {
-      color: var(--accent);
-      font-weight: 700;
-      margin-right: 0.4rem;
-    }
-    .term-info { color: #64748b; font-size: 0.75rem; }
-    .term-asset { color: #38bdf8; }
-    .term-vuln { color: #f43f5e; font-weight: 700; }
-    .term-sub { color: #cbd5e1; padding-left: 1rem; font-size: 0.76rem; }
-    .term-ok { color: #10b981; font-weight: 600; margin-top: 0.4rem; }
+    .term-prompt { color: var(--accent); }
+    .term-line-cmd { color: var(--text); }
+    .term-ok { color: var(--green); }
+    .term-vuln { color: var(--red); font-weight: 600; }
+    .term-info { color: var(--accent-cyan); }
+    .term-sub { color: var(--text-muted); }
+    .term-asset { color: var(--amber); }
     .cursor-blink {
-      display: inline-block;
-      width: 8px;
-      height: 13px;
-      background: var(--accent);
-      animation: blink 1s step-start infinite;
-      vertical-align: middle;
-      margin-left: 2px;
+      display: inline-block; width: 8px; height: 1em; background: var(--accent);
+      vertical-align: text-bottom; animation: blink 1.1s step-end infinite;
     }
     @keyframes blink { 50% { opacity: 0; } }
 
-    /* Architecture Strip */
+    /* ---- Philosophy ---- */
     .philosophy-strip {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
-      padding: 2.25rem 0;
-      border-top: 1px solid var(--card-border);
-      border-bottom: 1px solid var(--card-border);
-      margin-bottom: 4rem;
-      font-family: var(--mono);
+      padding: 3.5rem 0; border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border); margin-top: 4rem;
     }
-    .phil-item {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
+    .phil-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    @media (max-width: 900px) { .phil-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .phil-grid { grid-template-columns: 1fr; } }
     .phil-num {
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--accent);
-      background: rgba(0, 255, 204, 0.1);
-      padding: 0.2rem 0.45rem;
-      border-radius: 4px;
-      border: 1px solid rgba(0, 255, 204, 0.3);
-      flex-shrink: 0;
+      font-family: var(--mono); font-size: 0.8rem; color: var(--accent); margin-bottom: 0.5rem;
     }
-    .phil-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-    }
-    .phil-sub {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
+    .phil-title { font-weight: 700; font-size: 0.98rem; margin-bottom: 0.35rem; }
+    .phil-sub { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
 
-    /* Section Headings */
-    .section-title-wrap {
-      margin-bottom: 2rem;
-    }
+    /* ---- Sections ---- */
+    section[id] { padding: 5.5rem 0; scroll-margin-top: 4rem; }
+    .section-title-wrap { margin-bottom: 3rem; }
     .section-label {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-family: var(--mono); font-size: 0.74rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.65rem;
     }
     .section-title {
-      font-size: 1.85rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-top: 0.25rem;
+      font-size: clamp(1.6rem, 3.6vw, 2.3rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.15;
     }
+    .section-sub { color: var(--text-muted); margin-top: 0.9rem; max-width: 640px; line-height: 1.7; }
 
-    /* Tool Cards Grid (PDTM Style) */
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 4rem;
-    }
+    /* ---- Tools ---- */
+    .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    @media (max-width: 880px) { .tools-grid { grid-template-columns: 1fr; } }
     .tool-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 1.6rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.2s ease;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 8px; padding: 1.75rem; transition: border-color 0.2s, transform 0.2s;
     }
-    .tool-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 25px var(--accent-glow);
-      transform: translateY(-2px);
-    }
-    .tool-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.85rem;
-    }
-    .tool-name {
-      font-family: var(--mono);
-      font-size: 1.35rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
+    .tool-card:hover { border-color: var(--card-hover); transform: translateY(-3px); }
+    .tool-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+    .tool-name { font-family: var(--mono); font-weight: 700; font-size: 1.05rem; }
     .tool-tag {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      background: rgba(0, 240, 255, 0.1);
-      color: var(--accent-cyan);
-      border: 1px solid rgba(0, 240, 255, 0.25);
-      text-transform: uppercase;
+      font-family: var(--mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--accent); border: 1px solid rgba(0,255,204,0.25);
+      padding: 0.2rem 0.5rem; border-radius: 3px; white-space: nowrap;
     }
-    .tool-desc {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.55;
-      margin-bottom: 1.25rem;
-      min-height: 48px;
-    }
+    .tool-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 1.25rem; }
     .tool-install-box {
-      background: #080b11;
-      border: 1px solid #161d2b;
-      border-radius: 6px;
-      padding: 0.55rem 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: #94a3b8;
-      margin-bottom: 1rem;
-      min-width: 0;
+      background: rgba(0,0,0,0.35); border: 1px solid var(--card-border);
+      border-radius: 5px; padding: 0.7rem 0.85rem; margin-bottom: 1rem;
+      font-family: var(--mono); font-size: 0.76rem; color: var(--text);
+      display: flex; align-items: center; gap: 0.65rem; overflow-x: auto;
     }
-    .install-prompt {
-      color: var(--accent);
-      font-weight: 700;
-      user-select: none;
-      flex-shrink: 0;
+    .c-flag { color: var(--accent); user-select: none; }
+    .c-cmd { flex: 1; white-space: nowrap; }
+    .c-comment { color: var(--text-muted); font-size: 0.72rem; }
+    .copy-btn {
+      font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase;
+      background: transparent; border: 1px solid var(--card-hover); color: var(--text-muted);
+      padding: 0.2rem 0.45rem; border-radius: 3px; cursor: pointer; transition: 0.2s;
     }
-    .tool-install-box code {
-      flex: 1;
-      min-width: 0;
-      overflow-x: auto;
-      white-space: nowrap;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .tool-install-box code::-webkit-scrollbar {
-      display: none;
-      width: 0;
-      height: 0;
-    }
-    .tool-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 0.75rem;
-      border-top: 1px solid var(--card-border);
-      font-family: var(--mono);
-      font-size: 0.8rem;
-    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .tool-footer { display: flex; gap: 1.25rem; align-items: center; }
     .tool-link {
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-weight: 600;
+      font-family: var(--mono); font-size: 0.76rem; color: var(--accent);
+      display: inline-flex; align-items: center; gap: 0.35rem;
     }
     .tool-link:hover { text-decoration: underline; }
-    .tool-lang { color: var(--text-muted); font-size: 0.75rem; }
-
-    /* Pipeline Demo Section */
-    .pipeline-section {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 2rem;
-      margin-bottom: 4rem;
+    .tool-lang {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--text-muted);
+      margin-left: auto; text-transform: uppercase; letter-spacing: 0.06em;
     }
+    .verified-pill {
+      font-family: var(--mono); font-size: 0.6rem; color: var(--green);
+      border: 1px solid rgba(16,185,129,0.3); padding: 0.12rem 0.4rem;
+      border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    /* ---- Pipeline ---- */
+    .pipeline-section { border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
     .pipeline-code {
-      background: #07090e;
-      border: 1px solid #161e2e;
-      border-radius: 6px;
-      padding: 1.25rem;
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      overflow-x: auto;
-      margin-top: 1.25rem;
-      scrollbar-width: thin;
-      scrollbar-color: #1e293b #07090e;
+      background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px;
+      padding: 1.5rem; font-family: var(--mono); font-size: 0.82rem;
+      line-height: 1.9; overflow-x: auto;
     }
-    .pipeline-code .c-comment { color: #64748b; }
-    .pipeline-code .c-cmd { color: var(--accent); }
-    .pipeline-code .c-flag { color: #38bdf8; }
+    .pdtm-code { color: var(--text); white-space: pre; }
+    .pdtm-hero-bar {
+      color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.08em; margin: 1.15rem 0 0.4rem;
+    }
+    .pdtm-prompt { color: var(--accent); }
 
-    /* Research Table Section */
-    .research-table-wrap {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 4rem;
+    /* ---- Services ---- */
+    .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 980px) { .svc-grid { grid-template-columns: 1fr; } }
+    .svc-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 8px; padding: 1.85rem; display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.9rem;
+    .svc-card:hover { border-color: var(--card-hover); transform: translateY(-3px); }
+    .svc-card.featured {
+      border-color: rgba(0,255,204,0.35);
+      background: linear-gradient(180deg, rgba(0,255,204,0.05), var(--card-bg) 55%);
     }
-    th {
-      background: #090c13;
-      padding: 0.9rem 1.25rem;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-bottom: 1px solid var(--card-border);
+    .svc-flag {
+      font-family: var(--mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 0.2rem 0.5rem; border-radius: 3px; margin-bottom: 1rem; align-self: flex-start;
     }
-    td {
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid #141b29;
-      color: var(--text-muted);
+    .svc-flag.pop { color: var(--accent); background: rgba(0,255,204,0.12); }
+    .svc-flag.pro { color: var(--amber); background: rgba(245,158,11,0.12); }
+    .svc-flag.ent { color: var(--accent-cyan); background: rgba(0,240,255,0.1); }
+    .svc-name { font-family: var(--mono); font-weight: 700; font-size: 1.08rem; margin-bottom: 0.75rem; }
+    .svc-price {
+      font-family: var(--mono); font-size: 2rem; font-weight: 800;
+      letter-spacing: -1px; margin-bottom: 0.35rem;
     }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: rgba(255, 255, 255, 0.015); }
-    .vuln-name {
-      font-family: var(--mono);
-      font-weight: 700;
-      color: var(--text);
+    .svc-price span { font-size: 0.85rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0; }
+    .svc-for { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.35rem; font-style: italic; }
+    .svc-list { list-style: none; margin-bottom: 1.75rem; flex: 1; }
+    .svc-list li {
+      font-size: 0.87rem; color: var(--text-muted); padding: 0.5rem 0 0.5rem 1.5rem;
+      position: relative; line-height: 1.55;
     }
-    .vuln-name a { color: var(--accent); }
-    .vuln-name a:hover { text-decoration: underline; }
+    .svc-list li::before {
+      content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem;
+    }
+    .svc-list li strong { color: var(--text); font-weight: 600; }
+    .svc-btn {
+      font-family: var(--mono); font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.05em; text-align: center; padding: 0.8rem 1rem; border-radius: 5px;
+      border: 1px solid var(--card-hover); transition: 0.2s;
+    }
+    .svc-btn.primary { background: var(--accent); color: #04211c; border-color: var(--accent); font-weight: 700; }
+    .svc-btn.primary:hover { box-shadow: 0 0 22px var(--accent-glow); }
+    .svc-btn:not(.primary):hover { border-color: var(--accent); color: var(--accent); }
+    .svc-note {
+      font-size: 0.76rem; color: var(--text-muted); text-align: center;
+      margin-top: 1.25rem; line-height: 1.6;
+    }
+    .svc-note a { color: var(--accent); }
+
+    /* ---- Research ---- */
+    .research-table-wrap { overflow-x: auto; border: 1px solid var(--card-border); border-radius: 8px; }
+    .research-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; min-width: 720px; }
+    .research-table thead th {
+      font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-muted); text-align: left;
+      padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--card-border); background: rgba(0,0,0,0.25);
+    }
+    .research-table td { padding: 1rem 1.1rem; border-bottom: 1px solid var(--card-border); vertical-align: top; }
+    .research-table tr:last-child td { border-bottom: none; }
+    .vuln-name { font-family: var(--mono); font-weight: 600; font-size: 0.84rem; }
+    .research-table td:last-child { color: var(--text-muted); line-height: 1.55; }
     .sev-pill {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      display: inline-block;
+      font-family: var(--mono); font-size: 0.66rem; text-transform: uppercase;
+      padding: 0.18rem 0.45rem; border-radius: 3px; font-weight: 600; white-space: nowrap;
     }
-    .sev-crit { background: rgba(244, 63, 94, 0.15); color: var(--red); border: 1px solid rgba(244, 63, 94, 0.35); }
-    .sev-high { background: rgba(251, 146, 60, 0.15); color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.35); }
-    .sev-med { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.35); }
+    .sev-crit { color: var(--red); background: rgba(244,63,94,0.12); border: 1px solid rgba(244,63,94,0.3); }
+    .sev-high { color: var(--amber); background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); }
+    .sev-med { color: var(--accent-cyan); background: rgba(0,240,255,0.1); border: 1px solid rgba(0,240,255,0.3); }
+    .advisory-note {
+      font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;
+      padding: 0.9rem 1.1rem; border-left: 2px solid var(--card-hover); line-height: 1.65;
+    }
+    .advisory-note strong { color: var(--text); }
 
-    .post-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
-      gap: 1rem;
-      margin-bottom: 4rem;
-    }
+    /* ---- Posts ---- */
+    .post-list { display: grid; gap: 1.25rem; }
     .post-card {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      min-width: 0;
-      padding: 1.5rem;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-left: 3px solid var(--accent);
-      border-radius: 6px;
-      transition: border-color 0.15s, transform 0.15s;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 8px; padding: 1.6rem; transition: border-color 0.2s, transform 0.2s;
     }
-    .post-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
+    .post-card:hover { border-color: var(--card-hover); transform: translateY(-2px); }
     .post-meta {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 0.5rem 1rem;
-      color: var(--accent);
-      font: 700 0.72rem var(--mono);
-      text-transform: uppercase;
+      font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.7rem;
     }
-    .post-meta time { color: var(--text-muted); font-weight: 400; }
-    .post-card h3 { font-size: 1.2rem; line-height: 1.4; }
-    .post-card h3 a:hover { color: var(--accent); }
-    .post-card p { color: var(--text-muted); font-size: 0.9rem; }
-    .post-card .tool-link { margin-top: auto; font: 600 0.8rem var(--mono); }
+    .post-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.55rem; }
+    .post-card p { color: var(--text-muted); font-size: 0.89rem; line-height: 1.65; margin-bottom: 0.9rem; }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--card-border);
-      padding: 3rem 0;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
+    /* ---- CTA band ---- */
+    .cta-band {
+      border: 1px solid rgba(0,255,204,0.25); border-radius: 10px;
+      background: linear-gradient(135deg, rgba(0,255,204,0.06), rgba(0,240,255,0.03));
+      padding: 3.5rem 2rem; text-align: center; margin-bottom: 4rem;
     }
+    .cta-band h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 800; letter-spacing: -0.6px; margin-bottom: 0.85rem; }
+    .cta-band p { color: var(--text-muted); max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    footer { border-top: 1px solid var(--card-border); padding: 2.5rem 0; margin-top: 2rem; }
     .footer-inner {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1.5rem; flex-wrap: wrap;
+    }
+    .footer-note { font-family: var(--mono); font-size: 0.76rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: var(--mono); font-size: 0.76rem; color: var(--text-muted); }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-disclaimer {
+      font-size: 0.75rem; color: var(--text-muted); line-height: 1.65;
+      margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--card-border);
+    }
+    .footer-disclaimer strong { color: var(--text-muted); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <header>
-    <div class="container nav-inner">
-      <div class="brand">
-        <img src="/assets/logo.png?v=2" alt="Leviathan Logo" class="brand-logo-img">
-        <span>LEVIATHAN OFFSEC</span>
-        <span class="verified-pill">Verified</span>
+<header>
+  <div class="container nav-inner">
+    <a href="/" class="brand">
+      <img src="/assets/logo.png" alt="Leviathan OffSec" class="brand-logo-img">
+      <span>LEVIATHAN OFFSEC</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#tools">Tools</a>
+      <a href="#services">Services</a>
+      <a href="#pipeline">Pipeline</a>
+      <a href="#research">Research</a>
+      <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener">GitHub</a>
+      <a href="#services" class="nav-cta">Book a Scan</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> Continuous attack surface monitoring</div>
+      <h1>Know your perimeter<br>changed <span class="accent">before</span> someone else does.</h1>
+      <p class="hero-sub">
+        Leviathan turns the recon tooling you already run into a continuous monitoring
+        pipeline. Pipe <code>subfinder</code>, <code>httpx</code>, and DNS resolution straight
+        into immutable perimeter diffing and deterministic CVE triage — no daemon, no agent,
+        no black-box scoring.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-action-primary">Book an Assessment</a>
+        <a href="#tools" class="btn-action-secondary">Explore the Tools</a>
       </div>
-      <nav class="nav-links">
+    </div>
+
+    <div class="hero-terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span class="t-dot-red"></span><span class="t-dot-yellow"></span><span class="t-dot-green"></span></div>
+        <span class="terminal-title">zsh — leviathan-pipeline</span>
+        <span class="terminal-badge">LIVE</span>
+      </div>
+      <div class="terminal-screen">
+<span class="term-prompt">$</span> <span class="term-line-cmd">cat scope.txt | surfacediff --live | HostageLVX -silent</span>
+<br>
+<span class="term-info">[INF]</span> <span class="term-sub">surfacediff: loaded 142 targets from scope.txt</span>
+<br>
+<span class="term-ok">[+]</span> <span class="term-asset">NEW_ASSET</span> <span class="term-line-cmd">auth-dev.corp.internal</span> <span class="term-sub">(3.218.44.12)</span>
+<br>
+<span class="term-vuln}[!]</span> <span class="term-vuln">VULNERABLE</span> <span class="term-sub">dangling CNAME detected</span>
+<br>
+<span class="term-sub">&nbsp;&nbsp;&nbsp;&nbsp;Target:</span>   <span class="term-line-cmd">auth-dev.corp.internal -> corp.s3.amazonaws.com</span>
+<br>
+<span class="term-sub">&nbsp;&nbsp;&nbsp;&nbsp;Provider:</span> <span class="term-line-cmd">AWS S3 Bucket Takeover</span> <span class="term-ok">verified</span>
+<br>
+<span class="term-ok">[+]</span> <span class="term-line-cmd">FenrirLVX</span> <span class="term-sub">2 plugins matched known CVE signatures</span>
+<br>
+<span class="term-sub">&nbsp;&nbsp;&nbsp;&nbsp;database coverage</span> <span class="term-asset">2/7 plugins matched</span> <span class="term-sub">&middot; 5 with no advisory data</span>
+<br>
+<span class="term-ok">[ok]</span> <span class="term-sub">pipeline finished in</span> <span class="term-line-cmd">482ms</span>
+<span class="cursor-blink"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PHILOSOPHY ================= -->
+  <div class="philosophy-strip">
+    <div class="container phil-grid">
+      <div>
+        <div class="phil-num">01</div>
+        <div class="phil-title">High-Speed Concurrency</div>
+        <div class="phil-sub">Go goroutine worker pools with native timeout guards.</div>
+      </div>
+      <div>
+        <div class="phil-num">02</div>
+        <div class="phil-title">Unix Stdin/Stdout</div>
+        <div class="phil-sub">Composable by design — <code>cat targets | tool | tool</code>.</div>
+      </div>
+      <div>
+        <div class="phil-num">03</div>
+        <div class="phil-title">Zero Dependency</div>
+        <div class="phil-sub">Python standard library only. No supply-chain surface of our own.</div>
+      </div>
+      <div>
+        <div class="phil-num">04</div>
+        <div class="phil-title">Deterministic Scoring</div>
+        <div class="phil-sub">Contract-enforced CVSS, EPSS, and CISA KEV math you can audit.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TOOLS ================= -->
+  <section id="tools">
+    <div class="section-title-wrap">
+      <div class="section-label">01 // The Arsenal</div>
+      <h2 class="section-title">Open tooling. Auditable by construction.</h2>
+      <p class="section-sub">
+        Everything below is MIT licensed and runs on hardware you already own. The
+        assessments below are built on exactly these same binaries — you are never
+        handed a closed binary you cannot inspect.
+      </p>
+    </div>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-name">HostageLVX</div>
+          <div class="tool-tag">Takeover Engine</div>
+        </div>
+        <p class="tool-desc">
+          High-speed dangling DNS and subdomain takeover engine in Go. Native CNAME
+          verification across 30+ cloud and edge providers, including signature-free
+          fingerprinting of S3, Azure, GCP, Fastly, and legacy shared-hosting footguns.
+        </p>
+        <div class="tool-install-box">
+          <span class="c-flag">$</span>
+          <span class="c-cmd">go install github.com/leviathan-offsec/HostageLVX@latest</span>
+          <button class="copy-btn" data-copy="go install github.com/leviathan-offsec/HostageLVX@latest">Copy</button>
+        </div>
+        <div class="tool-footer">
+          <a href="https://github.com/leviathan-offsec/HostageLVX" target="_blank" rel="noopener" class="tool-link">Repository →</a>
+          <span class="verified-pill">MIT</span>
+          <span class="tool-lang">Go | CLI</span>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-name">surfacediff</div>
+          <div class="tool-tag">Surface Diffing</div>
+        </div>
+        <p class="tool-desc">
+          Immutable, content-addressed snapshotting and field-by-field diffing for external
+          perimeters. Pipe in any recon output; exits <code>1</code> on a detected attack
+          surface delta, so it drops straight into cron and CI without a wrapper.
+        </p>
+        <div class="tool-install-box">
+          <span class="c-flag">$</span>
+          <span class="c-cmd">pip install git+https://github.com/leviathan-offsec/surfacediff.git</span>
+          <button class="copy-btn" data-copy="pip install git+https://github.com/leviathan-offsec/surfacediff.git">Copy</button>
+        </div>
+        <div class="tool-footer">
+          <a href="https://github.com/leviathan-offsec/surfacediff" target="_blank" rel="noopener" class="tool-link">Repository →</a>
+          <span class="verified-pill">MIT</span>
+          <span class="tool-lang">Python | stdlib only</span>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-name">FenrirLVX</div>
+          <div class="tool-tag">CMS Auditor</div>
+        </div>
+        <p class="tool-desc">
+          Low-footprint Go CLI for WordPress and CMS auditing: plugin fingerprinting,
+          offline vulnerability correlation, and Shodan queries. Every verdict reports
+          how much of the target the local database could actually speak to, so a clean
+          result is never confused with a stale one.
+        </p>
+        <div class="tool-install-box">
+          <span class="c-flag">$</span>
+          <span class="c-cmd">./fenrir -t https://target</span>
+          <span class="c-comment"># vuln_db.json in release</span>
+          <button class="copy-btn" data-copy="./fenrir -t https://target">Copy</button>
+        </div>
+        <div class="tool-footer">
+          <a href="https://github.com/leviathan-offsec/FenrirLVX" target="_blank" rel="noopener" class="tool-link">Repository →</a>
+          <span class="verified-pill">MIT</span>
+          <span class="tool-lang">Go | CLI</span>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-name">leviathan-core</div>
+          <div class="tool-tag">Risk Kernel</div>
+        </div>
+        <p class="tool-desc">
+          Audited, contract-enforced vulnerability risk scoring kernel. Replaces black-box
+          vendor scores with explainable formulas computed against CVSS vectors, EPSS
+          probability, and CISA KEV catalog presence — so every ranking has a reason.
+        </p>
+        <div class="tool-install-box">
+          <span class="c-flag">$</span>
+          <span class="c-cmd">git clone https://github.com/leviathan-offsec/leviathan-core.git</span>
+          <button class="copy-btn" data-copy="git clone https://github.com/leviathan-offsec/leviathan-core.git">Copy</button>
+        </div>
+        <div class="tool-footer">
+          <a href="https://github.com/leviathan-offsec/leviathan-core" target="_blank" rel="noopener" class="tool-link">Repository →</a>
+          <span class="verified-pill">MIT</span>
+          <span class="tool-lang">Python | Kernel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="services" class="pipeline-section">
+    <div class="section-title-wrap">
+      <div class="section-label">02 // Engagements</div>
+      <h2 class="section-title">You keep the tooling. We run it for you.</h2>
+      <p class="section-sub">
+        Every engagement runs on the same open-source binaries listed above, scoped in
+        writing, and authorised by your team before any request is sent. Findings arrive
+        with reproduction steps and a fix recommendation — not a screenshot of a scanner
+        dashboard.
+      </p>
+    </div>
+
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-flag pro">One-off</div>
+        <div class="svc-name">Perimeter Audit</div>
+        <div class="svc-price">{{ page.pricing.audit_price }} <span>{{ page.pricing.audit_unit }}</span></div>
+        <div class="svc-for">For startups that need to know where they stand this quarter.</div>
+        <ul class="svc-list">
+          <li><strong>Up to 5 root domains</strong>, full subdomain enumeration</li>
+          <li>Dangling DNS and subdomain takeover verification</li>
+          <li>CMS and plugin fingerprinting with CVE correlation</li>
+          <li>Risk ranking for every finding, with evidence</li>
+          <li>30-minute call to walk the report</li>
+        </ul>
+        <a href="mailto:{{ page.pricing.contact }}?subject=Perimeter%20Audit" class="svc-btn">Request a Quote</a>
+      </div>
+
+      <div class="svc-card featured">
+        <div class="svc-flag pop">Most teams</div>
+        <div class="svc-name">Continuous Monitoring</div>
+        <div class="svc-price">{{ page.pricing.monitor_price }} <span>{{ page.pricing.monitor_unit }}</span></div>
+        <div class="svc-for">For teams who want to know the moment something changes.</div>
+        <ul class="svc-list">
+          <li>Everything in the Perimeter Audit, re-run <strong>daily</strong></li>
+          <li>Change-only alerts — you only hear about <strong>deltas</strong>, not repeats</li>
+          <li>New asset, takeover, and exposure notification within 24h</li>
+          <li>CVE correlation against your actual stack, not a generic feed</li>
+          <li>Cancel any month, no lock-in</li>
+        </ul>
+        <a href="mailto:{{ page.pricing.contact }}?subject=Continuous%20Monitoring" class="svc-btn primary">Start Monitoring</a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-flag ent">Enterprise</div>
+        <div class="svc-name">Embedded Retainer</div>
+        <div class="svc-price">{{ page.pricing.retainer_price }}</div>
+        <div class="svc-for">For teams that need remediation help, not just detection.</div>
+        <ul class="svc-list">
+          <li>Unlimited domains and shared-drive scoping</li>
+          <li>Internal network ranges, not just external DNS</li>
+          <li>Direct engineer contact on a shared channel</li>
+          <li>Remiation guidance and re-verification after each fix</li>
+          <li>Quarterly review against your actual risk posture</li>
+        </ul>
+        <a href="mailto:{{ page.pricing.contact }}?subject=Enterprise%20Retainer" class="svc-btn">Talk to Us</a>
+      </div>
+    </div>
+
+    <p class="svc-note">
+      All work is authorised, written-scope only. We do not scan third-party infrastructure
+      you do not control, and we do not provide working exploits for unpatched issues.
+      <a href="mailto:{{ page.pricing.contact }}">{{ page.pricing.contact }}</a>
+    </p>
+  </section>
+
+  <!-- ================= PIPELINE ================= -->
+  <section id="pipeline">
+    <div class="section-title-wrap">
+      <div class="section-label">03 // Unix Composability</div>
+      <h2 class="section-title">Pipe it. Schedule it. Alert on it.</h2>
+      <p class="section-sub">
+        No proprietary daemon, no agent, no account portal. Combine the standard recon
+        binaries you already trust with <code>surfacediff</code> and <code>HostageLVX</code>
+        directly in your terminal or your cron job.
+      </p>
+    </div>
+
+    <div class="pipeline-code">
+<pre class="pdtm-code"><span class="pdtm-hero-bar"># 1. Enumerate and snapshot subdomains with automated delta detection</span>
+<span class="pdtm-prompt">$</span> subfinder -d example.com -silent | surfacediff snap -l subs --source subfinder
+<span class="pdtm-prompt">$</span> surfacediff diff -l subs || echo "New subdomains found!"
+
+<span class="pdtm-hero-bar"># 2. Pipe live subdomains straight into the takeover engine</span>
+<span class="pdtm-prompt">$</span> cat subs.txt | hostage -threads 50 -verify
+
+<span class="pdtm-hero-bar"># 3. Snapshot web service changes (status flips, title changes, new tech)</span>
+<span class="pdtm-prompt">$</span> httpx -l subs.txt -json -silent | surfacediff snap -l web --source httpx
+<span class="pdtm-prompt">$</span> surfacediff diff -l web --json &gt; /tmp/surface_delta.json</pre>
+    </div>
+  </section>
+
+  <!-- ================= RESEARCH ================= -->
+  <section id="research" class="pipeline-section">
+    <div class="section-title-wrap">
+      <div class="section-label">04 // Vulnerability Research</div>
+      <h2 class="section-title">Published advisories and patch analysis.</h2>
+      <p class="section-sub">
+        Independent research into supply-chain and CMS vulnerabilities, published with
+        full technical analysis. Where an issue is unpatched upstream we ship the
+        analysis and reproduction steps, not a turnkey weapon.
+      </p>
+    </div>
+
+    <div class="research-table-wrap">
+      <table class="research-table">
+        <thead>
+          <tr>
+            <th>Advisory</th>
+            <th>Severity</th>
+            <th>Class</th>
+            <th>Target &amp; impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="vuln-name">decompress CWE-59</span></td>
+            <td><span class="sev-pill sev-high">High</span></td>
+            <td>CWE-59</td>
+            <td>Symlink escape and hardlink write bypass in <code>decompress@4.2.1</code>, a package with millions of weekly npm downloads. Patch analysis published; reproduction steps documented.</td>
+          </tr>
+          <tr>
+            <td><span class="vuln-name">CVE-2026-52824</span><br><span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-muted)">GHSA-jr9p-4h4j-6c58</span></td>
+            <td><span class="sev-pill sev-high">High</span></td>
+            <td>CWE-287</td>
+            <td>Default <code>APP_SECRET</code> enabling cryptographic session forgery in Kimai &le; 2.57.0, resulting in administrative session hijack.</td>
+          </tr>
+          <tr>
+            <td><span class="vuln-name">Tianwen ERP</span></td>
+            <td><span class="sev-pill sev-crit">Critical</span></td>
+            <td>CWE-434</td>
+            <td>Unauthenticated arbitrary file upload in Tianwen Property Management ERP. Vendor notified; reproduction steps documented in the advisory.</td>
+          </tr>
+          <tr>
+            <td><span class="vuln-name">braces DoS</span></td>
+            <td><span class="sev-pill sev-med">Medium</span></td>
+            <td>CWE-400</td>
+            <td>Patch analysis of CVE-2024-4068: comma-separated brace expansion strings remain unmitigated in <code>braces@3.0.3</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="advisory-note">
+      <strong>Reporting a vulnerability in your own product?</strong>
+      Responsible disclosure is handled directly — no bug bounty programme, no middleman.
+      Email the details and we will confirm receipt and coordinate a fix timeline with you.
+    </p>
+
+    {% assign research_posts = site.pages | where: "show_on_home", true | sort: "date" | reverse %}
+    {% if research_posts.size > 0 %}
+    <div class="post-list" style="margin-top:2.5rem">
+      {% for post in research_posts %}
+      <a href="{{ post.url | relative_url }}" class="post-card">
+        <div class="post-meta">{{ post.category }} &middot; {{ post.date | date: "%B %Y" }}</div>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.description }}</p>
+        <span class="tool-link">Read research &rarr;</span>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  <!-- ================= CTA BAND ================= -->
+  <section class="cta-band">
+    <h2>Not sure where you stand?</h2>
+    <p>
+      Send us your root domains. We will run the enumeration and tell you what we find
+      before you commit to anything — no charge, no obligation.
+    </p>
+    <div class="cta-actions">
+      <a href="mailto:{{ page.pricing.contact }}?subject=Free%20surface%20check" class="btn-action-primary">Request a Free Surface Check</a>
+      <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener" class="btn-action-secondary">Browse the Source</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-note">© 2026 Leviathan OffSec — leviathan.ac</span>
+      <nav class="footer-links">
+        <a href="https://github.com/leviathan-offsec" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:{{ page.pricing.contact }}">Contact</a>
         <a href="#tools">Tools</a>
-        <a href="#pipeline">Pipeline</a>
-        <a href="#research">Research</a>
-        <a href="https://github.com/leviathan-offsec" target="_blank">GitHub</a>
       </nav>
     </div>
-  </header>
+    <p class="footer-disclaimer">
+      <strong>Authorised testing only.</strong> Leviathan OffSec operates exclusively against
+      infrastructure with written client authorisation. Our tooling is published for
+      defenders and researchers; we do not provide operational exploits for unpatched
+      vulnerabilities, and we do not assist with unauthorised access to systems you do
+      not own or have permission to test.
+    </p>
+  </div>
+</footer>
 
-  <main class="container">
-
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span>LEVIATHAN OFFSEC // ARSENAL v1.0</span>
-        </div>
-        <h1>Offensive Reconnaissance &amp;<br><span>Perimeter Auditing.</span></h1>
-        <p class="hero-sub">
-          High-throughput Go engines and zero-dependency Python utilities built for attack surface mapping, dangling DNS takeover discovery, and deterministic vulnerability validation.
-        </p>
-
-        <!-- PDTM Quick-Install Hero Bar -->
-        <div class="pdtm-hero-bar">
-          <div class="pdtm-code">
-            <span class="pdtm-prompt">$</span>
-            <span id="hero-cmd">go install -v github.com/leviathan-offsec/HostageLVX@latest</span>
-          </div>
-          <button class="copy-btn" onclick="copyCode('hero-cmd', this)">COPY</button>
-        </div>
-
-        <div class="hero-actions">
-          <a href="#tools" class="btn-action-primary">Explore Tools</a>
-          <a href="/posts/80-days-reversing-iot-dvr.html" class="btn-action-secondary">Read 80-Day DVR Case Study</a>
-        </div>
-      </div>
-
-      <!-- Right Column: Interactive Terminal -->
-      <div class="hero-terminal">
-        <div class="terminal-bar">
-          <div class="terminal-dots">
-            <span class="t-dot t-dot-red"></span>
-            <span class="t-dot t-dot-yellow"></span>
-            <span class="t-dot t-dot-green"></span>
-          </div>
-          <div class="terminal-title">zsh 84x24</div>
-          <div class="terminal-badge">LIVE DEMO</div>
-        </div>
-        <div class="terminal-screen">
-          <div class="term-line-cmd"><span class="term-prompt">$</span>cat scope.txt | surfacediff --live | HostageLVX -silent</div>
-          <div class="term-info">[INF] surfacediff: loaded 142 targets from scope.txt</div>
-          <div class="term-asset">[+] NEW_ASSET   auth-dev.corp.internal (3.218.44.12)</div>
-          <div class="term-vuln">[!] VULNERABLE  HostageLVX: dangling CNAME detected!</div>
-          <div class="term-sub">Target:   auth-dev.corp.internal -> corp.s3.amazonaws.com</div>
-          <div class="term-sub">Provider: AWS S3 Bucket Takeover Verified</div>
-          <div class="term-asset">[+] FenrirLVX   2 plugins matched known CVE signatures</div>
-          <div class="term-sub">    database coverage  2/7 plugins matched  5 with no advisory data</div>
-          <div class="term-ok">[ok] Pipeline execution finished in 482ms</div>
-          <div style="margin-top: 0.5rem;"><span class="term-prompt">$</span><span class="cursor-blink"></span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Architecture Strip -->
-    <div class="philosophy-strip">
-      <div class="phil-item">
-        <span class="phil-num">01</span>
-        <div>
-          <div class="phil-title">High-Speed Concurrency</div>
-          <div class="phil-sub">Go goroutine worker pools with native timeout guards</div>
-        </div>
-      </div>
-      <div class="phil-item">
-        <span class="phil-num">02</span>
-        <div>
-          <div class="phil-title">Unix Stdin/Stdout</div>
-          <div class="phil-sub">Composable pipeline design (cat targets | tool | tool)</div>
-        </div>
-      </div>
-      <div class="phil-item">
-        <span class="phil-num">03</span>
-        <div>
-          <div class="phil-title">Zero Dependency Python</div>
-          <div class="phil-sub">Standard library only for immutable perimeter diffs</div>
-        </div>
-      </div>
-      <div class="phil-item">
-        <span class="phil-num">04</span>
-        <div>
-          <div class="phil-title">Deterministic Scoring</div>
-          <div class="phil-sub">Contract-enforced KEV, EPSS & CVSS math</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tooling Suite Grid -->
-    <section id="tools">
-      <div class="section-title-wrap">
-        <div class="section-label">01 // The Arsenal</div>
-        <h2 class="section-title">Modular Security Tooling</h2>
-      </div>
-
-      <div class="tools-grid">
-
-        <!-- HostageLVX -->
-        <div class="tool-card">
-          <div>
-            <div class="tool-header">
-              <div class="tool-name">HostageLVX</div>
-              <div class="tool-tag">Takeover Engine</div>
-            </div>
-            <p class="tool-desc">
-              High-speed dangling DNS and subdomain takeover engine in Go. Native CNAME verification across 30+ cloud and edge providers with zero external dependencies.
-            </p>
-          </div>
-          <div>
-            <div class="tool-install-box">
-              <span class="install-prompt">$</span>
-              <code id="cmd-hostage" title="go install -v github.com/leviathan-offsec/HostageLVX@latest">go install -v github.com/leviathan-offsec/HostageLVX@latest</code>
-              <button class="copy-btn" onclick="copyCode('cmd-hostage', this)">COPY</button>
-            </div>
-            <div class="tool-footer">
-              <a href="https://github.com/leviathan-offsec/HostageLVX" class="tool-link" target="_blank">Repository</a>
-              <span class="tool-lang">Go | CLI</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- surfacediff -->
-        <div class="tool-card">
-          <div>
-            <div class="tool-header">
-              <div class="tool-name">surfacediff</div>
-              <div class="tool-tag">Surface Diffing</div>
-            </div>
-            <p class="tool-desc">
-              Immutable content-addressed snapshotting and field-by-field diffing for external perimeters. Pipe in recon output; exit 1 on detected attack surface delta.
-            </p>
-          </div>
-          <div>
-            <div class="tool-install-box">
-              <span class="install-prompt">$</span>
-              <code id="cmd-surfacediff" title="pip install git+https://github.com/leviathan-offsec/surfacediff.git">pip install git+https://github.com/leviathan-offsec/surfacediff.git</code>
-              <button class="copy-btn" onclick="copyCode('cmd-surfacediff', this)">COPY</button>
-            </div>
-            <div class="tool-footer">
-              <a href="https://github.com/leviathan-offsec/surfacediff" class="tool-link" target="_blank">Repository</a>
-              <span class="tool-lang">Python | stdlib only</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- FenrirLVX -->
-        <div class="tool-card">
-          <div>
-            <div class="tool-header">
-              <div class="tool-name">FenrirLVX</div>
-              <div class="tool-tag">CMS Auditor</div>
-            </div>
-            <p class="tool-desc">
-              Low-footprint Go CLI for WordPress and CMS auditing: plugin fingerprinting, offline vulnerability correlation, and Shodan queries. Every verdict reports how much of the target the database could actually speak to, so a clean result is never confused with a stale one.
-            </p>
-          </div>
-          <div>
-            <div class="tool-install-box">
-              <span class="install-prompt">$</span>
-              <code id="cmd-fenrir" title="Download a release archive, then run the binary from the directory containing vuln_db.json"># release archive includes vuln_db.json
-              ./fenrir -t https://target</code>
-              <button class="copy-btn" onclick="copyCode('cmd-fenrir', this)">COPY</button>
-            </div>
-            <div class="tool-footer">
-              <a href="https://github.com/leviathan-offsec/FenrirLVX" class="tool-link" target="_blank">Repository</a>
-              <span class="tool-lang">Go | CLI</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- leviathan-core -->
-        <div class="tool-card">
-          <div>
-            <div class="tool-header">
-              <div class="tool-name">leviathan-core</div>
-              <div class="tool-tag">Risk Kernel</div>
-            </div>
-            <p class="tool-desc">
-              Audited, contract-enforced vulnerability risk scoring kernel. Replaces black-box vendor scores with explainable formulas against CVSS, EPSS, and CISA KEV.
-            </p>
-          </div>
-          <div>
-            <div class="tool-install-box">
-              <span class="install-prompt">$</span>
-              <code id="cmd-core" title="git clone https://github.com/leviathan-offsec/leviathan-core.git">git clone https://github.com/leviathan-offsec/leviathan-core.git</code>
-              <button class="copy-btn" onclick="copyCode('cmd-core', this)">COPY</button>
-            </div>
-            <div class="tool-footer">
-              <a href="https://github.com/leviathan-offsec/leviathan-core" class="tool-link" target="_blank">Repository</a>
-              <span class="tool-lang">Python | Kernel</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- agy-mcp: retired. The project was withdrawn rather than shipped,
-             because a 0.1.0 path-traversal fix story is not the right first
-             impression for a security lab. Removed from the public index
-             rather than left linking to a 404. -->
-
-      </div>
-    </section>
-
-    <!-- Pipeline Demonstration (Unix Philosophy) -->
-    <section id="pipeline" class="pipeline-section">
-      <div class="section-title-wrap" style="margin-bottom: 1rem;">
-        <div class="section-label">02 // Unix Composability</div>
-        <h3 class="section-title" style="font-size: 1.45rem;">Piped Attack Surface Monitoring</h3>
-      </div>
-      <p style="color: var(--text-muted); font-size: 0.95rem;">
-        No proprietary daemons. Combine standard recon binaries with <code>surfacediff</code> and <code>HostageLVX</code> directly in your terminal or cron pipeline:
-      </p>
-
-      <div class="pipeline-code">
-<span class="c-comment"># 1. Enumerate and snapshot subdomains with automated delta detection</span>
-<span class="c-cmd">subfinder</span> <span class="c-flag">-d</span> example.com <span class="c-flag">-silent</span> | <span class="c-cmd">surfacediff snap</span> <span class="c-flag">-l</span> subs <span class="c-flag">--source</span> subfinder
-<span class="c-cmd">surfacediff diff</span> <span class="c-flag">-l</span> subs || <span class="c-cmd">echo</span> <span class="c-flag">"New subdomains found!"</span>
-
-<span class="c-comment"># 2. Pipe live subdomains directly into the takeover engine</span>
-<span class="c-cmd">cat</span> subs.txt | <span class="c-cmd">hostage</span> <span class="c-flag">-threads</span> 50 <span class="c-flag">-verify</span>
-
-<span class="c-comment"># 3. Snapshot web service changes (status code flips, title changes, new tech)</span>
-<span class="c-cmd">httpx</span> <span class="c-flag">-l</span> subs.txt <span class="c-flag">-json -silent</span> | <span class="c-cmd">surfacediff snap</span> <span class="c-flag">-l</span> web <span class="c-flag">--source</span> httpx
-<span class="c-cmd">surfacediff diff</span> <span class="c-flag">-l</span> web <span class="c-flag">--json</span> > /tmp/surface_delta.json
-      </div>
-    </section>
-
-    <!-- Long-Form Research -->
-    <section id="deep-dive">
-      <div class="section-title-wrap">
-        <div class="section-label">03 // Featured Case Study</div>
-        <h2 class="section-title">Long-Form Research & Post-Mortems</h2>
-      </div>
-
-      {% assign research_posts = site.pages | where: "show_on_home", true | sort: "date" | reverse %}
-      <div class="post-list">
-        {% for post in research_posts %}
-        <article class="post-card">
-          <div class="post-meta">
-            <span>{{ post.category }}</span>
-            <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%B %Y" }}</time>
-          </div>
-          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          <p>{{ post.description }}</p>
-          <a href="{{ post.url | relative_url }}" class="tool-link">Read research &rarr;</a>
-        </article>
-        {% endfor %}
-      </div>
-    </section>
-
-    <!-- Public Research & Advisories -->
-    <section id="research">
-      <div class="section-title-wrap">
-        <div class="section-label">04 // Vulnerability Research</div>
-        <h2 class="section-title">Published Advisories & Exploit PoCs</h2>
-      </div>
-
-      <div class="research-table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Advisory / Identifier</th>
-              <th>Severity</th>
-              <th>Class</th>
-              <th>Target & Impact</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="vuln-name">
-                <a href="https://github.com/cyeezy08/decompress-CWE-59-PoC" target="_blank">decompress-CWE-59-PoC</a>
-              </td>
-              <td><span class="sev-pill sev-high">High</span></td>
-              <td>CWE-59 (Arbitrary File Write)</td>
-              <td>Symlink escape + hardlink write bypass in <code>decompress@4.2.1</code> (17.6M weekly downloads).</td>
-            </tr>
-            <tr>
-              <td class="vuln-name">
-                <a href="https://github.com/cyeezy08/Kimai-CVE-2026-49865-POC" target="_blank">Kimai-CVE-2026-49865-POC</a>
-              </td>
-              <td><span class="sev-pill sev-high">High</span></td>
-              <td>CWE-287 (Auth Bypass)</td>
-              <td>Default <code>APP_SECRET</code> cryptographic forge enabling administrative session hijack (&le; 2.57.0).</td>
-            </tr>
-            <tr>
-              <td class="vuln-name">
-                <a href="https://github.com/cyeezy08/Tianwen-ERP-Upload-PoC" target="_blank">Tianwen-ERP-Upload-PoC</a>
-              </td>
-              <td><span class="sev-pill sev-crit">Critical</span></td>
-              <td>CWE-434 (Unauth File Upload)</td>
-              <td>Unauthenticated arbitrary file upload in Tianwen Property Management ERP; paired with TUI demo PoC.</td>
-            </tr>
-            <tr>
-              <td class="vuln-name">
-                <a href="https://github.com/cyeezy08/DoS-Braces-3.03" target="_blank">DoS-Braces-3.03</a>
-              </td>
-              <td><span class="sev-pill sev-med">Medium</span></td>
-              <td>CWE-400 (Denial of Service)</td>
-              <td>Incomplete patch analysis of CVE-2024-4068 via comma-separated brace expansion strings.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container footer-inner">
-      <div>
-        <p><strong>LEVIATHAN OFFSEC</strong> | Research Lab</p>
-        <p style="margin-top: 0.25rem;">Developed & Maintained by <a href="https://github.com/cyeezy08" style="color: var(--accent);">@cyeezy08</a></p>
-      </div>
-      <div style="display: flex; gap: 1.5rem;">
-        <a href="https://github.com/leviathan-offsec" target="_blank" style="color: var(--accent);">Organization GitHub</a>
-        <a href="https://github.com/cyeezy08" target="_blank" style="color: var(--accent);">Personal GitHub</a>
-        <a href="mailto:chinyeezy08@gmail.com" style="color: var(--accent);">Email</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    function copyCode(elementId, btn) {
-      const text = document.getElementById(elementId).innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        const originalText = btn.innerText;
-        btn.innerText = 'COPIED!';
-        btn.style.background = '#00ffcc';
-        btn.style.color = '#000';
-        setTimeout(() => {
-          btn.innerText = originalText;
-          btn.style.background = '';
-          btn.style.color = '';
-        }, 1500);
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      navigator.clipboard.writeText(text).then(function () {
+        var prev = btn.textContent;
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = prev; }, 1400);
       });
-    }
-  </script>
-
+    });
+  });
+</script>
 </body>
 </html>
