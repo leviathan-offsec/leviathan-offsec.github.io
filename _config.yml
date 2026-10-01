@@ -1,0 +1,20 @@
+title: "Leviathan OffSec"
+description: "Open-source attack surface monitoring tools. Perimeter diffing, subdomain takeover detection, CMS auditing. MIT licensed."
+url: "https://leviathan.ac"
+baseurl: ""
+
+# Keep .html extensions working and serve clean /research/ permalink
+permalink: pretty
+
+# Don't touch these files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - SETUP.md
+  - POSTS.md
+  - _templates/
+  - README.md
+
+# Collections off — using plain pages
+plugins:
+  - jekyll-redirect-from
