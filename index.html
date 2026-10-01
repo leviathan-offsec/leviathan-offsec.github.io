@@ -1,3 +1,6 @@
+---
+show_on_home: false
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -571,6 +574,43 @@
     .sev-high { background: rgba(251, 146, 60, 0.15); color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.35); }
     .sev-med { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.35); }
 
+    .post-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+    .post-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      min-width: 0;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .post-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem 1rem;
+      color: var(--accent);
+      font: 700 0.72rem var(--mono);
+      text-transform: uppercase;
+    }
+    .post-meta time { color: var(--text-muted); font-weight: 400; }
+    .post-card h3 { font-size: 1.2rem; line-height: 1.4; }
+    .post-card h3 a:hover { color: var(--accent); }
+    .post-card p { color: var(--text-muted); font-size: 0.9rem; }
+    .post-card .tool-link { margin-top: auto; font: 600 0.8rem var(--mono); }
+
     /* Footer */
     footer {
       border-top: 1px solid var(--card-border);
@@ -848,27 +888,26 @@
       </div>
     </section>
 
-    <!-- Featured Long-Form Case Study -->
-    <section id="deep-dive" style="margin-bottom: 4rem;">
+    <!-- Long-Form Research -->
+    <section id="deep-dive">
       <div class="section-title-wrap">
         <div class="section-label">03 // Featured Case Study</div>
         <h2 class="section-title">Long-Form Research & Post-Mortems</h2>
       </div>
 
-      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-left: 4px solid var(--accent); border-radius: 8px; padding: 2rem; display: flex; flex-direction: column; gap: 1rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-          <span style="font-family: var(--mono); font-size: 0.75rem; color: var(--accent); font-weight: 700;">EMBEDDED FIRMWARE // POST-MORTEM</span>
-          <span style="font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted);">10 min read · September 2026</span>
-        </div>
-        <h3 style="font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px;">
-          <a href="/posts/80-days-reversing-iot-dvr.html" style="color: #fff;">80 Days Reverse Engineering an IoT DVR: What I Found and Why It Didn't Work Out ↗</a>
-        </h3>
-        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-          An honest technical breakdown of extracting stripped ARM32 binaries, breaking hardcoded AES seeds, and discovering unsigned root firmware execution paths on a widely deployed OEM surveillance platform—and why real-world delivery gaps and vendor vacuums left it without a bounty.
-        </p>
-        <div>
-          <a href="/posts/80-days-reversing-iot-dvr.html" class="tool-link" style="font-size: 0.85rem;">Read Full Technical Case Study →</a>
-        </div>
+      {% assign research_posts = site.pages | where: "show_on_home", true | sort: "date" | reverse %}
+      <div class="post-list">
+        {% for post in research_posts %}
+        <article class="post-card">
+          <div class="post-meta">
+            <span>{{ post.category }}</span>
+            <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%B %Y" }}</time>
+          </div>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p>{{ post.description }}</p>
+          <a href="{{ post.url | relative_url }}" class="tool-link">Read research &rarr;</a>
+        </article>
+        {% endfor %}
       </div>
     </section>
 
