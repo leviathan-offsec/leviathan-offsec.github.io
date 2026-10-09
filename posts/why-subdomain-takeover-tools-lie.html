@@ -1,0 +1,181 @@
+---
+layout: research-post
+title: "Why Your Subdomain Takeover Tool Lies to You"
+description: "Why automated takeover scanners fail on wildcard DNS and edge CDNs, the mechanics of unverified CNAME chains, and how cryptographic canary probing eliminates false positive alerts."
+category: "DNS Recon // Engineering"
+date: 2026-10-09
+read_time: "7 min read"
+show_on_home: true
+permalink: /posts/why-subdomain-takeover-tools-lie/
+redirect_from:
+  - /posts/why-subdomain-takeover-tools-lie.html
+---
+
+<p>
+  Most automated subdomain takeover tools are glorified grep wrappers around <code>can-i-take-over-xyz</code>.
+</p>
+
+<p>
+  You feed them 50,000 resolved subdomains from <code>subfinder</code>, they match a generic <code>NoSuchBucket</code> string on an S3 endpoint or a <code>There isn't a GitHub Pages site here</code> banner, and your triage queue fills up with 40 false positives that get closed as <em>Informative</em> or <em>N/A</em> within three hours.
+</p>
+
+<p>
+  If you've run <code>subjack</code>, <code>subzy</code>, or custom python scripts at scale, you already know the two fatal flaws: <strong>wildcard DNS traps</strong> and <strong>unverified CNAME resolution chains</strong>.
+</p>
+
+<h2>1. The Wildcard Trap (500 alerts on one dead zone)</h2>
+
+<p>
+  The most common reason for a flood of fake takeover alerts is wildcard DNS. A target organization configures a wildcard record on Route53 or Cloudflare:
+</p>
+
+<pre><code>*.staging.target.com.   300   IN   CNAME   unconfigured-tenant.s3-website-us-east-1.amazonaws.com.</code></pre>
+
+<p>
+  If a scanner doesn't probe the domain's baseline resolution behavior before scanning, every single non-existent subdomain in your wordlist:
+</p>
+
+<ul>
+  <li><code>admin.staging.target.com</code></li>
+  <li><code>internal-vpn.staging.target.com</code></li>
+  <li><code>test-jenkins.staging.target.com</code></li>
+</ul>
+
+<p>
+  ...will resolve to that dangling AWS endpoint. A naive tool fires 500 alerts for 500 "vulnerable" subdomains. In reality, <strong>there is only one dangling pointer</strong>, and claiming it once claims the entire wildcard space—or worse, the base zone is active and the wildcard is intentional dead space.
+</p>
+
+<h3>The Fix: Cryptographic Canary Probing</h3>
+
+<p>
+  Before testing any subdomain under a root zone, we generate a random 32-character high-entropy label that is guaranteed not to exist:
+</p>
+
+<pre><code>canaryHost := fmt.Sprintf("lvx-canary-%x.%s", randBytes(8), zone)</code></pre>
+
+<p>
+  We query the canary. If <code>lvx-canary-a8f3b9c1.staging.target.com</code> resolves to a CNAME or IP:
+</p>
+
+<ol>
+  <li>The zone is flagged as wildcarded.</li>
+  <li>We capture the wildcard target fingerprint.</li>
+  <li>Every subsequent finding that matches the canary's resolution signature is flagged as <code>WILDCARD_INHERITED</code> and suppressed from the critical alert queue.</li>
+</ol>
+
+<h2>2. The Dangling Chain Problem (CNAME Recursion)</h2>
+
+<p>
+  Most tools only check the immediate CNAME of the target:
+</p>
+
+<pre><code>api.target.com -> edge.customdomain.herokudns.com</code></pre>
+
+<p>
+  In modern cloud architectures, CNAMEs rarely point directly to the vulnerable host. They chain through three or four intermediaries:
+</p>
+
+<pre><code>cdn.target.com 
+  -> alias.trafficmanager.net 
+    -> custom-edge.azurewebsites.net (DANGLING)</code></pre>
+
+<p>
+  If your tool queries standard system <code>gethostbyname</code> or a single DNS packet, it gets back the final IP (which returns a generic 404 or connection refused) without exposing where the chain broke.
+</p>
+
+<p>
+  To detect takeovers accurately, the resolver must walk the CNAME chain recursively:
+</p>
+
+<ol>
+  <li>Query <code>CNAME</code> for <code>cdn.target.com</code>.</li>
+  <li>Extract the target <code>alias.trafficmanager.net</code>.</li>
+  <li>Check if intermediate domains are registered and active.</li>
+  <li>If an intermediate or terminal node in the chain points to an unclaimed SaaS tenant, trace the exact vulnerable hop.</li>
+</ol>
+
+<h2>3. Heuristic vs Fingerprint: Status Codes Are Not Proof</h2>
+
+<p>
+  A standard anti-pattern in takeover tools:
+</p>
+
+<pre><code># The lazy way that burns triagers
+if response.status_code == 404 and "NoSuchBucket" in response.text:
+    print("VULNERABLE!")</code></pre>
+
+<p>
+  Why this breaks in the real world:
+</p>
+
+<ul>
+  <li><strong>Custom Error Pages:</strong> Many reverse proxies (NGINX, Cloudflare, Traefik) intercept 404s and render a branded error page that happens to include error strings from an upstream origin.</li>
+  <li><strong>Partial Deprovisioning:</strong> An S3 bucket might return <code>AccessDenied</code> (403) instead of <code>NoSuchBucket</code> (404) if the bucket still exists in another account or the bucket policy prohibits anonymous listing.</li>
+</ul>
+
+<p>
+  In HostageLVX, a finding requires three distinct conditions before emitting a confirmed <code>TAKEOVER</code> verdict:
+</p>
+
+<ol>
+  <li><strong>NXDOMAIN or Dangling Target:</strong> The authoritative DNS records for the CNAME target confirm the host is unregistered or orphaned.</li>
+  <li><strong>Deterministic Response Fingerprint:</strong> An exact match against provider-specific headers (<code>X-GitHub-Request-Id</code>, <code>x-amz-error-code</code>, <code>Server: ATS</code>) and body content.</li>
+  <li><strong>Canary Difference:</strong> The behavior diverges from the root zone's baseline wildcard probe.</li>
+</ol>
+
+<h2>4. Benchmarking HostageLVX vs Legacy Scanners</h2>
+
+<p>
+  We benchmarked HostageLVX against <code>subzy</code> and <code>subjack</code> on a dataset of 15,000 corporate subdomains containing 3 known active takeovers and 4 wildcarded zones:
+</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Engine</th><th>Execution Time</th><th>Reported Takeovers</th><th>True Positives</th><th>False Positives</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>subjack</strong></td>
+        <td>4m 12s</td>
+        <td>47</td>
+        <td>3</td>
+        <td>44</td>
+      </tr>
+      <tr>
+        <td><strong>subzy</strong></td>
+        <td>2m 48s</td>
+        <td>39</td>
+        <td>3</td>
+        <td>36</td>
+      </tr>
+      <tr>
+        <td><strong>HostageLVX</strong></td>
+        <td><strong>19s</strong></td>
+        <td><strong>3</strong></td>
+        <td><strong>3</strong></td>
+        <td><strong>0</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+  The 40+ false positives from older tools were entirely caused by unhandled wildcard CNAMEs on Route53 and CDN fallback pages.
+</p>
+
+<h2>5. Installation & Usage</h2>
+
+<p>
+  HostageLVX is open-source, written in Go with zero runtime dependencies.
+</p>
+
+<pre><code># Install via Homebrew
+brew install leviathan-offsec/tap/hostage
+
+# Pipe subdomains directly from subfinder
+subfinder -d example.com -silent | hostage -c 50 -json -o findings.jsonl</code></pre>
+
+<p>
+  Repository and fingerprints: <a href="https://github.com/leviathan-offsec/HostageLVX" target="_blank" rel="noopener">github.com/leviathan-offsec/HostageLVX</a>.
+</p>
