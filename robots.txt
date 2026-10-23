@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Research posts are the acquisition surface — keep them fully crawlable.
+Disallow: /assets/logo.png
+
+Sitemap: https://leviathan.ac/sitemap.xml
