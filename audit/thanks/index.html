@@ -1,0 +1,76 @@
+---
+layout: null
+show_on_home: false
+title: "Audit booked"
+description: "Next steps for your Perimeter Takeover Audit."
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit booked — Leviathan OffSec</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/assets/brand.css">
+<style>
+  body {
+    margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono);
+    font-size: 15px; line-height: 1.7; min-height: 100vh;
+    display: grid; place-items: center; padding: 24px;
+  }
+  .card {
+    width: min(640px, 100%); background: var(--card-bg);
+    border: 1px solid var(--card-border); border-radius: var(--radius-lg); padding: 34px;
+  }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  .sub { color: var(--text-muted); font-size: 13px; margin-bottom: 26px; }
+  h2 { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-faint); margin: 26px 0 10px; }
+  pre {
+    background: var(--surface-sunk); border: 1px solid var(--card-border);
+    border-left: 2px solid var(--accent); border-radius: var(--radius);
+    padding: 14px 16px; font-size: 13px; white-space: pre-wrap; color: var(--text);
+  }
+  ol { padding-left: 20px; margin: 0; }
+  li { margin: 6px 0; color: var(--text-muted); }
+  li b { color: var(--text); }
+  a { color: var(--accent); }
+  .fine { color: var(--text-faint); font-size: 12px; margin-top: 28px; }
+</style>
+</head>
+<body>
+<main class="card">
+  <h1>Payment received.</h1>
+  <div class="sub">Your Perimeter Takeover Audit is queued. One thing is missing from you.</div>
+
+  <h2>1 // Send targets</h2>
+  <p>Reply to the <b>Stripe receipt email</b> with up to five domains, and paste this line filled in:</p>
+  <pre>I confirm I own or am authorised to test these domains:
+1.
+2.
+3.
+4.
+5.</pre>
+
+  <h2>2 // Authorisation is checked first</h2>
+  <p>Work starts when that statement is on record. If it doesn't hold up, the payment is refunded in full.</p>
+
+  <h2>3 // Timeline</h2>
+  <ol>
+    <li><b>Within 24 hours:</b> confirmation that the scope is accepted, plus anything critical found early gets flagged immediately.</li>
+    <li><b>Within 5 business days:</b> the report — findings, evidence, coverage, fixes in priority order.</li>
+    <li><b>Day 30:</b> retest included, reply to the report thread once patches are in.</li>
+  </ol>
+
+  <h2>4 // What we will not do</h2>
+  <p>No exploitation, no brute force, no denial of service, no testing outside the domains you list.
+     Anything that would need exploitation to prove gets flagged for a separate engagement.</p>
+
+  <p class="fine">
+    Questions before or during: reply to the receipt email, or write to
+    <a href="mailto:chinyeezy08@gmail.com">chinyeezy08@gmail.com</a>.
+    Keep the receipt — it is your order reference.
+  </p>
+</main>
+</body>
+</html>
