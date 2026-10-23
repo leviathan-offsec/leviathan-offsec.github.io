@@ -1,0 +1,145 @@
+---
+layout: null
+show_on_home: false
+title: "Your license"
+description: "Redeem a Leviathan checkout session."
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your license — Leviathan OffSec</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/assets/brand.css">
+<style>
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--mono);
+    font-size: 15px; line-height: 1.65; min-height: 100vh;
+    display: grid; place-items: center; padding: 24px; margin: 0;
+  }
+  .card {
+    width: min(660px, 100%); background: var(--card-bg);
+    border: 1px solid var(--card-border); border-radius: var(--radius-lg); padding: 32px;
+  }
+  h1 { font-size: 20px; margin: 0 0 4px; letter-spacing: .02em; }
+  .sub { color: var(--text-muted); font-size: 13px; margin-bottom: 28px; }
+  .state { display: none; }
+  .state.active { display: block; }
+  .key {
+    background: var(--surface-sunk); border: 1px solid var(--card-border);
+    border-left: 2px solid var(--accent); border-radius: var(--radius);
+    padding: 16px; word-break: break-all; color: var(--accent);
+    font-size: 13px; line-height: 1.7; max-height: 220px; overflow: auto;
+  }
+  .meta { display: flex; gap: 24px; flex-wrap: wrap; margin: 18px 0; color: var(--text-muted); font-size: 13px; }
+  .meta b { color: var(--text); font-weight: 600; }
+  button {
+    background: var(--accent); color: var(--text-inverse); border: 0;
+    border-radius: var(--radius); padding: 10px 18px; font: inherit;
+    font-weight: 700; cursor: pointer;
+  }
+  .hint { color: var(--text-muted); font-size: 12.5px; margin-top: 22px; }
+  .hint code { color: var(--text); background: var(--surface-sunk); padding: 1px 5px; border-radius: 4px; }
+  .err { color: var(--red); }
+  .spinner {
+    width: 16px; height: 16px; border: 2px solid var(--card-border);
+    border-top-color: var(--accent); border-radius: 50%;
+    animation: spin .8s linear infinite; display: inline-block;
+    vertical-align: -3px; margin-right: 10px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<main class="card">
+  <h1>Leviathan access</h1>
+  <div class="sub">redeeming your checkout session</div>
+
+  <section id="s-loading" class="state active">
+    <p><span class="spinner"></span>Verifying payment with Stripe…</p>
+  </section>
+
+  <section id="s-error" class="state">
+    <p class="err" id="err-msg">Something went wrong.</p>
+    <p class="hint" id="err-hint"></p>
+  </section>
+
+  <section id="s-done" class="state">
+    <div class="key" id="license-key"></div>
+    <div class="meta">
+      <span>tier <b id="tier">—</b></span>
+      <span>valid until <b id="expires">—</b></span>
+    </div>
+    <button id="copy">Copy license</button>
+    <p class="hint">
+      Save this. It verifies offline:<br>
+      <code>python3 cli/verify_license.py "$KEY"</code><br><br>
+      Renewals are automatic. The key stays the same, the expiry moves.
+    </p>
+  </section>
+</main>
+
+<script>
+  // Deployed license Worker. Change here when it moves to your own zone.
+  const WORKER_URL = "https://leviathan-license.majestic-cushion.workers.dev";
+
+  const el = (id) => document.getElementById(id);
+  const show = (id) => {
+    document.querySelectorAll(".state").forEach((n) => n.classList.remove("active"));
+    el(id).classList.add("active");
+  };
+  const fail = (msg, hint = "") => {
+    el("err-msg").textContent = msg;
+    el("err-hint").textContent = hint;
+    show("s-error");
+  };
+
+  const sessionId = new URLSearchParams(location.search).get("session_id");
+
+  if (!sessionId) {
+    fail("No checkout session found.",
+      "This page is the redirect target for a completed Stripe checkout. Start from /pricing/.");
+  } else {
+    fetch(WORKER_URL + "/issue", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session_id: sessionId }),
+    })
+      .then(async (res) => {
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          const map = {
+            subscription_not_active: ["Your subscription isn't active yet.",
+              "If you just paid, give it a minute and refresh. Otherwise check the payment method on your Stripe receipt."],
+            not_a_subscription: ["That checkout wasn't a subscription.", "Reply to your Stripe receipt and we'll sort it out."],
+            bad_session_id: ["Invalid checkout session.", "Open the link from your Stripe receipt."],
+          };
+          const [msg, hint] = map[data.error] || ["Couldn't issue your license.", data.detail || data.error || "Try refreshing."];
+          throw Object.assign(new Error(msg), { hint });
+        }
+        return data;
+      })
+      .then((data) => {
+        el("license-key").textContent = data.license;
+        el("tier").textContent = data.tier;
+        el("expires").textContent = new Date(data.expires_at * 1000).toLocaleDateString(undefined, {
+          year: "numeric", month: "short", day: "numeric",
+        });
+        el("copy").onclick = async () => {
+          try {
+            await navigator.clipboard.writeText(data.license);
+            el("copy").textContent = "Copied";
+            setTimeout(() => (el("copy").textContent = "Copy license"), 1600);
+          } catch {
+            el("copy").textContent = "Select and copy manually";
+          }
+        };
+        show("s-done");
+      })
+      .catch((err) => fail(err.message, err.hint || ""));
+  }
+</script>
+</body>
+</html>

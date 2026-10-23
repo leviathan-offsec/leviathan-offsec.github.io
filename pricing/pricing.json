@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-10-23T02:19:14.386Z",
+  "mode": "test",
+  "feed": {
+    "product_id": "leviathan-p0-feed",
+    "tiers": {
+      "hobby": {
+        "price_id": "price_1UTY4bGaSlvu45J3rcaUD194",
+        "amount": 500,
+        "interval": "month",
+        "payment_link": "https://buy.stripe.com/test_aFa3cv4RYgp96Xtggg1VK00"
+      },
+      "team": {
+        "price_id": "price_1UTY4bGaSlvu45J3lafICkOq",
+        "amount": 4900,
+        "interval": "month",
+        "payment_link": "https://buy.stripe.com/test_8x28wPgAG8WH3Lh0hi1VK01"
+      }
+    }
+  }
+}

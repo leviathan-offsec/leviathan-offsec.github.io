@@ -1,0 +1,126 @@
+---
+layout: null
+show_on_home: false
+title: "Pricing"
+description: "Leviathan P0 Feed — the KEV firehose triaged against your stack. Free digest, paid realtime lane."
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Leviathan OffSec</title>
+<meta name="description" content="The CISA KEV firehose, triaged against your stack. Free daily digest, realtime P0/P1 lane on a paid tier.">
+<link rel="stylesheet" href="/assets/brand.css">
+<style>
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    padding: 72px 24px 96px; font-family: var(--mono); font-size: 15px; line-height: 1.65;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; }
+  .eyebrow { color: var(--accent); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; }
+  h1 { font-size: clamp(26px, 4vw, 40px); margin: 12px 0; line-height: 1.15; }
+  .lede { color: var(--text-muted); max-width: 62ch; margin: 0 0 48px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .tier {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column;
+  }
+  .tier.featured { border-color: var(--card-hover); box-shadow: 0 0 0 1px rgba(0,255,204,.12), 0 24px 60px -30px var(--accent-glow); }
+  .tier h2 { margin: 0 0 6px; font-size: 17px; }
+  .price { font-size: 34px; font-weight: 700; margin: 10px 0 2px; }
+  .price small { font-size: 13px; color: var(--text-muted); font-weight: 400; }
+  .why { color: var(--text-muted); font-size: 13px; margin: 0 0 20px; }
+  ul { list-style: none; padding: 0; margin: 0 0 26px; font-size: 13.5px; }
+  li { padding: 7px 0; border-bottom: 1px solid var(--card-border); display: flex; gap: 10px; }
+  li:last-child { border-bottom: 0; }
+  .tick { color: var(--accent); }
+  .buy {
+    margin-top: auto; display: block; text-align: center; text-decoration: none;
+    padding: 12px; border-radius: var(--radius); font-weight: 700; font-size: 14px;
+    background: var(--accent); color: var(--text-inverse); border: 1px solid var(--accent);
+  }
+  .buy.ghost { background: transparent; color: var(--text); border-color: var(--card-border); }
+  .buy[aria-disabled="true"] { opacity: .45; pointer-events: none; }
+  .note { color: var(--text-muted); font-size: 12.5px; margin-top: 40px; max-width: 70ch; }
+  .note a { color: var(--text); }
+  .free { margin-top: 28px; color: var(--text-muted); font-size: 13px; }
+  code { color: var(--text); background: var(--surface-sunk); padding: 1px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="eyebrow">Leviathan OffSec</div>
+  <h1>The KEV firehose, triaged against your stack.</h1>
+  <p class="lede">
+    Every morning security teams skim CISA KEV, squint at EPSS, and ask "is any of this ours?".
+    Leviathan answers mechanically: declared software, matched against exploited-in-the-wild intel,
+    scored, and delivered where you already live. Zero packets sent to your assets.
+  </p>
+
+  <div class="grid">
+    <div class="tier" data-tier="hobby">
+      <h2>Hobby</h2>
+      <p class="why">For solo researchers keeping an eye on the stack they run.</p>
+      <div class="price"><span data-price>—</span><small>/mo</small></div>
+      <ul>
+        <li><span class="tick">+</span> Free daily KEV digest</li>
+        <li><span class="tick">+</span> Realtime P0/P1 lane in Discord</li>
+        <li><span class="tick">+</span> CLI triage for your declared stack</li>
+      </ul>
+      <a class="buy ghost" data-link href="#" aria-disabled="true">Get Hobby</a>
+    </div>
+
+    <div class="tier featured" data-tier="team">
+      <h2>Team</h2>
+      <p class="why">For small teams that need the realtime lane and a paper trail.</p>
+      <div class="price"><span data-price>—</span><small>/mo</small></div>
+      <ul>
+        <li><span class="tick">+</span> Everything in Hobby</li>
+        <li><span class="tick">+</span> Ransomware-associated KEV flagged first</li>
+        <li><span class="tick">+</span> <code>--deep</code>: CVSS + public PoC enrichment</li>
+        <li><span class="tick">+</span> Per-finding provenance for triage notes</li>
+      </ul>
+      <a class="buy" data-link href="#" aria-disabled="true">Get Team</a>
+    </div>
+  </div>
+
+  <p class="free">
+    The free tier never disappears: digest and CLI stay open. The paid lane buys minutes, not access to the data.
+  </p>
+
+  <p class="note" id="note">
+    Payments run through Stripe. Cancel any time in the customer portal; access runs to the end of the paid period.
+    Authorised defensive use only.
+  </p>
+</main>
+
+<script>
+  fetch("pricing.json")
+    .then((r) => { if (!r.ok) throw new Error("pricing.json missing"); return r.json(); })
+    .then((cfg) => {
+      const mode = cfg.mode === "true" || cfg.mode === true ? "live" : "test";
+      document.querySelectorAll("[data-tier]").forEach((card) => {
+        const info = cfg.feed?.tiers?.[card.dataset.tier];
+        if (!info) return;
+        const amount = (info.amount / 100).toLocaleString(undefined, {
+          style: "currency", currency: "usd", minimumFractionDigits: info.amount % 100 ? 2 : 0,
+        });
+        card.querySelector("[data-price]").textContent = amount;
+        const link = card.querySelector("[data-link]");
+        if (info.payment_link) {
+          link.href = info.payment_link;
+          link.removeAttribute("aria-disabled");
+        }
+      });
+      if (mode === "test") {
+        document.getElementById("note").insertAdjacentHTML("afterbegin",
+          "<b style='color:var(--amber)'>Test mode:</b> these links charge test cards only. ");
+      }
+    })
+    .catch(() => {
+      document.querySelectorAll("[data-link]").forEach((a) => { a.textContent = "Checkout unavailable"; });
+    });
+</script>
+</body>
+</html>
