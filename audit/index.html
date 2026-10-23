@@ -1,0 +1,172 @@
+---
+layout: null
+show_on_home: false
+title: "Perimeter Takeover Audit"
+description: "Fixed-scope external audit: dangling DNS, subdomain takeover, exposed admin surfaces and visible-CVE exposure across up to 5 domains. $149, 5 business days."
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perimeter Takeover Audit — Leviathan OffSec</title>
+<meta name="description" content="Fixed-scope external audit of up to 5 domains: dangling DNS, subdomain takeover, exposed admin surfaces, TLS and header posture, visible-CVE exposure. Evidence-backed PDF in 5 business days. $149.">
+<link rel="canonical" href="https://leviathan.ac/audit/">
+<meta property="og:title" content="Perimeter Takeover Audit — Leviathan OffSec">
+<meta property="og:description" content="The cheap wins attackers find first, checked against your domains. Evidence-backed PDF, 5 business days, $149.">
+<meta property="og:url" content="https://leviathan.ac/audit/">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="/assets/brand.css">
+<style>
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--mono); font-size: 15px; line-height: 1.7;
+    padding: 72px 24px 96px;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  .eyebrow { color: var(--accent); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; }
+  h1 { font-size: clamp(28px, 4.6vw, 44px); line-height: 1.12; margin: 14px 0 16px; letter-spacing: -.01em; }
+  .lede { color: var(--text-muted); font-size: 16px; max-width: 64ch; margin: 0 0 40px; }
+  h2 { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-faint); margin: 48px 0 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .item { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 18px 20px; }
+  .item h3 { margin: 0 0 6px; font-size: 14.5px; }
+  .item p { margin: 0; color: var(--text-muted); font-size: 13px; line-height: 1.65; }
+  .item .n { color: var(--accent); font-size: 11.5px; letter-spacing: .12em; }
+  .buybox {
+    margin-top: 48px; background: var(--card-bg); border: 1px solid var(--card-hover);
+    border-radius: var(--radius-lg); padding: 28px;
+    box-shadow: 0 24px 60px -34px var(--accent-glow);
+    display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between;
+  }
+  .buybox .price { font-size: 40px; font-weight: 700; line-height: 1; }
+  .buybox .price small { font-size: 13px; color: var(--text-muted); font-weight: 400; display: block; margin-top: 6px; }
+  .buybox ul { margin: 0; padding: 0; list-style: none; font-size: 13px; color: var(--text-muted); }
+  .buybox li { padding: 2px 0; }
+  .buybox li::before { content: "▸ "; color: var(--accent); }
+  .buy {
+    display: inline-block; background: var(--accent); color: var(--text-inverse);
+    text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: var(--radius);
+    font-size: 15px; white-space: nowrap;
+  }
+  .steps { counter-reset: s; display: grid; gap: 12px; }
+  .step { display: grid; grid-template-columns: 28px 1fr; gap: 12px; font-size: 14px; }
+  .step::before {
+    counter-increment: s; content: counter(s); color: var(--accent);
+    border: 1px solid var(--card-border); border-radius: 50%; width: 26px; height: 26px;
+    display: grid; place-items: center; font-size: 12px;
+  }
+  .step b { color: var(--text); }
+  .step span { color: var(--text-muted); }
+  .note {
+    margin-top: 56px; padding: 18px 20px; border-left: 2px solid var(--amber);
+    background: var(--surface-sunk); border-radius: var(--radius);
+    color: var(--text-muted); font-size: 13px;
+  }
+  .note b { color: var(--text); }
+  details { border-bottom: 1px solid var(--card-border); padding: 14px 0; font-size: 14px; }
+  summary { cursor: pointer; color: var(--text); }
+  details p { color: var(--text-muted); margin: 10px 0 0; font-size: 13.5px; }
+  a { color: var(--accent); }
+  footer { margin-top: 64px; color: var(--text-faint); font-size: 12px; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="eyebrow">Leviathan OffSec // Fixed scope</div>
+  <h1>Your perimeter changed.<br>Somebody should tell you.</h1>
+  <p class="lede">
+    Most breaches start with something boring: a subdomain pointing at a bucket someone deleted
+    in 2021, an admin panel exposed to the internet, a TLS certificate about to lapse.
+    This is a fixed-scope check for exactly that class of problem, across up to five domains
+    you own. Evidence for every finding, no severity theatre, five business days.
+  </p>
+
+  <h2>What gets checked</h2>
+  <div class="grid">
+    <div class="item">
+      <div class="n">01</div>
+      <h3>Dangling DNS &amp; subdomain takeover</h3>
+      <p>Every CNAME and A record that leaves your zone, checked against 21 provider takeover signatures. A CNAME pointing at a live bucket is not reported as a finding.</p>
+    </div>
+    <div class="item">
+      <div class="n">02</div>
+      <h3>Exposed admin surfaces</h3>
+      <p>Panels, dashboards, CI, databases and storage endpoints that answer on the public internet, with the response that proves it.</p>
+    </div>
+    <div class="item">
+      <div class="n">03</div>
+      <h3>TLS &amp; header posture</h3>
+      <p>Certificate expiry and chain problems, protocol versions, HSTS/CSP/frame-ancestors presence. The stuff that turns a misconfiguration into a headline.</p>
+    </div>
+    <div class="item">
+      <div class="n">04</div>
+      <h3>Visible-CVE surface</h3>
+      <p>Version banners and fingerprints matched against public advisory data, with an explicit note of what the local database could <em>not</em> speak to. No silent gaps.</p>
+    </div>
+    <div class="item">
+      <div class="n">05</div>
+      <h3>30-day retest</h3>
+      <p>One re-run after you patch, so the report ends in "resolved" rather than "here is your anxiety".</p>
+    </div>
+  </div>
+
+  <div class="buybox">
+    <div>
+      <div class="price">$149 <small>one-off, up to 5 domains</small></div>
+    </div>
+    <ul>
+      <li>Evidence-backed PDF report</li>
+      <li>Delivered in 5 business days</li>
+      <li>24-hour heads-up on anything critical</li>
+      <li>30-day retest included</li>
+    </ul>
+    <a class="buy" href="https://buy.stripe.com/fZudR27Qt2bCbRX6oabbG02">Book the audit</a>
+  </div>
+
+  <h2>How it runs</h2>
+  <div class="steps">
+    <div class="step"><b>Pay and send targets.</b> <span>Checkout collects payment; reply to the Stripe receipt with up to five domains and one line confirming you own or control them.</span></div>
+    <div class="step"><b>Authorisation checked first.</b> <span>No work starts until that statement is on record. If authorisation doesn't hold up, the payment is refunded.</span></div>
+    <div class="step"><b>Passive first, then careful active checks.</b> <span>DNS, certificate transparency, public exposure, banner and header collection. No exploitation, no brute force, no denial of service.</span></div>
+    <div class="step"><b>Report.</b> <span>Findings with the evidence that proves each one, what was checked and what could not be, and the fix in priority order.</span></div>
+    <div class="step"><b>Retest at day 30.</b> <span>Reply to the report thread when patches are in. The re-run is included.</span></div>
+  </div>
+
+  <div class="note">
+    <b>What this is not.</b> It is not a penetration test, not a compliance certificate, and not a
+    guarantee that nothing else is wrong. It is a fast, honest check of the exposure class that
+    attackers actually scan for, with the limits of the check stated in the report.
+    <br><br>
+    <b>Authorised targets only.</b> Assets must be yours or under written client authorisation.
+    Authorisation is confirmed in writing before any active check runs.
+  </div>
+
+  <h2>Questions</h2>
+  <details>
+    <summary>Why is this so cheap?</summary>
+    <p>Because the scan layer is tooling I already run and maintain — HostageLVX, surfacediff, and Fenrir are MIT-licensed and public. What you're paying for is the triage, the false-positive elimination, and a report a human can act on. It is fixed scope by design.</p>
+  </details>
+  <details>
+    <summary>Do you exploit anything you find?</summary>
+    <p>No. Findings are established with non-destructive evidence: the response, the certificate, the record, the banner. Anything that would require exploiting a vulnerability to prove is flagged for a follow-up engagement instead.</p>
+  </details>
+  <details>
+    <summary>Can I send more than five domains?</summary>
+    <p>Yes, five is included. Extra domains are $20 each, invoiced after you send the list, before work starts.</p>
+  </details>
+  <details>
+    <summary>What if you find nothing?</summary>
+    <p>You still get the report: what was checked, what was excluded and why, the current exposure inventory, and the retest. A clean result is a real result when the coverage is stated.</p>
+  </details>
+  <details>
+    <summary>Who am I buying this from?</summary>
+    <p>Leviathan OffSec — an independent offensive security research lab. Public research and MIT-licensed tooling on <a href="https://github.com/leviathan-offsec">GitHub</a>, longer writeups in the <a href="/research/">research section</a>.</p>
+  </details>
+
+  <footer>
+    Leviathan OffSec — leviathan.ac · Authorised testing only · No operational exploits provided
+  </footer>
+</main>
+</body>
+</html>
